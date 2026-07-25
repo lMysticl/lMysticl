@@ -1,28 +1,55 @@
 # Pavel Putrenkov
 
-Java developer working on backend applications and command-line tools.
+Java/Spring backend engineer focused on document-processing systems, PDF
+analysis, reliable APIs, and maintainable service design. I also use React and
+TypeScript for selected full-stack work.
 
-## Current project
+## Selected projects
 
 ### [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
 
-A Java 21 CLI that checks PDFs for missing or suspicious native text layers
-before documents enter search, indexing, accessibility, or extraction workflows.
+A Java 21 CLI for diagnosing missing or suspicious native text layers before
+they disrupt search, copy/paste, indexing, accessibility workflows, or
+downstream text extraction.
 
-- human-readable and versioned JSON reports
-- page selection and configurable resource limits
-- automated tests, CodeQL analysis, and SBOM-backed releases
+- page-by-page diagnostics and versioned JSON reports
+- CI-friendly exit codes and documented resource limits
+- automated tests, CodeQL analysis, dependency updates, and releases
+- explicit scope: it does not run OCR or modify source PDFs
 
-[Repository](https://github.com/lMysticl/pdf-text-layer-auditor)
-· [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
-· [JSON report schema](https://github.com/lMysticl/pdf-text-layer-auditor/blob/main/docs/report-schema-v1.json)
+### [User Aggregation Service](https://github.com/lMysticl/Aggregation_Service)
 
-## Working with
+A Spring Boot service that aggregates user data from PostgreSQL and MongoDB,
+with caching, OpenAPI documentation, and Docker support.
 
-Java 21, Spring Boot, Hibernate, MySQL, Maven, JUnit, and GitHub Actions.
+## Core stack
+
+`Java 21` · `Spring Boot` · `REST APIs` · `PDFBox` · `PostgreSQL` ·
+`MongoDB` · `Hibernate` · `Maven` · `Docker` · `JUnit` · `GitHub Actions`
+
+Selected full-stack work: `React` · `TypeScript`
+
+## Open-source history
+
+Earlier public contributions to Broadleaf Commerce were made through my former
+work account, [`putrenkov`](https://github.com/putrenkov): **77 public pull
+requests, 66 merged**. That account is retained for historical attribution;
+`lMysticl` is my current GitHub profile.
+
+Selected contributions:
+
+- [Historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360) —
+  a team change involving retention safety, extensibility, and
+  MySQL/PostgreSQL compatibility
+- [Domain equality and serialization invariants](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156) —
+  regression coverage and review-driven changes across the domain model
+- [Multi-catalog persistence fix](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2367) —
+  a major persistence defect discussed and validated through review
 
 ## Engineering priorities
 
-- diagnostics that explain why a document needs attention
-- small codebases with clear ownership and focused tests
-- secure, reproducible builds and releases
+- tests that protect behavior and important invariants
+- reproducible builds and CI that verifies documented workflows
+- explicit API and data contracts
+- actionable diagnostics and honest limitations
+- small, reviewable changes with clear trade-offs
