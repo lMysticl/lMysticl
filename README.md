@@ -59,7 +59,7 @@ MongoDB user data.
 
 ## Core capabilities
 
-<table>
+<table align="center">
 <tr>
 <td width="50%" valign="top"><strong>Backend</strong><br><sub>Java 21 · Spring Boot · REST · Hibernate</sub></td>
 <td width="50%" valign="top"><strong>Documents</strong><br><sub>PDFBox · text layers · validation · extraction</sub></td>
