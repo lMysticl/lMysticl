@@ -78,7 +78,7 @@ Selected full-stack work: `React` · `TypeScript`
 
 ## Open-source record
 
-<table>
+<table width="100%">
 <tr>
 <td width="33%" align="center"><h3>77</h3><sub>public pull requests</sub></td>
 <td width="33%" align="center"><h3>66</h3><sub>merged</sub></td>
