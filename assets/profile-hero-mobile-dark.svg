@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="690" viewBox="0 0 700 690" role="img" aria-labelledby="title desc">
+  <title id="title">Pavel Putrenkov — Java and Spring backend engineer</title>
+  <desc id="desc">A mobile system blueprint from document ingestion through analysis, validation, and delivery.</desc>
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#111923"/>
+    </linearGradient>
+    <linearGradient id="pipeline" x1="0" y1="292" x2="0" y2="568" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#58a6ff"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#30363d" stroke-width="1" opacity=".22"/>
+    </pattern>
+    <style>
+      text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .motion {
+          display: none;
+        }
+      }
+    </style>
+  </defs>
+
+  <rect x=".5" y=".5" width="699" height="689" rx="22" fill="url(#background)" stroke="#30363d"/>
+  <rect x="1" y="1" width="698" height="688" rx="21" fill="url(#grid)"/>
+
+  <rect x="42" y="34" width="48" height="4" rx="2" fill="#58a6ff"/>
+  <rect x="96" y="34" width="28" height="4" rx="2" fill="#2dd4bf"/>
+  <text x="42" y="63" fill="#58a6ff" font-size="15" font-weight="700" letter-spacing="2.1">BACKEND SYSTEMS · DOCUMENT PROCESSING</text>
+
+  <text x="42" y="118" fill="#f0f6fc" font-size="44" font-weight="700">Pavel Putrenkov</text>
+  <text x="42" y="158" fill="#b1bac4" font-size="22">Java &amp; Spring engineer building reliable</text>
+  <text x="42" y="188" fill="#b1bac4" font-size="22">document-processing systems and APIs.</text>
+
+  <g class="mono" font-size="15" font-weight="600">
+    <rect x="42" y="211" width="98" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+    <text x="91" y="234" fill="#f0f6fc" text-anchor="middle">JAVA 21</text>
+    <rect x="151" y="211" width="139" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+    <text x="220.5" y="234" fill="#f0f6fc" text-anchor="middle">SPRING BOOT</text>
+    <rect x="301" y="211" width="101" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+    <text x="351.5" y="234" fill="#f0f6fc" text-anchor="middle">PDFBOX</text>
+    <rect x="413" y="211" width="117" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+    <text x="471.5" y="234" fill="#f0f6fc" text-anchor="middle">REST APIs</text>
+  </g>
+
+  <line x1="42" y1="270" x2="658" y2="270" stroke="#30363d"/>
+  <text x="42" y="294" fill="#8b949e" font-size="13" font-weight="700" letter-spacing="1.8">SYSTEM BLUEPRINT</text>
+
+  <line x1="70" y1="326" x2="70" y2="584" stroke="url(#pipeline)" stroke-width="3"/>
+
+  <g>
+    <rect x="100" y="308" width="558" height="66" rx="11" fill="#161b22" stroke="#30363d"/>
+    <rect x="100" y="394" width="558" height="66" rx="11" fill="#161b22" stroke="#30363d"/>
+    <rect x="100" y="480" width="558" height="66" rx="11" fill="#161b22" stroke="#30363d"/>
+    <rect x="100" y="566" width="558" height="66" rx="11" fill="#161b22" stroke="#30363d"/>
+  </g>
+
+  <g fill="#0d1117" stroke-width="4">
+    <circle cx="70" cy="341" r="9" stroke="#58a6ff"/>
+    <circle cx="70" cy="427" r="9" stroke="#4ab2ef"/>
+    <circle cx="70" cy="513" r="9" stroke="#3bc4d7"/>
+    <circle cx="70" cy="599" r="9" stroke="#2dd4bf"/>
+  </g>
+
+  <g fill="#d7dee7" font-size="18" font-weight="700" letter-spacing="1.2">
+    <text x="126" y="337">01 · INGEST</text>
+    <text x="126" y="423">02 · ANALYZE</text>
+    <text x="126" y="509">03 · VALIDATE</text>
+    <text x="126" y="595">04 · SHIP</text>
+  </g>
+  <g class="mono" fill="#8b949e" font-size="15">
+    <text x="126" y="359">PDF / files</text>
+    <text x="126" y="445">PDFBox / rules</text>
+    <text x="126" y="531">JUnit / CodeQL</text>
+    <text x="126" y="617">Docker / CI</text>
+  </g>
+
+  <g class="motion">
+    <circle cx="70" cy="341" r="13" fill="#2dd4bf" opacity=".14">
+      <animate attributeName="cy" values="341;599;599" keyTimes="0;.42;1" dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.14;.14;0;0" keyTimes="0;.03;.38;.42;1" dur="9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="70" cy="341" r="5" fill="#7eeadf">
+      <animate attributeName="cy" values="341;599;599" keyTimes="0;.42;1" dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.03;.38;.42;1" dur="9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <text x="350" y="666" fill="#8b949e" font-size="14" text-anchor="middle" letter-spacing=".5">Contracts first · Evidence over assumptions · Reviewable changes</text>
+</svg>
