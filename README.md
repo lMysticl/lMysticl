@@ -80,9 +80,9 @@ Selected full-stack work: `React` · `TypeScript`
 
 <table width="100%">
 <tr>
-<td width="33%" align="center"><h3>77</h3><sub>public pull requests</sub></td>
-<td width="33%" align="center"><h3>66</h3><sub>merged</sub></td>
-<td width="34%" align="center"><h3>Broadleaf Commerce</h3><sub>earlier public contributions</sub></td>
+<td width="280" align="center"><h3>77</h3><sub>public pull requests</sub></td>
+<td width="280" align="center"><h3>66</h3><sub>merged</sub></td>
+<td width="280" align="center"><h3>Broadleaf Commerce</h3><sub>earlier public contributions</sub></td>
 </tr>
 </table>
 
