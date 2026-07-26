@@ -26,10 +26,8 @@ A Java 21 CLI that catches missing or suspicious native PDF text layers before
 they disrupt search, copy/paste, indexing, accessibility workflows, or
 downstream extraction.
 
-**Built for:** page-level diagnostics · versioned JSON · deterministic exit
-codes · bounded resource use
-
-**Delivery:** automated tests · CodeQL · SBOM · build provenance · releases
+**Evidence:** page-level diagnostics · versioned JSON · deterministic exit
+codes · automated releases
 
 <p>
   <a href="https://github.com/lMysticl/pdf-text-layer-auditor/actions/workflows/build.yml"><img src="https://github.com/lMysticl/pdf-text-layer-auditor/actions/workflows/build.yml/badge.svg" alt="PDF Text Layer Auditor build status"></a>
@@ -47,11 +45,7 @@ codes · bounded resource use
 A Spring Boot portfolio service that exposes one REST API over PostgreSQL and
 MongoDB user data.
 
-**Built for:** multi-source aggregation · caching · OpenAPI · health endpoints
-· Docker Compose
-
-**Boundary:** documented as a local evaluation service, not a production
-deployment.
+**Evidence:** multi-source aggregation · caching · OpenAPI · Docker Compose
 
 <p>
   <a href="https://github.com/lMysticl/Aggregation_Service/actions/workflows/ci.yml"><img src="https://github.com/lMysticl/Aggregation_Service/actions/workflows/ci.yml/badge.svg" alt="User Aggregation Service CI status"></a>
@@ -67,10 +61,12 @@ deployment.
 
 <table>
 <tr>
-<td width="25%" valign="top"><strong>Backend</strong><br><sub>Java 21 · Spring Boot · REST · Hibernate</sub></td>
-<td width="25%" valign="top"><strong>Documents</strong><br><sub>PDFBox · text layers · validation · extraction</sub></td>
-<td width="25%" valign="top"><strong>Data</strong><br><sub>PostgreSQL · MongoDB · JPA · caching</sub></td>
-<td width="25%" valign="top"><strong>Delivery</strong><br><sub>Maven · Docker · JUnit · GitHub Actions</sub></td>
+<td width="50%" valign="top"><strong>Backend</strong><br><sub>Java 21 · Spring Boot · REST · Hibernate</sub></td>
+<td width="50%" valign="top"><strong>Documents</strong><br><sub>PDFBox · text layers · validation · extraction</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><strong>Data</strong><br><sub>PostgreSQL · MongoDB · JPA · caching</sub></td>
+<td width="50%" valign="top"><strong>Delivery</strong><br><sub>Maven · Docker · JUnit · GitHub Actions</sub></td>
 </tr>
 </table>
 
