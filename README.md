@@ -26,8 +26,8 @@ A Java 21 CLI that catches missing or suspicious native PDF text layers before
 they disrupt search, copy/paste, indexing, accessibility workflows, or
 downstream extraction.
 
-**Evidence:** page-level diagnostics · versioned JSON · deterministic exit
-codes · automated releases
+**Evidence:** GitHub Marketplace Action · page-level diagnostics · versioned
+JSON · signed releases
 
 <p>
   <a href="https://github.com/lMysticl/pdf-text-layer-auditor/actions/workflows/build.yml"><img src="https://github.com/lMysticl/pdf-text-layer-auditor/actions/workflows/build.yml/badge.svg" alt="PDF Text Layer Auditor build status"></a>
@@ -35,23 +35,27 @@ codes · automated releases
 </p>
 
 [`Repository`](https://github.com/lMysticl/pdf-text-layer-auditor) ·
+[`Marketplace`](https://github.com/marketplace/actions/pdf-text-layer-audit) ·
 [`Latest release`](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
 
 </td>
 <td width="44%" valign="top">
 
-### [User Aggregation Service](https://github.com/lMysticl/Aggregation_Service)
+### [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
 
-A Spring Boot portfolio service that exposes one REST API over PostgreSQL and
-MongoDB user data.
+A Java 21 and Spring Boot 3.5 service that exposes one validated REST API over
+PostgreSQL and MongoDB user data.
 
-**Evidence:** multi-source aggregation · caching · OpenAPI · Docker Compose
+**Evidence:** bounded concurrent aggregation · Caffeine caching · Flyway ·
+OpenAPI · Docker Compose
 
 <p>
-  <a href="https://github.com/lMysticl/Aggregation_Service/actions/workflows/ci.yml"><img src="https://github.com/lMysticl/Aggregation_Service/actions/workflows/ci.yml/badge.svg" alt="User Aggregation Service CI status"></a>
+  <a href="https://github.com/lMysticl/user-aggregation-service/actions/workflows/ci.yml"><img src="https://github.com/lMysticl/user-aggregation-service/actions/workflows/ci.yml/badge.svg" alt="User Aggregation Service CI status"></a>
+  <a href="https://github.com/lMysticl/user-aggregation-service/actions/workflows/codeql.yml"><img src="https://github.com/lMysticl/user-aggregation-service/actions/workflows/codeql.yml/badge.svg" alt="User Aggregation Service CodeQL status"></a>
 </p>
 
-[`Repository`](https://github.com/lMysticl/Aggregation_Service)
+[`Repository`](https://github.com/lMysticl/user-aggregation-service) ·
+[`Latest release`](https://github.com/lMysticl/user-aggregation-service/releases/latest)
 
 </td>
 </tr>
