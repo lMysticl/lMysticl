@@ -5,7 +5,7 @@
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="#0B1220"/><stop offset="1" stop-color="#12263A"/></linearGradient>
     <radialGradient id="glow"><stop stop-color="#2C7A87" stop-opacity=".42"/><stop offset="1" stop-color="#2C7A87" stop-opacity="0"/></radialGradient>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="#37526B" stroke-opacity=".15"/></pattern>
-    <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }</style>
+    <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; } @media (prefers-reduced-motion: reduce) { .motion { display: none; } }</style>
   </defs>
   <rect x=".5" y=".5" width="1199" height="379" rx="22" fill="url(#background)" stroke="#344B61"/>
   <rect x="1" y="1" width="1198" height="378" rx="21" fill="url(#grid)"/>
@@ -25,6 +25,16 @@
   <circle cx="847" cy="116" r="6" fill="#74E5D4"/>
   <circle cx="847" cy="195" r="6" fill="#83BFFF"/>
   <circle cx="847" cy="274" r="6" fill="#74E5D4"/>
+  <g class="motion">
+    <circle cx="847" cy="116" r="18" fill="#74E5D4" opacity="0">
+      <animate attributeName="cy" values="116;274;274" keyTimes="0;.65;1" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.17;.17;0;0" keyTimes="0;.07;.56;.65;1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="847" cy="116" r="5" fill="#74E5D4" opacity="0">
+      <animate attributeName="cy" values="116;274;274" keyTimes="0;.65;1" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.07;.56;.65;1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
   <text x="872" y="111" fill="#9FB6C7" font-size="15" font-weight="700" letter-spacing="1">01 / DOCUMENTS</text>
   <text x="872" y="139" fill="#F5F9FC" font-size="21" font-weight="650">PDF → usable text</text>
   <text x="872" y="190" fill="#9FB6C7" font-size="15" font-weight="700" letter-spacing="1">02 / DATA SOURCES</text>

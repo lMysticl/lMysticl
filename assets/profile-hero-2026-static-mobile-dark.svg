@@ -5,7 +5,7 @@
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="#0B1220"/><stop offset="1" stop-color="#12263A"/></linearGradient>
     <radialGradient id="glow"><stop stop-color="#2C7A87" stop-opacity=".42"/><stop offset="1" stop-color="#2C7A87" stop-opacity="0"/></radialGradient>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="#37526B" stroke-opacity=".15"/></pattern>
-    <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }</style>
+    <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; } @media (prefers-reduced-motion: reduce) { .motion { display: none; } }</style>
   </defs>
   <rect x=".5" y=".5" width="619" height="549" rx="22" fill="url(#background)" stroke="#344B61"/>
   <rect x="1" y="1" width="618" height="548" rx="21" fill="url(#grid)"/>
@@ -22,6 +22,7 @@
   <rect x="34" y="457" width="552" height="67" rx="12" fill="#142539" stroke="#456077"/>
   <circle cx="64" cy="410" r="7" fill="#74E5D4"/>
   <circle cx="64" cy="490" r="7" fill="#83BFFF"/>
+  <line x1="64" y1="417" x2="64" y2="483" stroke="#456077" stroke-width="2"/>
   <text x="86" y="417" fill="#F5F9FC" font-size="26" font-weight="650">PDF → usable text</text>
   <text x="86" y="498" fill="#F5F9FC" font-size="26" font-weight="650">SQL + Mongo → one API</text>
 </svg>

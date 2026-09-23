@@ -28,7 +28,7 @@ def base(width: int, height: int, c: dict[str, str], title: str) -> str:
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="{c['bg_a']}"/><stop offset="1" stop-color="{c['bg_b']}"/></linearGradient>
     <radialGradient id="glow"><stop stop-color="{c['glow']}" stop-opacity=".42"/><stop offset="1" stop-color="{c['glow']}" stop-opacity="0"/></radialGradient>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="{c['grid']}" stroke-opacity=".15"/></pattern>
-    <style>text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }}</style>
+    <style>text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }} @media (prefers-reduced-motion: reduce) {{ .motion {{ display: none; }} }}</style>
   </defs>
   <rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="22" fill="url(#background)" stroke="{c['border']}"/>
   <rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="21" fill="url(#grid)"/>
@@ -52,6 +52,16 @@ def desktop(c: dict[str, str]) -> str:
   <circle cx="847" cy="116" r="6" fill="{c['aqua']}"/>
   <circle cx="847" cy="195" r="6" fill="{c['blue']}"/>
   <circle cx="847" cy="274" r="6" fill="{c['aqua']}"/>
+  <g class="motion">
+    <circle cx="847" cy="116" r="18" fill="{c['aqua']}" opacity="0">
+      <animate attributeName="cy" values="116;274;274" keyTimes="0;.65;1" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.17;.17;0;0" keyTimes="0;.07;.56;.65;1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="847" cy="116" r="5" fill="{c['aqua']}" opacity="0">
+      <animate attributeName="cy" values="116;274;274" keyTimes="0;.65;1" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.07;.56;.65;1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
   <text x="872" y="111" fill="{c['subtle']}" font-size="15" font-weight="700" letter-spacing="1">01 / DOCUMENTS</text>
   <text x="872" y="139" fill="{c['text']}" font-size="21" font-weight="650">PDF → usable text</text>
   <text x="872" y="190" fill="{c['subtle']}" font-size="15" font-weight="700" letter-spacing="1">02 / DATA SOURCES</text>
@@ -76,16 +86,40 @@ def mobile(c: dict[str, str]) -> str:
   <rect x="34" y="457" width="552" height="67" rx="12" fill="{c['panel']}" stroke="{c['panel_border']}"/>
   <circle cx="64" cy="410" r="7" fill="{c['aqua']}"/>
   <circle cx="64" cy="490" r="7" fill="{c['blue']}"/>
+  <line x1="64" y1="417" x2="64" y2="483" stroke="{c['panel_border']}" stroke-width="2"/>
+  <g class="motion">
+    <circle cx="64" cy="410" r="18" fill="{c['aqua']}" opacity="0">
+      <animate attributeName="cy" values="410;490;490" keyTimes="0;.65;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.17;.17;0;0" keyTimes="0;.07;.56;.65;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="64" cy="410" r="5" fill="{c['aqua']}" opacity="0">
+      <animate attributeName="cy" values="410;490;490" keyTimes="0;.65;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.07;.56;.65;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
   <text x="86" y="417" fill="{c['text']}" font-size="26" font-weight="650">PDF → usable text</text>
   <text x="86" y="498" fill="{c['text']}" font-size="26" font-weight="650">SQL + Mongo → one API</text>
 </svg>
 '''
 
 
+def without_motion(svg: str) -> str:
+    """Keep the same artwork for visitors who prefer reduced motion."""
+    marker = '  <g class="motion">'
+    assert svg.count(marker) == 1
+    start = svg.index(marker)
+    end = svg.index("  </g>\n", start) + len("  </g>\n")
+    still = svg[:start] + svg[end:]
+    assert "<animate " not in still
+    return still
+
+
 def main() -> None:
     for theme, colors in THEMES.items():
-        (ASSETS / f"profile-hero-2026-{theme}.svg").write_text(desktop(colors), encoding="utf-8")
-        (ASSETS / f"profile-hero-2026-mobile-{theme}.svg").write_text(mobile(colors), encoding="utf-8")
+        for size, artwork in (("", desktop(colors)), ("mobile-", mobile(colors))):
+            prefix = f"profile-hero-2026-"
+            (ASSETS / f"{prefix}animated-{size}{theme}.svg").write_text(artwork, encoding="utf-8")
+            (ASSETS / f"{prefix}static-{size}{theme}.svg").write_text(without_motion(artwork), encoding="utf-8")
 
 
 if __name__ == "__main__":
