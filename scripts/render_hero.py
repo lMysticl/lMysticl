@@ -1,21 +1,19 @@
-"""Generate the four self-contained, theme-aware profile hero SVGs."""
+"""Generate the editorial profile cover in two themes and viewport sizes."""
 
 from pathlib import Path
 
 
 ASSETS = Path(__file__).resolve().parents[1] / "assets"
-THEMES = {
+PALETTES = {
     "dark": {
-        "bg_a": "#0B1220", "bg_b": "#12263A", "grid": "#37526B",
-        "border": "#344B61", "text": "#F5F9FC", "muted": "#C6D5E2",
-        "subtle": "#9FB6C7", "aqua": "#74E5D4", "blue": "#83BFFF",
-        "panel": "#142539", "panel_border": "#456077", "glow": "#2C7A87",
+        "bg_a": "#111318", "bg_b": "#20242B", "border": "#373B41",
+        "text": "#F8F5EF", "muted": "#D5D0C7", "quiet": "#A9AAA8",
+        "line": "#62615D", "accent": "#E9B47A", "glow": "#BE8751",
     },
     "light": {
-        "bg_a": "#F7FAFF", "bg_b": "#E8F3F6", "grid": "#9FC4D1",
-        "border": "#C5D7E1", "text": "#102536", "muted": "#375569",
-        "subtle": "#4C697B", "aqua": "#087C71", "blue": "#075DA8",
-        "panel": "#FFFFFF", "panel_border": "#BED0DA", "glow": "#AADFD9",
+        "bg_a": "#FAF7F0", "bg_b": "#EEE9E0", "border": "#D8D0C5",
+        "text": "#202124", "muted": "#4E4D49", "quiet": "#64635E",
+        "line": "#A9A096", "accent": "#9E562E", "glow": "#D6B18B",
     },
 }
 
@@ -23,103 +21,72 @@ THEMES = {
 def base(width: int, height: int, c: dict[str, str], title: str) -> str:
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">
   <title id="title">{title}</title>
-  <desc id="desc">Java and Spring backend systems for PDF processing and multi-source APIs.</desc>
+  <desc id="desc">Pavel Putrenkov, Java and Spring backend engineer. Complex inputs, clear outcomes.</desc>
   <defs>
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="{c['bg_a']}"/><stop offset="1" stop-color="{c['bg_b']}"/></linearGradient>
-    <radialGradient id="glow"><stop stop-color="{c['glow']}" stop-opacity=".42"/><stop offset="1" stop-color="{c['glow']}" stop-opacity="0"/></radialGradient>
-    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="{c['grid']}" stroke-opacity=".15"/></pattern>
-    <style>text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }} @media (prefers-reduced-motion: reduce) {{ .motion {{ display: none; }} }}</style>
+    <radialGradient id="glow"><stop stop-color="{c['glow']}" stop-opacity=".16"/><stop offset="1" stop-color="{c['glow']}" stop-opacity="0"/></radialGradient>
+    <linearGradient id="streak"><stop stop-color="{c['accent']}" stop-opacity="0"/><stop offset=".5" stop-color="{c['accent']}"/><stop offset="1" stop-color="{c['accent']}" stop-opacity="0"/></linearGradient>
+    <style>text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }} text.monogram {{ font-family: Georgia, "Times New Roman", serif; }} @media (prefers-reduced-motion: reduce) {{ .motion {{ display: none; }} }}</style>
   </defs>
-  <rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="22" fill="url(#background)" stroke="{c['border']}"/>
-  <rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="21" fill="url(#grid)"/>
+  <rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="18" fill="url(#background)" stroke="{c['border']}"/>
 '''
 
 
-def desktop(c: dict[str, str]) -> str:
-    return base(1200, 380, c, "Pavel Putrenkov — reliable software for complex data") + f'''
-  <circle cx="1020" cy="100" r="265" fill="url(#glow)"/>
-  <rect x="48" y="42" width="46" height="5" rx="2.5" fill="{c['aqua']}"/>
-  <text x="106" y="49" fill="{c['aqua']}" font-size="18" font-weight="700" letter-spacing="2">JAVA / SPRING · DOCUMENT SYSTEMS</text>
-  <text x="48" y="125" fill="{c['text']}" font-size="56" font-weight="750">Pavel Putrenkov</text>
-  <text x="48" y="197" fill="{c['text']}" font-size="48" font-weight="700">Reliable software</text>
-  <text x="48" y="251" fill="{c['aqua']}" font-size="48" font-weight="700">for complex data.</text>
-  <text x="48" y="300" fill="{c['muted']}" font-size="20">PDF analysis · multi-source APIs · clear contracts</text>
-  <line x1="48" y1="331" x2="753" y2="331" stroke="{c['border']}"/>
-  <text x="48" y="357" fill="{c['subtle']}" font-size="17" font-weight="600" letter-spacing="1">JAVA 21  /  SPRING BOOT  /  PDFBOX</text>
-  <rect x="804" y="40" width="344" height="298" rx="19" fill="{c['panel']}" stroke="{c['panel_border']}"/>
-  <text x="833" y="75" fill="{c['subtle']}" font-size="16" font-weight="700" letter-spacing="1.7">FROM INPUT TO EVIDENCE</text>
-  <line x1="847" y1="114" x2="847" y2="281" stroke="{c['panel_border']}" stroke-width="2"/>
-  <circle cx="847" cy="116" r="6" fill="{c['aqua']}"/>
-  <circle cx="847" cy="195" r="6" fill="{c['blue']}"/>
-  <circle cx="847" cy="274" r="6" fill="{c['aqua']}"/>
-  <g class="motion">
-    <circle cx="847" cy="116" r="18" fill="{c['aqua']}" opacity="0">
-      <animate attributeName="cy" values="116;274;274" keyTimes="0;.65;1" dur="8s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0;.17;.17;0;0" keyTimes="0;.07;.56;.65;1" dur="8s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="847" cy="116" r="5" fill="{c['aqua']}" opacity="0">
-      <animate attributeName="cy" values="116;274;274" keyTimes="0;.65;1" dur="8s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.07;.56;.65;1" dur="8s" repeatCount="indefinite"/>
-    </circle>
+def moving_streak(c: dict[str, str], x: int, y: int, end: int, width: int, seconds: int) -> str:
+    return f'''  <g class="motion">
+    <rect x="{x}" y="{y - 2}" width="{width}" height="4" rx="2" fill="url(#streak)" opacity="0">
+      <animate attributeName="x" values="{x};{end - width};{end - width}" keyTimes="0;.55;1" dur="{seconds}s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.9;.9;0;0" keyTimes="0;.07;.47;.56;1" dur="{seconds}s" repeatCount="indefinite"/>
+    </rect>
   </g>
-  <text x="872" y="111" fill="{c['subtle']}" font-size="15" font-weight="700" letter-spacing="1">01 / DOCUMENTS</text>
-  <text x="872" y="139" fill="{c['text']}" font-size="21" font-weight="650">PDF → usable text</text>
-  <text x="872" y="190" fill="{c['subtle']}" font-size="15" font-weight="700" letter-spacing="1">02 / DATA SOURCES</text>
-  <text x="872" y="218" fill="{c['text']}" font-size="21" font-weight="650">SQL + Mongo → API</text>
-  <text x="872" y="269" fill="{c['subtle']}" font-size="15" font-weight="700" letter-spacing="1">03 / DELIVERY</text>
-  <text x="872" y="297" fill="{c['text']}" font-size="21" font-weight="650">Test → release</text>
+'''
+
+
+def desktop(c: dict[str, str], animated: bool) -> str:
+    return base(1200, 430, c, "Pavel Putrenkov — complex inputs, clear outcomes") + f'''
+  <circle cx="997" cy="195" r="260" fill="url(#glow)"/>
+  <circle cx="995" cy="211" r="154" fill="none" stroke="{c['accent']}" stroke-opacity=".42" stroke-width="1.5"/>
+  <circle cx="995" cy="211" r="122" fill="none" stroke="{c['line']}" stroke-opacity=".45"/>
+  <text class="monogram" x="890" y="311" fill="{c['accent']}" fill-opacity=".20" font-size="285" font-style="italic">P</text>
+  <circle cx="1095" cy="304" r="13" fill="{c['accent']}"/>
+  <rect x="60" y="47" width="38" height="4" rx="2" fill="{c['accent']}"/>
+  <text x="111" y="52" fill="{c['accent']}" font-size="18" font-weight="700" letter-spacing="2">JAVA / SPRING · BACKEND ENGINEER</text>
+  <text x="60" y="133" fill="{c['text']}" font-size="58" font-weight="700">Pavel Putrenkov</text>
+  <text x="60" y="221" fill="{c['text']}" font-size="62" font-weight="700">Complex inputs.</text>
+  <text x="60" y="291" fill="{c['accent']}" font-size="62" font-weight="700">Clear outcomes.</text>
+  <text x="60" y="339" fill="{c['muted']}" font-size="21">Documents, data and dependable APIs.</text>
+  <line x1="60" y1="377" x2="1140" y2="377" stroke="{c['line']}" stroke-opacity=".65"/>
+{moving_streak(c, 60, 377, 1140, 138, 9) if animated else ""}  <text x="60" y="409" fill="{c['quiet']}" font-size="16" font-weight="600" letter-spacing="1.5">PDF TOOLING  /  MULTI-SOURCE SERVICES  /  OPEN SOURCE</text>
 </svg>
 '''
 
 
-def mobile(c: dict[str, str]) -> str:
-    return base(620, 550, c, "Pavel Putrenkov — Java and Spring backend engineer") + f'''
-  <circle cx="530" cy="110" r="195" fill="url(#glow)"/>
-  <rect x="34" y="36" width="40" height="5" rx="2.5" fill="{c['aqua']}"/>
-  <text x="84" y="43" fill="{c['aqua']}" font-size="22" font-weight="700" letter-spacing="1">JAVA / SPRING · DOCUMENTS</text>
-  <text x="34" y="126" fill="{c['text']}" font-size="59" font-weight="750">Pavel Putrenkov</text>
-  <text x="34" y="212" fill="{c['text']}" font-size="50" font-weight="700">Reliable software</text>
-  <text x="34" y="269" fill="{c['aqua']}" font-size="50" font-weight="700">for complex data.</text>
-  <text x="34" y="318" fill="{c['muted']}" font-size="26">PDF analysis · multi-source APIs</text>
-  <line x1="34" y1="354" x2="586" y2="354" stroke="{c['border']}"/>
-  <rect x="34" y="376" width="552" height="67" rx="12" fill="{c['panel']}" stroke="{c['panel_border']}"/>
-  <rect x="34" y="457" width="552" height="67" rx="12" fill="{c['panel']}" stroke="{c['panel_border']}"/>
-  <circle cx="64" cy="410" r="7" fill="{c['aqua']}"/>
-  <circle cx="64" cy="490" r="7" fill="{c['blue']}"/>
-  <line x1="64" y1="417" x2="64" y2="483" stroke="{c['panel_border']}" stroke-width="2"/>
-  <g class="motion">
-    <circle cx="64" cy="410" r="18" fill="{c['aqua']}" opacity="0">
-      <animate attributeName="cy" values="410;490;490" keyTimes="0;.65;1" dur="6s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0;.17;.17;0;0" keyTimes="0;.07;.56;.65;1" dur="6s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="64" cy="410" r="5" fill="{c['aqua']}" opacity="0">
-      <animate attributeName="cy" values="410;490;490" keyTimes="0;.65;1" dur="6s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.07;.56;.65;1" dur="6s" repeatCount="indefinite"/>
-    </circle>
-  </g>
-  <text x="86" y="417" fill="{c['text']}" font-size="26" font-weight="650">PDF → usable text</text>
-  <text x="86" y="498" fill="{c['text']}" font-size="26" font-weight="650">SQL + Mongo → one API</text>
+def mobile(c: dict[str, str], animated: bool) -> str:
+    return base(620, 580, c, "Pavel Putrenkov — Java and Spring backend engineer") + f'''
+  <circle cx="510" cy="461" r="160" fill="url(#glow)"/>
+  <circle cx="505" cy="447" r="110" fill="none" stroke="{c['accent']}" stroke-opacity=".34" stroke-width="1.5"/>
+  <text class="monogram" x="432" y="520" fill="{c['accent']}" fill-opacity=".18" font-size="205" font-style="italic">P</text>
+  <circle cx="573" cy="525" r="9" fill="{c['accent']}"/>
+  <rect x="34" y="39" width="34" height="4" rx="2" fill="{c['accent']}"/>
+  <text x="81" y="45" fill="{c['accent']}" font-size="22" font-weight="700" letter-spacing="1">JAVA / SPRING ENGINEER</text>
+  <text x="34" y="130" fill="{c['text']}" font-size="59" font-weight="700">Pavel Putrenkov</text>
+  <text x="34" y="218" fill="{c['text']}" font-size="54" font-weight="700">Complex inputs.</text>
+  <text x="34" y="282" fill="{c['accent']}" font-size="54" font-weight="700">Clear outcomes.</text>
+  <text x="34" y="339" fill="{c['muted']}" font-size="25">Thoughtful backend engineering for</text>
+  <text x="34" y="375" fill="{c['muted']}" font-size="25">documents, data and APIs.</text>
+  <line x1="34" y1="491" x2="586" y2="491" stroke="{c['line']}" stroke-opacity=".65"/>
+{moving_streak(c, 34, 491, 586, 90, 8) if animated else ""}  <text x="34" y="539" fill="{c['quiet']}" font-size="22" font-weight="600" letter-spacing="1">PDF  /  DATA  /  OPEN SOURCE</text>
 </svg>
 '''
-
-
-def without_motion(svg: str) -> str:
-    """Keep the same artwork for visitors who prefer reduced motion."""
-    marker = '  <g class="motion">'
-    assert svg.count(marker) == 1
-    start = svg.index(marker)
-    end = svg.index("  </g>\n", start) + len("  </g>\n")
-    still = svg[:start] + svg[end:]
-    assert "<animate " not in still
-    return still
 
 
 def main() -> None:
-    for theme, colors in THEMES.items():
-        for size, artwork in (("", desktop(colors)), ("mobile-", mobile(colors))):
-            prefix = f"profile-hero-2026-"
-            (ASSETS / f"{prefix}animated-{size}{theme}.svg").write_text(artwork, encoding="utf-8")
-            (ASSETS / f"{prefix}static-{size}{theme}.svg").write_text(without_motion(artwork), encoding="utf-8")
+    for theme, colors in PALETTES.items():
+        for size, render in (("", desktop), ("mobile-", mobile)):
+            for kind, animated in (("animated", True), ("static", False)):
+                svg = render(colors, animated)
+                path = ASSETS / f"profile-cover-2026-{kind}-{size}{theme}.svg"
+                path.write_text(svg, encoding="utf-8")
 
 
 if __name__ == "__main__":

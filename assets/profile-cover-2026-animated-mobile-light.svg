@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="580" viewBox="0 0 620 580" role="img" aria-labelledby="title desc">
+  <title id="title">Pavel Putrenkov — Java and Spring backend engineer</title>
+  <desc id="desc">Pavel Putrenkov, Java and Spring backend engineer. Complex inputs, clear outcomes.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1"><stop stop-color="#FAF7F0"/><stop offset="1" stop-color="#EEE9E0"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#D6B18B" stop-opacity=".16"/><stop offset="1" stop-color="#D6B18B" stop-opacity="0"/></radialGradient>
+    <linearGradient id="streak"><stop stop-color="#9E562E" stop-opacity="0"/><stop offset=".5" stop-color="#9E562E"/><stop offset="1" stop-color="#9E562E" stop-opacity="0"/></linearGradient>
+    <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; } text.monogram { font-family: Georgia, "Times New Roman", serif; } @media (prefers-reduced-motion: reduce) { .motion { display: none; } }</style>
+  </defs>
+  <rect x=".5" y=".5" width="619" height="579" rx="18" fill="url(#background)" stroke="#D8D0C5"/>
+
+  <circle cx="510" cy="461" r="160" fill="url(#glow)"/>
+  <circle cx="505" cy="447" r="110" fill="none" stroke="#9E562E" stroke-opacity=".34" stroke-width="1.5"/>
+  <text class="monogram" x="432" y="520" fill="#9E562E" fill-opacity=".18" font-size="205" font-style="italic">P</text>
+  <circle cx="573" cy="525" r="9" fill="#9E562E"/>
+  <rect x="34" y="39" width="34" height="4" rx="2" fill="#9E562E"/>
+  <text x="81" y="45" fill="#9E562E" font-size="22" font-weight="700" letter-spacing="1">JAVA / SPRING ENGINEER</text>
+  <text x="34" y="130" fill="#202124" font-size="59" font-weight="700">Pavel Putrenkov</text>
+  <text x="34" y="218" fill="#202124" font-size="54" font-weight="700">Complex inputs.</text>
+  <text x="34" y="282" fill="#9E562E" font-size="54" font-weight="700">Clear outcomes.</text>
+  <text x="34" y="339" fill="#4E4D49" font-size="25">Thoughtful backend engineering for</text>
+  <text x="34" y="375" fill="#4E4D49" font-size="25">documents, data and APIs.</text>
+  <line x1="34" y1="491" x2="586" y2="491" stroke="#A9A096" stroke-opacity=".65"/>
+  <g class="motion">
+    <rect x="34" y="489" width="90" height="4" rx="2" fill="url(#streak)" opacity="0">
+      <animate attributeName="x" values="34;496;496" keyTimes="0;.55;1" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;.9;.9;0;0" keyTimes="0;.07;.47;.56;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="34" y="539" fill="#64635E" font-size="22" font-weight="600" letter-spacing="1">PDF  /  DATA  /  OPEN SOURCE</text>
+</svg>
