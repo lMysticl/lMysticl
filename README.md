@@ -1,13 +1,13 @@
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-cover-2026-static-mobile-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-cover-2026-static-mobile-light.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/profile-cover-2026-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="./assets/profile-cover-2026-static-light.svg">
-  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-cover-2026-animated-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-cover-2026-animated-mobile-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-cover-2026-animated-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-cover-2026-animated-light.svg">
-  <img src="./assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-cover-2026-static-mobile-dark.svg?v=829de0a">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-cover-2026-static-mobile-light.svg?v=829de0a">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/profile-cover-2026-static-dark.svg?v=829de0a">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="./assets/profile-cover-2026-static-light.svg?v=829de0a">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-cover-2026-animated-mobile-dark.svg?v=829de0a">
+  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-cover-2026-animated-mobile-light.svg?v=829de0a">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-cover-2026-animated-dark.svg?v=829de0a">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-cover-2026-animated-light.svg?v=829de0a">
+  <img src="./assets/profile-cover-2026-static-light.svg?v=829de0a" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
 I'm Pavel, a Senior Java Engineer with 10+ years of experience in payments,
