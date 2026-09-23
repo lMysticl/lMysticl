@@ -10,57 +10,50 @@
   <img src="https://github.com/lMysticl/lMysticl/raw/829de0a5c47a945d99649da610732a845c466995/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
-I'm Pavel, a Senior Java Engineer with 10+ years of experience in payments,
-e-commerce, and document processing. I built a payment system from the ground
-up and led Java delivery for three years while staying hands-on in design,
-implementation, and review. Today I deliver document conversion and interactive
-reporting across Java 21 / Spring Boot and React / TypeScript.
+I'm Pavel. I've been writing Java for more than ten years, across e-commerce,
+payments, and document processing. At Ukrposhta I built a payment system from
+scratch and led Java delivery for three years, while still writing and reviewing
+code.
 
-I focus on the boundaries that make complex systems dependable: clear API and
-data contracts, faithful document processing, measured performance, and failures
-that point to their cause. I back those decisions with automated tests and
-observability.
+These days I work on document conversion and interactive reporting, from Java 21
+and Spring Boot services to the React/TypeScript UI. The projects below reflect
+problems I keep coming back to: PDFs that look fine but can't be searched, data
+split across databases, and Spring applications that span more than one repo.
 
-[Explore my work](#selected-work) · [Connect on LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
+[Find me on LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
 
 ## Selected work
 
 ### 01 · [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
 
-A PDF can look perfect while its text layer is missing. This Java 21 CLI and
-GitHub Action catch suspicious pages before they disrupt search, extraction, or
-accessibility workflows. Versioned JSON and deterministic exit codes make the
-findings usable in CI.
+Some PDFs look fine until you try to search or copy their text. I built a Java
+CLI and GitHub Action to catch that early. It points to the pages that need
+attention and gives CI a predictable result.
 
 [Source code](https://github.com/lMysticl/pdf-text-layer-auditor) · [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) · [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
 
 ### 02 · [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
 
-One validated REST API brings PostgreSQL and MongoDB user records together
-without exposing their source as an integration burden. The Java 21 / Spring
-Boot service uses bounded concurrency, source-aware responses, caching, and
-deterministic failure handling.
+This Spring Boot service reads users from PostgreSQL and MongoDB through one API.
+It tells callers where records came from and returns a clear error if one source
+times out instead of quietly returning an incomplete answer.
 
 [Source code](https://github.com/lMysticl/user-aggregation-service) · [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
 
 ### 03 · [ArchVerity](https://plugins.jetbrains.com/plugin/34234-archverity)
 
-A Kotlin IntelliJ IDEA plugin for analyzing Spring architecture and contracts
-across repositories.
+I wrote this Kotlin plugin for IntelliJ IDEA to inspect Spring architecture and
+contracts across repositories.
 
 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34234-archverity)
 
-## Engineering practice
+I also build coding-agent workflows for codebase analysis and review. I still
+read the diff and run the tests before shipping changes.
 
-I use unit, integration, contract, and browser tests to validate changes across
-service and UI boundaries. I measure processing with Micrometer and Prometheus,
-and use AI-assisted workflows for analysis and review while retaining ownership
-of design decisions and final verification.
+## Earlier open-source work
 
-## Open-source history
-
-My earlier Broadleaf Commerce contributions were made through my former work
-account, [`putrenkov`](https://github.com/putrenkov):
+Before this account, I contributed to Broadleaf Commerce as
+[`putrenkov`](https://github.com/putrenkov). A few examples:
 
 - [Historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360) — retention safety and MySQL/PostgreSQL compatibility.
 - [Domain equality and serialization invariants](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156) — regression coverage across the domain model.
