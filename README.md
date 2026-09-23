@@ -1,9 +1,9 @@
 <picture>
-  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-hero-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-hero-mobile-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero-light.svg">
-  <img src="./assets/profile-hero-light.svg" alt="Pavel Putrenkov, Java and Spring backend engineer. Reliable software for complex data: PDF processing and multi-source APIs." width="100%">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-hero-2026-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-hero-2026-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero-2026-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero-2026-light.svg">
+  <img src="./assets/profile-hero-2026-light.svg" alt="Pavel Putrenkov, Java and Spring backend engineer. Reliable software for complex data: PDF processing and multi-source APIs." width="100%">
 </picture>
 
 I build Java and Spring services that turn difficult inputs into dependable

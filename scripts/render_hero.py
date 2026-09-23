@@ -84,8 +84,8 @@ def mobile(c: dict[str, str]) -> str:
 
 def main() -> None:
     for theme, colors in THEMES.items():
-        (ASSETS / f"profile-hero-{theme}.svg").write_text(desktop(colors), encoding="utf-8")
-        (ASSETS / f"profile-hero-mobile-{theme}.svg").write_text(mobile(colors), encoding="utf-8")
+        (ASSETS / f"profile-hero-2026-{theme}.svg").write_text(desktop(colors), encoding="utf-8")
+        (ASSETS / f"profile-hero-2026-mobile-{theme}.svg").write_text(mobile(colors), encoding="utf-8")
 
 
 if __name__ == "__main__":
