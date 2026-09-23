@@ -7,41 +7,55 @@
   <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-cover-2026-animated-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-cover-2026-animated-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/profile-cover-2026-animated-light.svg">
-  <img src="./assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Java and Spring backend engineer. Complex inputs, clear outcomes." width="100%">
+  <img src="./assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
-Hi, I'm Pavel. I care about the details that decide whether software is actually
-useful: whether a PDF can be searched, whether records from two databases can
-be served through one clear API, and whether a failure points to its cause. I
-build Java and Spring systems around those details.
+I'm Pavel, a Senior Java Engineer with 10+ years of experience in payments,
+e-commerce, and document processing. I built a payment system from the ground
+up and led Java delivery for three years while staying hands-on in design,
+implementation, and review. Today I deliver document conversion and interactive
+reporting across Java 21 / Spring Boot and React / TypeScript.
 
-[**Explore my PDF tool**](https://github.com/lMysticl/pdf-text-layer-auditor) · [Connect on LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
+I focus on the boundaries that make complex systems dependable: clear API and
+data contracts, faithful document processing, measured performance, and failures
+that point to their cause. I back those decisions with automated tests and
+observability.
 
-## Featured projects
+[Explore my work](#selected-work) · [Connect on LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
+
+## Selected work
 
 ### 01 · [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
 
-A PDF can look perfect while its text layer is missing. I built a Java 21 CLI
-and GitHub Action that flags suspicious pages before they disrupt search,
-extraction, or accessibility workflows. Its JSON output is versioned for
-automation.
+A PDF can look perfect while its text layer is missing. This Java 21 CLI and
+GitHub Action catch suspicious pages before they disrupt search, extraction, or
+accessibility workflows. Versioned JSON and deterministic exit codes make the
+findings usable in CI.
 
 [Source code](https://github.com/lMysticl/pdf-text-layer-auditor) · [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) · [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
 
 ### 02 · [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
 
-An API consumer should not have to know which database holds a user record.
-This Java 21 and Spring Boot service brings PostgreSQL and MongoDB records
-behind one validated REST API, with bounded concurrent aggregation, caching,
-migrations, and OpenAPI.
+One validated REST API brings PostgreSQL and MongoDB user records together
+without exposing their source as an integration burden. The Java 21 / Spring
+Boot service uses bounded concurrency, source-aware responses, caching, and
+deterministic failure handling.
 
 [Source code](https://github.com/lMysticl/user-aggregation-service) · [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
 
-## Engineering approach
+### 03 · [ArchVerity](https://plugins.jetbrains.com/plugin/34234-archverity)
 
-I favor explicit contracts, errors that tell you where to look, and tests that
-make a change easier to trust. When a project needs a frontend, I work in React
-and TypeScript too.
+A Kotlin IntelliJ IDEA plugin for analyzing Spring architecture and contracts
+across repositories.
+
+[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34234-archverity)
+
+## Engineering practice
+
+I use unit, integration, contract, and browser tests to validate changes across
+service and UI boundaries. I measure processing with Micrometer and Prometheus,
+and use AI-assisted workflows for analysis and review while retaining ownership
+of design decisions and final verification.
 
 ## Open-source history
 

@@ -21,7 +21,7 @@ PALETTES = {
 def base(width: int, height: int, c: dict[str, str], title: str) -> str:
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">
   <title id="title">{title}</title>
-  <desc id="desc">Pavel Putrenkov, Java and Spring backend engineer. Complex inputs, clear outcomes.</desc>
+  <desc id="desc">Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes.</desc>
   <defs>
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="{c['bg_a']}"/><stop offset="1" stop-color="{c['bg_b']}"/></linearGradient>
     <radialGradient id="glow"><stop stop-color="{c['glow']}" stop-opacity=".16"/><stop offset="1" stop-color="{c['glow']}" stop-opacity="0"/></radialGradient>
@@ -50,32 +50,32 @@ def desktop(c: dict[str, str], animated: bool) -> str:
   <text class="monogram" x="890" y="311" fill="{c['accent']}" fill-opacity=".20" font-size="285" font-style="italic">P</text>
   <circle cx="1095" cy="304" r="13" fill="{c['accent']}"/>
   <rect x="60" y="47" width="38" height="4" rx="2" fill="{c['accent']}"/>
-  <text x="111" y="52" fill="{c['accent']}" font-size="18" font-weight="700" letter-spacing="2">JAVA / SPRING · BACKEND ENGINEER</text>
+  <text x="111" y="52" fill="{c['accent']}" font-size="18" font-weight="700" letter-spacing="2">SENIOR JAVA ENGINEER · SPRING BOOT</text>
   <text x="60" y="133" fill="{c['text']}" font-size="58" font-weight="700">Pavel Putrenkov</text>
   <text x="60" y="221" fill="{c['text']}" font-size="62" font-weight="700">Complex inputs.</text>
   <text x="60" y="291" fill="{c['accent']}" font-size="62" font-weight="700">Clear outcomes.</text>
-  <text x="60" y="339" fill="{c['muted']}" font-size="21">Documents, data and dependable APIs.</text>
+  <text x="60" y="339" fill="{c['muted']}" font-size="21">Payments, documents and dependable APIs.</text>
   <line x1="60" y1="377" x2="1140" y2="377" stroke="{c['line']}" stroke-opacity=".65"/>
-{moving_streak(c, 60, 377, 1140, 138, 9) if animated else ""}  <text x="60" y="409" fill="{c['quiet']}" font-size="16" font-weight="600" letter-spacing="1.5">PDF TOOLING  /  MULTI-SOURCE SERVICES  /  OPEN SOURCE</text>
+{moving_streak(c, 60, 377, 1140, 138, 9) if animated else ""}  <text x="60" y="409" fill="{c['quiet']}" font-size="16" font-weight="600" letter-spacing="1.5">PAYMENTS  /  DOCUMENTS  /  DEVELOPER TOOLING</text>
 </svg>
 '''
 
 
 def mobile(c: dict[str, str], animated: bool) -> str:
-    return base(620, 580, c, "Pavel Putrenkov — Java and Spring backend engineer") + f'''
+    return base(620, 580, c, "Pavel Putrenkov — Senior Java Engineer") + f'''
   <circle cx="510" cy="461" r="160" fill="url(#glow)"/>
   <circle cx="505" cy="447" r="110" fill="none" stroke="{c['accent']}" stroke-opacity=".34" stroke-width="1.5"/>
   <text class="monogram" x="432" y="520" fill="{c['accent']}" fill-opacity=".18" font-size="205" font-style="italic">P</text>
   <circle cx="573" cy="525" r="9" fill="{c['accent']}"/>
   <rect x="34" y="39" width="34" height="4" rx="2" fill="{c['accent']}"/>
-  <text x="81" y="45" fill="{c['accent']}" font-size="22" font-weight="700" letter-spacing="1">JAVA / SPRING ENGINEER</text>
+  <text x="81" y="45" fill="{c['accent']}" font-size="22" font-weight="700" letter-spacing="1">SENIOR JAVA · SPRING BOOT</text>
   <text x="34" y="130" fill="{c['text']}" font-size="59" font-weight="700">Pavel Putrenkov</text>
   <text x="34" y="218" fill="{c['text']}" font-size="54" font-weight="700">Complex inputs.</text>
   <text x="34" y="282" fill="{c['accent']}" font-size="54" font-weight="700">Clear outcomes.</text>
-  <text x="34" y="339" fill="{c['muted']}" font-size="25">Thoughtful backend engineering for</text>
-  <text x="34" y="375" fill="{c['muted']}" font-size="25">documents, data and APIs.</text>
+  <text x="34" y="339" fill="{c['muted']}" font-size="25">Reliable systems for payments,</text>
+  <text x="34" y="375" fill="{c['muted']}" font-size="25">documents and developer tools.</text>
   <line x1="34" y1="491" x2="586" y2="491" stroke="{c['line']}" stroke-opacity=".65"/>
-{moving_streak(c, 34, 491, 586, 90, 8) if animated else ""}  <text x="34" y="539" fill="{c['quiet']}" font-size="22" font-weight="600" letter-spacing="1">PDF  /  DATA  /  OPEN SOURCE</text>
+{moving_streak(c, 34, 491, 586, 90, 8) if animated else ""}  <text x="34" y="539" fill="{c['quiet']}" font-size="22" font-weight="600" letter-spacing="1">PAYMENTS  /  DOCS  /  TOOLING</text>
 </svg>
 '''
 
