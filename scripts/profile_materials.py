@@ -16,19 +16,25 @@ ORBIT_COLORS = {
 }
 
 # A custom serif outline keeps the monogram identical on every GitHub client.
-LETTER = ('M -49 59 L -48 54 C -36 53 -32 52 -30 41 L -10 -42 '
-          'C -7 -54 -9 -58 -21 -59 L -20 -65 L 28 -65 '
-          'C 57 -65 72 -54 68 -31 C 64 -9 45 7 15 7 L 3 7 '
-          'L -5 42 C -7 52 -3 54 11 54 L 10 59 Z '
-          'M 9 -8 L 20 -8 C 40 -8 50 -18 54 -35 '
-          'C 57 -48 47 -52 30 -52 L 20 -52 Z')
+LETTER = ('M -46 62 L -45 57 C -33 56 -29 53 -27 42 L -10 -43 '
+          'C -8 -55 -11 -58 -23 -58 L -22 -64 H 23 '
+          'C 48 -64 63 -54 63 -35 C 63 -9 41 8 12 8 H 4 '
+          'L -2 42 C -4 53 0 57 14 57 L 13 62 Z '
+          'M 8 -4 H 18 C 37 -4 48 -16 48 -34 '
+          'C 48 -47 41 -53 27 -53 H 17 Z')
+
+# Center the face plus its 8 by 6.8 solid extrusion; keep cast shadows attached.
+# Outline bounds are (-46, -64) to (63, 62), before bevel strokes.
+LETTER_PLACEMENT = 'translate(-12.5 -2.4)'
 
 
 def gradients(accent):
     return f'''
     <radialGradient id="orbital-aura"><stop stop-color="{accent}" stop-opacity=".19"/><stop offset=".58" stop-color="{accent}" stop-opacity=".06"/><stop offset="1" stop-color="{accent}" stop-opacity="0"/></radialGradient>
     <radialGradient id="orbital-shadow"><stop stop-color="#020812" stop-opacity=".85"/><stop offset="1" stop-color="#020812" stop-opacity="0"/></radialGradient>
-    <radialGradient id="orbital-core" cx=".25" cy=".18" r=".84"><stop stop-color="#C4C3B3"/><stop offset=".19" stop-color="#789096"/><stop offset=".42" stop-color="#375361"/><stop offset=".69" stop-color="#112B40"/><stop offset=".9" stop-color="{MIDNIGHT}"/><stop offset="1" stop-color="#020812"/></radialGradient>
+    <radialGradient id="orbital-core" cx=".25" cy=".18" r=".84"><stop stop-color="#BDD6D4"/><stop offset=".19" stop-color="#719AA9"/><stop offset=".42" stop-color="#315C75"/><stop offset=".69" stop-color="#133650"/><stop offset=".9" stop-color="{MIDNIGHT}"/><stop offset="1" stop-color="#020812"/></radialGradient>
+    <linearGradient id="orbital-cloud-layer" gradientUnits="userSpaceOnUse" x1="-64" y1="-64" x2="74" y2="72"><stop stop-color="#E1E6D4"/><stop offset=".3" stop-color="#91B8BA"/><stop offset=".65" stop-color="#36657A"/><stop offset="1" stop-color="#183D58"/></linearGradient>
+    <linearGradient id="orbital-cloud-edge" gradientUnits="userSpaceOnUse" x1="-78" y1="-45" x2="64" y2="44"><stop stop-color="#F4EDD3"/><stop offset=".42" stop-color="#A3C9CD"/><stop offset="1" stop-color="#47788D"/></linearGradient>
     <radialGradient id="orbital-specular"><stop stop-color="#FFF5DC" stop-opacity=".55"/><stop offset=".42" stop-color="#D9E8E2" stop-opacity=".15"/><stop offset="1" stop-color="#C9E8EF" stop-opacity="0"/></radialGradient>
     <radialGradient id="orbital-atmosphere"><stop offset=".81" stop-color="{TURQUOISE}" stop-opacity="0"/><stop offset=".9" stop-color="#8BDDDC" stop-opacity=".2"/><stop offset=".94" stop-color="#86C6DC" stop-opacity=".045"/><stop offset="1" stop-color="{TURQUOISE}" stop-opacity="0"/></radialGradient>
     <linearGradient id="orbital-rim" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#F6E6BA"/><stop offset=".3" stop-color="#A4BDC2"/><stop offset=".57" stop-color="#234250"/><stop offset=".77" stop-color="#101E2B"/><stop offset="1" stop-color="#AC895B"/></linearGradient>
@@ -45,21 +51,16 @@ def gradients(accent):
 
 
 def nucleus():
-    # Broad swirls remain readable at 1x; smaller tributaries add surface relief.
-    swirls = [
-        'M -90 -35 C -55 -73 -35 -24 -3 -38 S 44 -62 82 -21',
-        'M -94 -23 C -64 -58 -47 -23 -24 -22 S 4 -49 30 -32 S 69 -19 94 -6',
-        'M -97 -8 C -68 -24 -57 -4 -40 2 S -17 -6 -9 -22',
-        'M -88 25 C -51 11 -41 42 -7 34 S 38 4 78 27',
-        'M -72 51 C -43 30 -14 65 21 50 S 60 27 88 41',
-        'M -53 71 C -26 49 14 77 44 62 S 67 49 79 54',
+    # Irregular atmospheric ribbons curve across the globe and into its night side.
+    bands = [
+        ('M -98 -51 C -70 -74 -54 -55 -33 -60 S -3 -81 27 -64 S 60 -47 93 -53 L 99 -36 C 62 -32 45 -42 23 -47 S -5 -49 -22 -46 -59 -45 -78 -32 L -97 -30 Z', '.58'),
+        ('M -100 -22 C -69 -42 -64 -18 -44 -22 S -19 -43 1 -26 S 48 -14 95 -28 L 98 -16 C 56 -1 26 0 3 -13 S -14 -20 -30 -9 -63 -13 -81 -4 L -99 3 Z', '.42'),
+        ('M -98 8 C -77 -2 -72 18 -55 16 S -40 -4 -23 10 4 33 27 22 58 12 97 28 L 95 38 C 64 23 43 31 26 35 S -7 38 -23 26 -42 23 -55 27 -79 11 -98 25 Z', '.3'),
+        ('M -84 46 C -58 28 -39 57 -9 50 S 34 40 60 52 72 59 88 56 L 78 71 C 49 59 34 56 10 65 S -30 65 -48 58 -68 52 -81 60 Z', '.24'),
     ]
     terrain = '\n'.join(
-        f'        <path d="{d}" fill="none" stroke="{color}" stroke-width="{width}" opacity="{opacity}"/>'
-        for i, d in enumerate(swirls)
-        for color, width, opacity in (
-            ('#061722', 6 + i % 3, '.28'), ('#9FB5AE', 1.2, '.25'),
-        ))
+        f'        <path d="{d}" fill="url(#orbital-cloud-layer)" opacity="{opacity}"/>'
+        for d, opacity in bands)
     sides = '\n'.join(
         f'        <use href="#orbital-letter" transform="translate({i} {i * .85:.2f})" fill="url(#orbital-gold-side)" stroke="#6F4929" stroke-width=".7"/>'
         for i in range(8, 0, -1))
@@ -72,16 +73,24 @@ def nucleus():
       <circle r="{CORE_RADIUS}" fill="url(#orbital-core)" stroke="url(#orbital-rim)" stroke-width="1.3"/>
       <g clip-path="url(#orbital-core-clip)">
 {terrain}
-        <path d="M -82 -45 C -61 -58 -59 -37 -42 -40 S -24 -63 -9 -52 M -80 31 C -63 20 -49 47 -32 43 M 24 68 C 43 64 49 45 71 44" fill="none" stroke="#D7C49A" stroke-width=".7" opacity=".32"/>
+        <path d="M -86 -47 C -61 -59 -51 -40 -30 -49 S -6 -65 18 -52 M -87 -19 C -71 -32 -64 -14 -45 -18 S -22 -34 -9 -24 M -74 36 C -61 28 -45 48 -27 44 M 19 62 C 36 55 49 58 63 65" fill="none" stroke="url(#orbital-cloud-edge)" stroke-width="1.2" opacity=".52"/>
+        <path d="M -85 -40 C -63 -51 -54 -36 -36 -42 M -90 -10 C -74 -23 -64 -7 -51 -11 M -75 42 C -56 37 -45 56 -24 49" fill="none" stroke="#071F35" stroke-width="2.2" opacity=".3"/>
+        <g transform="translate(-57 5) rotate(19)">
+          <ellipse rx="17" ry="8" fill="#173F56" opacity=".7"/>
+          <path d="M -17 0 C -12 -10 15 -10 17 -1 S -9 10 -12 3 7 -5 10 0 -5 5 -5 1" fill="none" stroke="url(#orbital-cloud-edge)" stroke-width="1.9" opacity=".62"/>
+          <path d="M -12 -2 C -3 -7 11 -5 12 -1" fill="none" stroke="#E1E7CF" stroke-width=".65" opacity=".55"/>
+        </g>
         <ellipse cx="-37" cy="-55" rx="59" ry="32" transform="rotate(-24 -37 -55)" fill="url(#orbital-specular)"/>
         <circle r="90" fill="url(#orbital-terminator)" opacity=".32"/>
         <path d="M -82 -24 A 86 86 0 0 1 -28 -81" fill="none" stroke="#F7EED4" stroke-opacity=".62" stroke-width="1.25" stroke-linecap="round"/>
         <path d="M 20 87 A 89 89 0 0 0 81 36" fill="none" stroke="#CAA772" stroke-opacity=".38" stroke-width="1"/>
+        <g id="orbital-letter-placement" transform="{LETTER_PLACEMENT}">
         <use href="#orbital-letter" transform="translate(12 12)" fill="#020711" stroke="#020711" stroke-width="9" opacity=".13"/>
         <use href="#orbital-letter" transform="translate(9 9)" fill="#020711" stroke="#020711" stroke-width="3" opacity=".6"/>
 {sides}
         <use href="#orbital-letter" fill="url(#orbital-gold)" stroke="url(#orbital-bevel)" stroke-width="2.4" stroke-linejoin="round"/>
-        <path d="M -18 -63 H 28 C 52 -63 66 -56 67 -43 M -47 57 H 9 M 12 -10 C 33 -9 45 -17 50 -30" fill="none" stroke="#FFF4D4" stroke-opacity=".7" stroke-width=".7" stroke-linecap="round"/>
+        <path d="M -20 -62 H 23 C 47 -62 60 -53 61 -38 M -43 60 H 12 M 10 -2 H 18 C 36 -2 47 -14 49 -29" fill="none" stroke="#FFF4D4" stroke-opacity=".7" stroke-width=".7" stroke-linecap="round"/>
+        </g>
       </g>
     </g>'''
 
