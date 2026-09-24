@@ -18,22 +18,22 @@ a payment system from scratch and led Java development for three years.
 
 ## Selected work
 
-### 01 В· [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
+### 01 · [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
 
 A Java CLI and GitHub Action that detects missing or suspicious PDF text layers
 and reports affected pages for automated checks.
 
-[Source code](https://github.com/lMysticl/pdf-text-layer-auditor) В· [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) В· [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
+[Source code](https://github.com/lMysticl/pdf-text-layer-auditor) · [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) · [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
 
-### 02 В· [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
+### 02 · [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
 
 A Spring Boot API that combines user records from PostgreSQL and MongoDB. It
 includes source information and reports timeouts explicitly instead of
 returning incomplete data as a successful response.
 
-[Source code](https://github.com/lMysticl/user-aggregation-service) В· [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
+[Source code](https://github.com/lMysticl/user-aggregation-service) · [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
 
-### 03 В· [ArchVerity](https://plugins.jetbrains.com/plugin/34234-archverity)
+### 03 · [ArchVerity](https://plugins.jetbrains.com/plugin/34234-archverity)
 
 A Kotlin plugin for IntelliJ IDEA that inspects Spring architecture and
 contracts across repositories.
@@ -45,6 +45,6 @@ contracts across repositories.
 Before this account, I contributed to Broadleaf Commerce as
 [`putrenkov`](https://github.com/putrenkov). A few examples:
 
-- [Historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360) вЂ” retention safety and MySQL/PostgreSQL compatibility.
-- [Domain equality and serialization invariants](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156) вЂ” regression coverage across the domain model.
-- [Multi-catalog persistence fix](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2367) вЂ” a persistence defect validated through review.
+- [Historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360) — retention safety and MySQL/PostgreSQL compatibility.
+- [Domain equality and serialization invariants](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156) — regression coverage across the domain model.
+- [Multi-catalog persistence fix](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2367) — a persistence defect validated through review.
