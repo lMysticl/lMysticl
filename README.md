@@ -10,43 +10,35 @@
   <img src="https://github.com/lMysticl/lMysticl/raw/829de0a5c47a945d99649da610732a845c466995/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
-For more than a decade, I've worked on Java systems in e-commerce, payments,
-and document processing. At Ukrposhta, I built a payment system from the ground
-up and led Java development for three years, while continuing to write and
-review code.
+I build document conversion and interactive reporting software, from Java 21
+and Spring Boot services to React/TypeScript interfaces. At Ukrposhta, I built
+a payment system from scratch and led Java development for three years.
 
-I now work on document conversion and interactive reporting, building Java 21
-and Spring Boot services alongside React/TypeScript interfaces.
-
-[Find me on LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
+[LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
 
 ## Selected work
 
 ### 01 · [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
 
-Some PDFs look fine until you try to search or copy their text. I built a Java
-CLI and GitHub Action to catch that early. It points to the pages that need
-attention and gives CI a predictable result.
+A Java CLI and GitHub Action that detects missing or suspicious PDF text layers
+and reports affected pages for automated checks.
 
 [Source code](https://github.com/lMysticl/pdf-text-layer-auditor) · [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) · [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
 
 ### 02 · [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
 
-This Spring Boot service reads users from PostgreSQL and MongoDB through one API.
-It tells callers where records came from and returns a clear error if one source
-times out instead of quietly returning an incomplete answer.
+A Spring Boot API that combines user records from PostgreSQL and MongoDB. It
+includes source information and reports timeouts explicitly instead of
+returning incomplete data as a successful response.
 
 [Source code](https://github.com/lMysticl/user-aggregation-service) · [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
 
 ### 03 · [ArchVerity](https://plugins.jetbrains.com/plugin/34234-archverity)
 
-I wrote this Kotlin plugin for IntelliJ IDEA to inspect Spring architecture and
+A Kotlin plugin for IntelliJ IDEA that inspects Spring architecture and
 contracts across repositories.
 
 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34234-archverity)
-
-I also build coding-agent workflows for codebase analysis and review. I still
-read the diff and run the tests before shipping changes.
 
 ## Earlier open-source work
 
