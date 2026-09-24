@@ -5,38 +5,111 @@
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="#FAF7F0"/><stop offset="1" stop-color="#EEE9E0"/></linearGradient>
     <radialGradient id="glow"><stop stop-color="#D6B18B" stop-opacity=".16"/><stop offset="1" stop-color="#D6B18B" stop-opacity="0"/></radialGradient>
     <linearGradient id="streak"><stop stop-color="#9E562E" stop-opacity="0"/><stop offset=".5" stop-color="#9E562E"/><stop offset="1" stop-color="#9E562E" stop-opacity="0"/></linearGradient>
-    <radialGradient id="planet" cx=".3" cy=".25" r=".8"><stop stop-color="#F3D2A5"/><stop offset=".45" stop-color="#B77644"/><stop offset="1" stop-color="#713B20"/></radialGradient>
-    <radialGradient id="planet-halo"><stop stop-color="#9E562E" stop-opacity=".2"/><stop offset="1" stop-color="#9E562E" stop-opacity="0"/></radialGradient>
+  <!-- orbital-definitions:start -->
+    <radialGradient id="orbital-aura"><stop stop-color="#9E562E" stop-opacity=".19"/><stop offset=".58" stop-color="#9E562E" stop-opacity=".06"/><stop offset="1" stop-color="#9E562E" stop-opacity="0"/></radialGradient>
+    <radialGradient id="orbital-shadow"><stop stop-color="#03070D" stop-opacity=".7"/><stop offset="1" stop-color="#03070D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="orbital-core" cx=".28" cy=".22" r=".85"><stop stop-color="#8C877B"/><stop offset=".2" stop-color="#55585A"/><stop offset=".52" stop-color="#252C34"/><stop offset=".8" stop-color="#10161F"/><stop offset="1" stop-color="#060B13"/></radialGradient>
+    <radialGradient id="orbital-specular" cx=".35" cy=".25"><stop stop-color="#FFF1DA" stop-opacity=".45"/><stop offset="1" stop-color="#FFF1DA" stop-opacity="0"/></radialGradient>
+    <linearGradient id="orbital-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF0C9"/><stop offset=".24" stop-color="#B88C59"/><stop offset=".56" stop-color="#303943"/><stop offset=".83" stop-color="#0B1018"/><stop offset="1" stop-color="#837467"/></linearGradient>
+    <linearGradient id="orbital-gold" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#FFF1CE"/><stop offset=".3" stop-color="#DDB57B"/><stop offset=".6" stop-color="#9E6E3D"/><stop offset=".83" stop-color="#D6AA6C"/><stop offset="1" stop-color="#80532F"/></linearGradient>
+    <linearGradient id="orbital-wire" gradientUnits="userSpaceOnUse" x1="-120" y1="-110" x2="130" y2="125"><stop stop-color="#FFE2B3"/><stop offset=".32" stop-color="#9C6237"/><stop offset=".72" stop-color="#8F633F"/><stop offset="1" stop-color="#9C6237"/></linearGradient>
+    <radialGradient id="orbital-amber" cx=".28" cy=".22" r=".82"><stop stop-color="#FFE7B1"/><stop offset=".35" stop-color="#D5A061"/><stop offset=".64" stop-color="#986039"/><stop offset=".84" stop-color="#4B3027"/><stop offset="1" stop-color="#1A1920"/></radialGradient>
+    <radialGradient id="orbital-moon" cx=".25" cy=".2" r=".82"><stop stop-color="#FFF3D7"/><stop offset=".4" stop-color="#C3C1B6"/><stop offset=".68" stop-color="#7E8587"/><stop offset="1" stop-color="#252E39"/></radialGradient>
+    <radialGradient id="orbital-ocean" cx=".28" cy=".2" r=".83"><stop stop-color="#B4ECDE"/><stop offset=".25" stop-color="#4F9C9C"/><stop offset=".6" stop-color="#20545F"/><stop offset=".86" stop-color="#0C293D"/><stop offset="1" stop-color="#07101F"/></radialGradient>
+    <radialGradient id="orbital-terminator" cx=".28" cy=".2" r=".83"><stop offset=".28" stop-color="#030A15" stop-opacity="0"/><stop offset=".66" stop-color="#030A15" stop-opacity=".08"/><stop offset=".86" stop-color="#030A15" stop-opacity=".45"/><stop offset="1" stop-color="#030A15" stop-opacity=".8"/></radialGradient>
+    <linearGradient id="orbital-rings" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#735846"/><stop offset=".45" stop-color="#D3B88C"/><stop offset=".7" stop-color="#F4D6A1"/><stop offset="1" stop-color="#9F784F"/></linearGradient>
+    <clipPath id="orbital-core-clip"><circle r="82"/></clipPath>
+    <clipPath id="orbital-amber-clip"><circle r="17"/></clipPath>
+    <clipPath id="orbital-moon-clip"><circle r="13"/></clipPath>
+    <clipPath id="orbital-ocean-clip"><circle r="12"/></clipPath>
+    <text id="orbital-letter" class="monogram" x="-53" y="54" font-size="154" font-style="italic">P</text>
+    <g id="orbital-nucleus">
+      <circle cx="8" cy="10" r="101" fill="url(#orbital-shadow)"/>
+      <circle r="82" fill="url(#orbital-core)" stroke="url(#orbital-rim)" stroke-width="1.5"/>
+      <g clip-path="url(#orbital-core-clip)">
+        <ellipse cx="-22" cy="-40" rx="58" ry="35" transform="rotate(-26)" fill="url(#orbital-specular)"/>
+        <path d="M -76 -26 C -40 -53 25 -39 78 -7 M -78 -13 C -31 -39 36 -18 81 13 M -69 41 C -22 57 31 69 62 48" fill="none" stroke="#D4C7AC" stroke-opacity=".08" stroke-width=".75"/>
+        <path d="M -41 -71 C -69 -34 -72 20 -38 70 M 17 -79 C -14 -37 -22 20 12 81" fill="none" stroke="#C5BBA8" stroke-opacity=".065" stroke-width=".7"/>
+        <path d="M -70 -29 A 76 76 0 0 1 -26 -71" fill="none" stroke="#FFF0CF" stroke-opacity=".5" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M 29 75 A 80 80 0 0 0 75 29" fill="none" stroke="#799BA4" stroke-opacity=".2" stroke-width="1"/>
+        <use href="#orbital-letter" transform="translate(5 6)" fill="#040810" opacity=".85"/>
+        <use href="#orbital-letter" transform="translate(3 4)" fill="#5B3E28"/>
+        <use href="#orbital-letter" transform="translate(1.5 2)" fill="#997047"/>
+        <use href="#orbital-letter" fill="url(#orbital-gold)" stroke="#FFE7B5" stroke-opacity=".38" stroke-width=".65"/>
+      </g>
+    </g>
+    <g id="orbital-body-amber">
+      <g transform="rotate(-24)"><ellipse rx="30" ry="8" fill="none" stroke="#201E23" stroke-opacity=".45" stroke-width="6"/><ellipse rx="28" ry="7.4" fill="none" stroke="url(#orbital-rings)" stroke-width="4.2"/><ellipse rx="31" ry="8.7" fill="none" stroke="#BFA17A" stroke-opacity=".7" stroke-width=".8"/></g>
+      <circle r="17" fill="url(#orbital-amber)"/>
+      <g clip-path="url(#orbital-amber-clip)" transform="rotate(-12)">
+        <path d="M -20 -9 Q 0 -3 19 -8 M -20 -2 Q 1 6 20 0 M -20 8 Q 1 13 20 8" fill="none" stroke="#765137" stroke-opacity=".45" stroke-width="2.6"/>
+        <path d="M -18 -12 Q -1 -7 18 -11 M -20 3 Q 0 10 20 4" fill="none" stroke="#FFE3AD" stroke-opacity=".55" stroke-width="1.1"/>
+        <ellipse cx="6" cy="2" rx="4" ry="1.6" fill="#BF7845" opacity=".65"/>
+        <path d="M -20 2 Q 0 -2 20 -9" fill="none" stroke="#1C1820" stroke-opacity=".32" stroke-width="2.4"/>
+      </g>
+      <circle r="17" fill="url(#orbital-terminator)"/>
+      <g transform="rotate(-24)"><path d="M -28 0 A 28 7.4 0 0 0 28 0" fill="none" stroke="url(#orbital-rings)" stroke-width="4.2"/><path d="M -31 0 A 31 8.7 0 0 0 31 0" fill="none" stroke="#EFD6A8" stroke-opacity=".8" stroke-width=".8"/><path d="M -25 0 A 25 6.5 0 0 0 25 0" fill="none" stroke="#6C523C" stroke-opacity=".75" stroke-width=".75"/></g>
+      <path d="M -13 -7 A 14 14 0 0 1 -6 -13" fill="none" stroke="#FFF2CE" stroke-opacity=".8" stroke-width="1" stroke-linecap="round"/>
+    </g>
+    <g id="orbital-body-moon">
+      <circle r="13" fill="url(#orbital-moon)"/>
+      <g clip-path="url(#orbital-moon-clip)">
+        <ellipse cx="-4" cy="-3" rx="3.4" ry="3" fill="#777C78" opacity=".65"/>
+        <path d="M -7 -3 A 3.2 2.9 0 0 0 -1 -2" fill="none" stroke="#EEE8CF" stroke-opacity=".8" stroke-width=".9"/>
+        <ellipse cx="4.7" cy="4.8" rx="3.2" ry="2.4" transform="rotate(-20 4.7 4.8)" fill="#646D73" opacity=".55"/>
+        <path d="M 2 5 Q 4.8 8.5 8 4.5" fill="none" stroke="#DAD8C8" stroke-opacity=".7" stroke-width=".8"/>
+        <circle cx="3.7" cy="-6.3" r="1.8" fill="#737C7A" opacity=".55"/>
+        <path d="M 2 -6.5 Q 3.8 -3.7 5.3 -6.3" fill="none" stroke="#F0E8CF" stroke-opacity=".75" stroke-width=".65"/>
+        <circle cx="-6" cy="5" r="1.3" fill="#697375" opacity=".6"/><circle cx="-1" cy="8.7" r=".7" fill="#EDE5CF" opacity=".5"/><circle cx="7.4" cy="-1.7" r=".8" fill="#687579" opacity=".7"/>
+      </g>
+      <circle r="13" fill="url(#orbital-terminator)"/>
+      <path d="M -10 -6 A 11.5 11.5 0 0 1 -4 -11" fill="none" stroke="#FFF5DC" stroke-opacity=".7" stroke-width=".75"/>
+    </g>
+    <g id="orbital-body-ocean">
+      <circle r="12" fill="url(#orbital-ocean)" stroke="#89BFC1" stroke-opacity=".3" stroke-width=".65"/>
+      <g clip-path="url(#orbital-ocean-clip)">
+        <path d="M -8 -10 L -3 -8 -4 -4 0 -2 -2 2 -5 1 -7 4 -10 2 -10 -3 Z M 4 0 L 9 -2 12 2 9 7 5 9 2 6 3 3 Z" fill="#8AA99A" opacity=".6"/>
+        <path d="M -13 -4 Q -6 -8 1 -4 T 14 -5 M -13 3 Q -7 0 0 4 T 14 4" fill="none" stroke="#E2ECE0" stroke-opacity=".53" stroke-width="1.2"/>
+        <path d="M -6 -10 Q -1 -7 6 -8 M -9 9 Q -2 5 4 9" fill="none" stroke="#E7EEE0" stroke-opacity=".38" stroke-width=".8"/>
+      </g>
+      <circle r="12" fill="url(#orbital-terminator)"/>
+      <path d="M -10 -4 A 10.8 10.8 0 0 1 -4 -10" fill="none" stroke="#C4F4EB" stroke-opacity=".85" stroke-width=".9" stroke-linecap="round"/>
+    </g>
+  <!-- orbital-definitions:end -->
     <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; } text.monogram { font-family: Georgia, "Times New Roman", serif; } @media (prefers-reduced-motion: reduce) { .motion { display: none; } }</style>
   </defs>
   <rect x=".5" y=".5" width="619" height="579" rx="18" fill="url(#background)" stroke="#D8D0C5"/>
 
   <circle cx="510" cy="461" r="160" fill="url(#glow)"/>
-  <g id="orbital-monogram" transform="translate(505 447) scale(.66)">
-    <circle r="154" fill="none" stroke="#9E562E" stroke-opacity=".15"/>
-    <ellipse rx="148" ry="58" transform="rotate(-25)" fill="none" stroke="#9E562E" stroke-opacity=".32" stroke-width="1.25"/>
-    <ellipse rx="148" ry="58" transform="rotate(35)" fill="none" stroke="#9E562E" stroke-opacity=".24" stroke-width="1.25"/>
-    <ellipse rx="148" ry="58" transform="rotate(95)" fill="none" stroke="#9E562E" stroke-opacity=".20" stroke-width="1.25"/>
-    <text class="monogram" x="-105" y="100" fill="#9E562E" fill-opacity=".25" font-size="285" font-style="italic">P</text>
-    <g transform="rotate(-25)">
-      <g class="satellite" transform="translate(135.205 23.591)">
-        <circle r="20.8" fill="url(#planet-halo)"/>
-        <circle r="8" fill="url(#planet)" stroke="#9E562E" stroke-opacity=".35" stroke-width=".6"/>
-      </g>
-    </g>
-    <g transform="rotate(35)">
-      <g class="satellite" transform="translate(-130.676 27.229)">
-        <circle r="15.600000000000001" fill="url(#planet-halo)"/>
-        <circle r="6" fill="url(#planet)" stroke="#9E562E" stroke-opacity=".35" stroke-width=".6"/>
-      </g>
-    </g>
-    <g transform="rotate(95)">
-      <g class="satellite" transform="translate(-20.598 -57.436)">
-        <circle r="13.0" fill="url(#planet-halo)"/>
-        <circle r="5" fill="url(#planet)" stroke="#9E562E" stroke-opacity=".35" stroke-width=".6"/>
-      </g>
-    </g>
+  <!-- orbital-scene:start -->
+  <g id="orbital-monogram" transform="translate(508 442) scale(.56)">
+    <circle r="188" fill="url(#orbital-aura)"/>
+  <g class="orbit-back">
+    <path d="M -124.268 52.749 L -123.57 49.789 L -122.598 46.784 L -121.365 43.741 L -119.881 40.667 L -118.158 37.571 L -116.208 34.46 L -114.043 31.339 L -111.672 28.216 L -109.107 25.095 L -106.358 21.982 L -103.435 18.882 L -100.347 15.799 L -97.103 12.738 L -93.713 9.702 L -90.185 6.696 L -86.527 3.723 L -82.746 0.786 L -78.851 -2.113 L -74.848 -4.969 L -70.744 -7.781 L -66.546 -10.546 L -62.261 -13.261 L -57.893 -15.925 L -53.449 -18.535 L -48.935 -21.089 L -44.356 -23.585 L -39.718 -26.021 L -35.024 -28.395 L -30.281 -30.705 L -25.494 -32.949 L -20.666 -35.125 L -15.804 -37.231 L -10.911 -39.266 L -5.992 -41.227 L -1.052 -43.112 L 3.905 -44.919 L 8.872 -46.646 L 13.847 -48.291 L 18.823 -49.851 L 23.796 -51.324 L 28.76 -52.707 L 33.71 -53.999 L 38.641 -55.195 L 43.546 -56.294 L 48.419 -57.293 L 53.255 -58.188 L 58.045 -58.977 L 62.785 -59.656 L 67.465 -60.222 L 72.078 -60.672 L 76.616 -61.002 L 81.072 -61.209 L 85.434 -61.289 L 89.695 -61.238 L 93.844 -61.053 L 97.871 -60.73 L 101.764 -60.265 L 105.514 -59.655 L 109.106 -58.896 L 112.53 -57.985 L 115.771 -56.918 L 118.817 -55.691 L 121.655 -54.302 L 124.268 -52.749" fill="none" stroke="#9E562E" stroke-opacity=".23" stroke-width=".9"/>
+    <path d="M -112.686 -91.251 L -108.916 -92.857 L -104.979 -94.205 L -100.891 -95.304 L -96.664 -96.157 L -92.314 -96.774 L -87.852 -97.159 L -83.291 -97.32 L -78.642 -97.263 L -73.917 -96.996 L -69.126 -96.525 L -64.278 -95.856 L -59.383 -94.997 L -54.451 -93.954 L -49.488 -92.733 L -44.504 -91.341 L -39.505 -89.782 L -34.498 -88.064 L -29.491 -86.191 L -24.489 -84.169 L -19.498 -82.004 L -14.524 -79.7 L -9.573 -77.262 L -4.649 -74.695 L 0.242 -72.004 L 5.095 -69.192 L 9.907 -66.265 L 14.671 -63.225 L 19.385 -60.078 L 24.043 -56.826 L 28.641 -53.474 L 33.175 -50.025 L 37.641 -46.483 L 42.034 -42.851 L 46.351 -39.133 L 50.585 -35.332 L 54.735 -31.452 L 58.793 -27.496 L 62.757 -23.467 L 66.621 -19.37 L 70.38 -15.207 L 74.03 -10.982 L 77.564 -6.7 L 80.978 -2.364 L 84.266 2.022 L 87.422 6.454 L 90.439 10.926 L 93.312 15.435 L 96.034 19.975 L 98.597 24.54 L 100.996 29.126 L 103.222 33.727 L 105.268 38.335 L 107.126 42.944 L 108.787 47.546 L 110.244 52.135 L 111.488 56.701 L 112.51 61.237 L 113.301 65.732 L 113.852 70.176 L 114.154 74.56 L 114.197 78.871 L 113.973 83.099 L 113.472 87.23 L 112.686 91.251" fill="none" stroke="#9E562E" stroke-opacity=".23" stroke-width=".9"/>
+    <path d="M 2.531 -144.978 L 4.309 -142.808 L 6.031 -140.362 L 7.693 -137.655 L 9.294 -134.703 L 10.835 -131.522 L 12.313 -128.127 L 13.728 -124.531 L 15.081 -120.748 L 16.37 -116.791 L 17.596 -112.672 L 18.76 -108.404 L 19.86 -103.996 L 20.898 -99.461 L 21.874 -94.806 L 22.787 -90.043 L 23.64 -85.18 L 24.431 -80.225 L 25.163 -75.186 L 25.834 -70.072 L 26.446 -64.888 L 26.999 -59.642 L 27.493 -54.34 L 27.93 -48.989 L 28.309 -43.594 L 28.631 -38.16 L 28.896 -32.694 L 29.105 -27.2 L 29.258 -21.684 L 29.354 -16.15 L 29.396 -10.603 L 29.382 -5.047 L 29.312 0.512 L 29.188 6.07 L 29.008 11.622 L 28.773 17.165 L 28.483 22.692 L 28.138 28.2 L 27.737 33.683 L 27.282 39.136 L 26.77 44.555 L 26.203 49.934 L 25.58 55.267 L 24.901 60.548 L 24.165 65.771 L 23.373 70.93 L 22.523 76.019 L 21.617 81.029 L 20.653 85.953 L 19.631 90.784 L 18.551 95.512 L 17.414 100.129 L 16.219 104.626 L 14.965 108.992 L 13.654 113.218 L 12.284 117.291 L 10.858 121.2 L 9.374 124.934 L 7.834 128.478 L 6.238 131.82 L 4.588 134.945 L 2.884 137.839 L 1.129 140.487 L -0.677 142.872 L -2.531 144.978" fill="none" stroke="#9E562E" stroke-opacity=".23" stroke-width=".9"/>
   </g>
+  <g class="orbit-stationary">
+    <g class="satellite-static" data-body="moon" transform="translate(-90.838 -96.927) scale(0.94)"><use href="#orbital-body-moon"/></g>
+    <g class="satellite-static" data-body="ocean" transform="translate(20.653 85.953) scale(0.835)"><use href="#orbital-body-ocean"/></g>
+  </g>
+    <use id="orbital-core-instance" href="#orbital-nucleus"/>
+  <g class="orbit-front">
+    <path d="M 124.268 -52.749 L 126.644 -51.028 L 128.766 -49.138 L 130.621 -47.076 L 132.191 -44.843 L 133.464 -42.438 L 134.422 -39.861 L 135.051 -37.112 L 135.336 -34.195 L 135.263 -31.111 L 134.819 -27.864 L 133.992 -24.46 L 132.769 -20.904 L 131.141 -17.203 L 129.099 -13.366 L 126.636 -9.403 L 123.749 -5.324 L 120.434 -1.143 L 116.691 3.127 L 112.523 7.47 L 107.936 11.872 L 102.939 16.313 L 97.542 20.776 L 91.76 25.241 L 85.612 29.689 L 79.118 34.097 L 72.303 38.445 L 65.194 42.712 L 57.82 46.876 L 50.215 50.916 L 42.411 54.813 L 34.447 58.546 L 26.359 62.097 L 18.186 65.448 L 9.968 68.585 L 1.744 71.491 L -6.446 74.155 L -14.563 76.567 L -22.571 78.717 L -30.433 80.598 L -38.115 82.207 L -45.585 83.541 L -52.813 84.598 L -59.772 85.38 L -66.439 85.89 L -72.792 86.132 L -78.811 86.112 L -84.483 85.839 L -89.793 85.319 L -94.733 84.563 L -99.294 83.581 L -103.473 82.385 L -107.266 80.985 L -110.673 79.395 L -113.697 77.625 L -116.341 75.689 L -118.61 73.599 L -120.51 71.367 L -122.051 69.005 L -123.239 66.526 L -124.086 63.94 L -124.601 61.259 L -124.795 58.493 L -124.68 55.653 L -124.268 52.749" transform="translate(.4 .7)" fill="none" stroke="#050A12" stroke-opacity=".36" stroke-width="2.1"/>
+    <path d="M 124.268 -52.749 L 126.644 -51.028 L 128.766 -49.138 L 130.621 -47.076 L 132.191 -44.843 L 133.464 -42.438 L 134.422 -39.861 L 135.051 -37.112 L 135.336 -34.195 L 135.263 -31.111 L 134.819 -27.864 L 133.992 -24.46 L 132.769 -20.904 L 131.141 -17.203 L 129.099 -13.366 L 126.636 -9.403 L 123.749 -5.324 L 120.434 -1.143 L 116.691 3.127 L 112.523 7.47 L 107.936 11.872 L 102.939 16.313 L 97.542 20.776 L 91.76 25.241 L 85.612 29.689 L 79.118 34.097 L 72.303 38.445 L 65.194 42.712 L 57.82 46.876 L 50.215 50.916 L 42.411 54.813 L 34.447 58.546 L 26.359 62.097 L 18.186 65.448 L 9.968 68.585 L 1.744 71.491 L -6.446 74.155 L -14.563 76.567 L -22.571 78.717 L -30.433 80.598 L -38.115 82.207 L -45.585 83.541 L -52.813 84.598 L -59.772 85.38 L -66.439 85.89 L -72.792 86.132 L -78.811 86.112 L -84.483 85.839 L -89.793 85.319 L -94.733 84.563 L -99.294 83.581 L -103.473 82.385 L -107.266 80.985 L -110.673 79.395 L -113.697 77.625 L -116.341 75.689 L -118.61 73.599 L -120.51 71.367 L -122.051 69.005 L -123.239 66.526 L -124.086 63.94 L -124.601 61.259 L -124.795 58.493 L -124.68 55.653 L -124.268 52.749" fill="none" stroke="url(#orbital-wire)" stroke-opacity=".78" stroke-width="1.15"/>
+    <path d="M 124.268 -52.749 L 126.644 -51.028 L 128.766 -49.138 L 130.621 -47.076 L 132.191 -44.843 L 133.464 -42.438 L 134.422 -39.861 L 135.051 -37.112 L 135.336 -34.195 L 135.263 -31.111 L 134.819 -27.864 L 133.992 -24.46 L 132.769 -20.904 L 131.141 -17.203 L 129.099 -13.366 L 126.636 -9.403 L 123.749 -5.324 L 120.434 -1.143 L 116.691 3.127 L 112.523 7.47 L 107.936 11.872 L 102.939 16.313 L 97.542 20.776 L 91.76 25.241 L 85.612 29.689 L 79.118 34.097 L 72.303 38.445 L 65.194 42.712 L 57.82 46.876 L 50.215 50.916 L 42.411 54.813 L 34.447 58.546 L 26.359 62.097 L 18.186 65.448 L 9.968 68.585 L 1.744 71.491 L -6.446 74.155 L -14.563 76.567 L -22.571 78.717 L -30.433 80.598 L -38.115 82.207 L -45.585 83.541 L -52.813 84.598 L -59.772 85.38 L -66.439 85.89 L -72.792 86.132 L -78.811 86.112 L -84.483 85.839 L -89.793 85.319 L -94.733 84.563 L -99.294 83.581 L -103.473 82.385 L -107.266 80.985 L -110.673 79.395 L -113.697 77.625 L -116.341 75.689 L -118.61 73.599 L -120.51 71.367 L -122.051 69.005 L -123.239 66.526 L -124.086 63.94 L -124.601 61.259 L -124.795 58.493 L -124.68 55.653 L -124.268 52.749" fill="none" stroke="#FFE4B7" stroke-opacity=".15" stroke-width=".32"/>
+    <path d="M 112.686 91.251 L 111.606 95.15 L 110.223 98.911 L 108.529 102.519 L 106.518 105.959 L 104.182 109.215 L 101.516 112.271 L 98.516 115.109 L 95.177 117.713 L 91.497 120.065 L 87.476 122.149 L 83.114 123.946 L 78.414 125.44 L 73.38 126.616 L 68.019 127.456 L 62.34 127.948 L 56.354 128.075 L 50.075 127.828 L 43.52 127.194 L 36.707 126.165 L 29.657 124.734 L 22.396 122.896 L 14.948 120.65 L 7.344 117.995 L -0.386 114.936 L -8.209 111.478 L -16.091 107.63 L -23.995 103.404 L -31.884 98.816 L -39.722 93.884 L -47.47 88.627 L -55.09 83.07 L -62.545 77.237 L -69.801 71.157 L -76.821 64.859 L -83.574 58.373 L -90.028 51.733 L -96.156 44.97 L -101.932 38.117 L -107.335 31.207 L -112.344 24.274 L -116.944 17.349 L -121.121 10.463 L -124.867 3.645 L -128.174 -3.076 L -131.04 -9.674 L -133.463 -16.124 L -135.446 -22.404 L -136.993 -28.494 L -138.113 -34.376 L -138.813 -40.033 L -139.106 -45.451 L -139.002 -50.62 L -138.518 -55.528 L -137.667 -60.168 L -136.465 -64.535 L -134.929 -68.623 L -133.076 -72.431 L -130.924 -75.956 L -128.489 -79.198 L -125.79 -82.16 L -122.843 -84.842 L -119.666 -87.249 L -116.275 -89.384 L -112.686 -91.251" transform="translate(.4 .7)" fill="none" stroke="#050A12" stroke-opacity=".36" stroke-width="2.1"/>
+    <path d="M 112.686 91.251 L 111.606 95.15 L 110.223 98.911 L 108.529 102.519 L 106.518 105.959 L 104.182 109.215 L 101.516 112.271 L 98.516 115.109 L 95.177 117.713 L 91.497 120.065 L 87.476 122.149 L 83.114 123.946 L 78.414 125.44 L 73.38 126.616 L 68.019 127.456 L 62.34 127.948 L 56.354 128.075 L 50.075 127.828 L 43.52 127.194 L 36.707 126.165 L 29.657 124.734 L 22.396 122.896 L 14.948 120.65 L 7.344 117.995 L -0.386 114.936 L -8.209 111.478 L -16.091 107.63 L -23.995 103.404 L -31.884 98.816 L -39.722 93.884 L -47.47 88.627 L -55.09 83.07 L -62.545 77.237 L -69.801 71.157 L -76.821 64.859 L -83.574 58.373 L -90.028 51.733 L -96.156 44.97 L -101.932 38.117 L -107.335 31.207 L -112.344 24.274 L -116.944 17.349 L -121.121 10.463 L -124.867 3.645 L -128.174 -3.076 L -131.04 -9.674 L -133.463 -16.124 L -135.446 -22.404 L -136.993 -28.494 L -138.113 -34.376 L -138.813 -40.033 L -139.106 -45.451 L -139.002 -50.62 L -138.518 -55.528 L -137.667 -60.168 L -136.465 -64.535 L -134.929 -68.623 L -133.076 -72.431 L -130.924 -75.956 L -128.489 -79.198 L -125.79 -82.16 L -122.843 -84.842 L -119.666 -87.249 L -116.275 -89.384 L -112.686 -91.251" fill="none" stroke="url(#orbital-wire)" stroke-opacity=".78" stroke-width="1.15"/>
+    <path d="M 112.686 91.251 L 111.606 95.15 L 110.223 98.911 L 108.529 102.519 L 106.518 105.959 L 104.182 109.215 L 101.516 112.271 L 98.516 115.109 L 95.177 117.713 L 91.497 120.065 L 87.476 122.149 L 83.114 123.946 L 78.414 125.44 L 73.38 126.616 L 68.019 127.456 L 62.34 127.948 L 56.354 128.075 L 50.075 127.828 L 43.52 127.194 L 36.707 126.165 L 29.657 124.734 L 22.396 122.896 L 14.948 120.65 L 7.344 117.995 L -0.386 114.936 L -8.209 111.478 L -16.091 107.63 L -23.995 103.404 L -31.884 98.816 L -39.722 93.884 L -47.47 88.627 L -55.09 83.07 L -62.545 77.237 L -69.801 71.157 L -76.821 64.859 L -83.574 58.373 L -90.028 51.733 L -96.156 44.97 L -101.932 38.117 L -107.335 31.207 L -112.344 24.274 L -116.944 17.349 L -121.121 10.463 L -124.867 3.645 L -128.174 -3.076 L -131.04 -9.674 L -133.463 -16.124 L -135.446 -22.404 L -136.993 -28.494 L -138.113 -34.376 L -138.813 -40.033 L -139.106 -45.451 L -139.002 -50.62 L -138.518 -55.528 L -137.667 -60.168 L -136.465 -64.535 L -134.929 -68.623 L -133.076 -72.431 L -130.924 -75.956 L -128.489 -79.198 L -125.79 -82.16 L -122.843 -84.842 L -119.666 -87.249 L -116.275 -89.384 L -112.686 -91.251" fill="none" stroke="#FFE4B7" stroke-opacity=".15" stroke-width=".32"/>
+    <path d="M -2.531 144.978 L -4.43 146.789 L -6.371 148.287 L -8.352 149.456 L -10.369 150.277 L -12.417 150.733 L -14.492 150.808 L -16.589 150.483 L -18.702 149.743 L -20.825 148.572 L -22.951 146.955 L -25.072 144.879 L -27.181 142.331 L -29.269 139.302 L -31.328 135.783 L -33.347 131.77 L -35.318 127.258 L -37.229 122.249 L -39.071 116.746 L -40.834 110.757 L -42.505 104.291 L -44.075 97.365 L -45.534 89.998 L -46.871 82.212 L -48.077 74.036 L -49.143 65.5 L -50.061 56.641 L -50.823 47.498 L -51.424 38.112 L -51.857 28.53 L -52.12 18.799 L -52.209 8.969 L -52.124 -0.91 L -51.864 -10.785 L -51.432 -20.607 L -50.83 -30.323 L -50.062 -39.884 L -49.135 -49.242 L -48.054 -58.354 L -46.828 -67.175 L -45.464 -75.668 L -43.974 -83.798 L -42.366 -91.532 L -40.651 -98.844 L -38.839 -105.711 L -36.943 -112.114 L -34.973 -118.039 L -32.94 -123.474 L -30.855 -128.413 L -28.728 -132.853 L -26.57 -136.794 L -24.39 -140.239 L -22.197 -143.193 L -20 -145.666 L -17.808 -147.667 L -15.627 -149.209 L -13.465 -150.305 L -11.327 -150.971 L -9.22 -151.222 L -7.149 -151.075 L -5.118 -150.547 L -3.131 -149.656 L -1.192 -148.419 L 0.696 -146.854 L 2.531 -144.978" transform="translate(.4 .7)" fill="none" stroke="#050A12" stroke-opacity=".36" stroke-width="2.1"/>
+    <path d="M -2.531 144.978 L -4.43 146.789 L -6.371 148.287 L -8.352 149.456 L -10.369 150.277 L -12.417 150.733 L -14.492 150.808 L -16.589 150.483 L -18.702 149.743 L -20.825 148.572 L -22.951 146.955 L -25.072 144.879 L -27.181 142.331 L -29.269 139.302 L -31.328 135.783 L -33.347 131.77 L -35.318 127.258 L -37.229 122.249 L -39.071 116.746 L -40.834 110.757 L -42.505 104.291 L -44.075 97.365 L -45.534 89.998 L -46.871 82.212 L -48.077 74.036 L -49.143 65.5 L -50.061 56.641 L -50.823 47.498 L -51.424 38.112 L -51.857 28.53 L -52.12 18.799 L -52.209 8.969 L -52.124 -0.91 L -51.864 -10.785 L -51.432 -20.607 L -50.83 -30.323 L -50.062 -39.884 L -49.135 -49.242 L -48.054 -58.354 L -46.828 -67.175 L -45.464 -75.668 L -43.974 -83.798 L -42.366 -91.532 L -40.651 -98.844 L -38.839 -105.711 L -36.943 -112.114 L -34.973 -118.039 L -32.94 -123.474 L -30.855 -128.413 L -28.728 -132.853 L -26.57 -136.794 L -24.39 -140.239 L -22.197 -143.193 L -20 -145.666 L -17.808 -147.667 L -15.627 -149.209 L -13.465 -150.305 L -11.327 -150.971 L -9.22 -151.222 L -7.149 -151.075 L -5.118 -150.547 L -3.131 -149.656 L -1.192 -148.419 L 0.696 -146.854 L 2.531 -144.978" fill="none" stroke="url(#orbital-wire)" stroke-opacity=".78" stroke-width="1.15"/>
+    <path d="M -2.531 144.978 L -4.43 146.789 L -6.371 148.287 L -8.352 149.456 L -10.369 150.277 L -12.417 150.733 L -14.492 150.808 L -16.589 150.483 L -18.702 149.743 L -20.825 148.572 L -22.951 146.955 L -25.072 144.879 L -27.181 142.331 L -29.269 139.302 L -31.328 135.783 L -33.347 131.77 L -35.318 127.258 L -37.229 122.249 L -39.071 116.746 L -40.834 110.757 L -42.505 104.291 L -44.075 97.365 L -45.534 89.998 L -46.871 82.212 L -48.077 74.036 L -49.143 65.5 L -50.061 56.641 L -50.823 47.498 L -51.424 38.112 L -51.857 28.53 L -52.12 18.799 L -52.209 8.969 L -52.124 -0.91 L -51.864 -10.785 L -51.432 -20.607 L -50.83 -30.323 L -50.062 -39.884 L -49.135 -49.242 L -48.054 -58.354 L -46.828 -67.175 L -45.464 -75.668 L -43.974 -83.798 L -42.366 -91.532 L -40.651 -98.844 L -38.839 -105.711 L -36.943 -112.114 L -34.973 -118.039 L -32.94 -123.474 L -30.855 -128.413 L -28.728 -132.853 L -26.57 -136.794 L -24.39 -140.239 L -22.197 -143.193 L -20 -145.666 L -17.808 -147.667 L -15.627 -149.209 L -13.465 -150.305 L -11.327 -150.971 L -9.22 -151.222 L -7.149 -151.075 L -5.118 -150.547 L -3.131 -149.656 L -1.192 -148.419 L 0.696 -146.854 L 2.531 -144.978" fill="none" stroke="#FFE4B7" stroke-opacity=".15" stroke-width=".32"/>
+  </g>
+  <g class="orbit-stationary">
+    <g class="satellite-static" data-body="amber" transform="translate(133.819 -41.598) scale(1.069)"><use href="#orbital-body-amber"/></g>
+  </g>
+  </g>
+  <!-- orbital-scene:end -->
   <rect x="34" y="39" width="34" height="4" rx="2" fill="#9E562E"/>
   <text x="81" y="45" fill="#9E562E" font-size="22" font-weight="700" letter-spacing="1">SENIOR JAVA · SPRING BOOT</text>
   <text x="34" y="130" fill="#202124" font-size="59" font-weight="700">Pavel Putrenkov</text>
@@ -44,6 +117,6 @@
   <text x="34" y="282" fill="#9E562E" font-size="54" font-weight="700">Clear outcomes.</text>
   <text x="34" y="339" fill="#4E4D49" font-size="25">Reliable systems for payments,</text>
   <text x="34" y="375" fill="#4E4D49" font-size="25">documents and developer tools.</text>
-  <line x1="34" y1="491" x2="586" y2="491" stroke="#A9A096" stroke-opacity=".65"/>
+  <line x1="34" y1="491" x2="390" y2="491" stroke="#A9A096" stroke-opacity=".65"/>
   <text x="34" y="539" fill="#64635E" font-size="22" font-weight="600" letter-spacing="1">PAYMENTS  /  DOCS  /  TOOLING</text>
 </svg>
