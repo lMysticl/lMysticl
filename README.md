@@ -10,13 +10,13 @@
   <img src="https://github.com/lMysticl/lMysticl/raw/829de0a5c47a945d99649da610732a845c466995/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
-I'm a senior Java engineer with more than ten years of experience across
-e-commerce, payments, and document processing. At Ukrposhta, I built a payment
-system from the ground up and led Java development for three years, continuing
-to write and review code throughout.
+For more than a decade, I've worked on Java systems in e-commerce, payments,
+and document processing. At Ukrposhta, I built a payment system from the ground
+up and led Java development for three years, while continuing to write and
+review code.
 
-I currently work on document conversion and interactive reporting, building
-Java 21/Spring Boot services and React/TypeScript interfaces.
+I now work on document conversion and interactive reporting, building Java 21
+and Spring Boot services alongside React/TypeScript interfaces.
 
 [Find me on LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/)
 
