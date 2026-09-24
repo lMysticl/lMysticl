@@ -1,0 +1,39 @@
+{
+  "blender": "5.2.1 LTS",
+  "engine": "CYCLES",
+  "device": [
+    "AMD Radeon(TM) Graphics",
+    "AMD Radeon RX 6950 XT"
+  ],
+  "samples": 96,
+  "seed": 42,
+  "size": 640,
+  "view_transform": "AgX",
+  "packed_textures": [
+    "earth-clouds.jpg",
+    "earth-color.jpg",
+    "moon-color.jpg",
+    "moon-height.jpg"
+  ],
+  "source_outline": "profile_materials.LETTER",
+  "letter_centering": {
+    "before_xy": [
+      -0.01467779278755188,
+      -2.9802322387695312e-08
+    ],
+    "translation_xy": [
+      0.01467779278755188,
+      2.9802322387695312e-08
+    ],
+    "after_xy": [
+      0,
+      0
+    ]
+  },
+  "sprites": [
+    "core",
+    "amber",
+    "moon",
+    "ocean"
+  ]
+}

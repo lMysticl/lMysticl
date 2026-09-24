@@ -1,4 +1,4 @@
-"""Rebuild the cover's vector orbital scene, preserving the surrounding layout.
+"""Rebuild the cover's animated orbital scene, preserving the surrounding layout.
 
 The scene uses a perspective projection of three 3D orbital planes. Synchronized
 front/back copies let SVG/SMIL occlude each satellite behind the central sphere
@@ -12,6 +12,7 @@ import re
 import xml.etree.ElementTree as ET
 
 from profile_materials import CORE_RADIUS, ORBIT_COLORS, definitions
+from profile_sky import sky
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -101,7 +102,7 @@ def trail_definitions(orbit, animated):
 
 def trail(orbit, front, animated, dark):
     side = 'front' if front else 'back'
-    color = ORBIT_COLORS[orbit.body][0 if dark else 1]
+    color = ORBIT_COLORS[orbit.body][0]
     ref = f'orbital-trail-{orbit.body}' + ('' if animated else '-still')
     return f'''    <g class="orbital-trail" data-body="{orbit.body}" clip-path="url(#orbital-{orbit.body}-{side})" fill="{color}" stroke="{color}" stroke-linejoin="round" opacity="{'1' if front else '.5'}">
       <use href="#{ref}" stroke-width="8" opacity=".035"/>
@@ -115,11 +116,11 @@ def track(orbit, front, dark):
     start = 0 if front else 180
     points = [project(orbit, start + 180 * i / 64) for i in range(65)]
     d = 'M ' + ' L '.join(f'{number(x)} {number(y)}' for x, y, _, _ in points)
-    color = ORBIT_COLORS[orbit.body][0 if dark else 1]
+    color = ORBIT_COLORS[orbit.body][0]
     if not front:
-        return f'    <path d="{d}" fill="none" stroke="{color}" stroke-opacity=".15" stroke-width=".7"/>'
+        return f'    <path d="{d}" fill="none" stroke="{color}" stroke-opacity=".24" stroke-width=".8"/>'
     return f'''    <path d="{d}" transform="translate(.4 .7)" fill="none" stroke="#050A12" stroke-opacity=".36" stroke-width="2.1"/>
-    <path d="{d}" fill="none" stroke="{color}" stroke-opacity=".3" stroke-width=".7"/>'''
+    <path d="{d}" fill="none" stroke="{color}" stroke-opacity=".58" stroke-width=".9"/>'''
 
 
 def satellite(orbit, front, animated):
@@ -183,7 +184,16 @@ def scene(mobile, animated, dark):
 def rebuild(path):
     source = path.read_text(encoding='utf-8')
     mobile, animated, dark = ('mobile' in path.name, 'animated' in path.name, 'dark' in path.name)
-    accent = '#E9B47A' if dark else '#9E562E'
+    accent = '#E9B47A'
+    # A night sky spans both theme variants; adjust light-theme ink for contrast.
+    for old,new in {'#9E562E':'#E9B47A','#202124':'#F8F5EF','#4E4D49':'#D5D0C7',
+                    '#64635E':'#A9AAA8','#D8D0C5':'#373B41'}.items():
+        source=source.replace(old,new)
+    if '<!-- profile-sky:start -->' in source:
+        source=re.sub(r'  <!-- profile-sky:start -->.*?  <!-- profile-sky:end -->',sky(mobile),source,count=1,flags=re.S)
+    else:
+        source=re.sub(r'\n  <circle cx="(?:997|500)"[^\n]*fill="url\(#glow\)"/>','',source)
+        source=source.replace('  <!-- orbital-scene:start -->',sky(mobile)+'\n  <!-- orbital-scene:start -->',1)
     if '<!-- orbital-definitions:start -->' in source:
         source = re.sub(r'  <!-- orbital-definitions:start -->.*?  <!-- orbital-definitions:end -->', definitions(accent), source, count=1, flags=re.S)
     else:
