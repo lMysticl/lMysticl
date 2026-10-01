@@ -1,13 +1,13 @@
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-static-mobile-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-static-mobile-light.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-static-light.svg">
-  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-animated-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-animated-mobile-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-animated-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-animated-light.svg">
-  <img src="https://github.com/lMysticl/lMysticl/raw/ca348a87d6a8e32349106be3a83e358fa0204ec6/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-static-mobile-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-static-mobile-light.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-static-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-static-light.svg">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-animated-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-animated-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-animated-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-animated-light.svg">
+  <img src="https://github.com/lMysticl/lMysticl/raw/0843c3942030857b689034e1aef5d93abc449a1f/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
 I build document conversion and interactive reporting software, from Java 21
