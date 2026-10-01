@@ -7,7 +7,7 @@
   ],
   "samples": 96,
   "seed": 42,
-  "size": 640,
+  "size": 960,
   "view_transform": "AgX",
   "packed_textures": [
     "earth-clouds.jpg",
@@ -15,25 +15,21 @@
     "moon-color.jpg",
     "moon-height.jpg"
   ],
-  "source_outline": "profile_materials.LETTER",
-  "letter_centering": {
-    "before_xy": [
-      -0.01467779278755188,
-      -2.9802322387695312e-08
-    ],
-    "translation_xy": [
-      0.01467779278755188,
-      2.9802322387695312e-08
-    ],
-    "after_xy": [
+  "core": {
+    "subject": "daylight Earth",
+    "monogram": false,
+    "city_lights": false,
+    "orientation_degrees": [
+      -74,
       0,
-      0
+      -12
+    ],
+    "cloud_range": [
+      0.22,
+      0.95
     ]
   },
-  "sprites": [
-    "core",
-    "amber",
-    "moon",
-    "ocean"
+  "rendered_sprites": [
+    "core"
   ]
 }

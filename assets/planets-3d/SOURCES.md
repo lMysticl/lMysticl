@@ -1,9 +1,10 @@
 # Cover artwork sources
 
 The cover combines original Blender geometry and lighting with NASA surface
-maps. The gold P is extruded from the custom outline in `profile_materials.py`.
-Saturn's bands and separated ring geometry, atmospheric shells, starfield and
-orbital animation are authored procedurally. This is an artistic scene, not a
+maps. The central daylight Earth shows the Americas with raised cloud geometry
+and a thin blue atmosphere, without a monogram or city lights.
+Saturn's bands and separated ring geometry, atmospheric shells, starfield,
+shooting stars and orbital animation are authored procedurally. This is an artistic scene, not a
 scientific model of planetary positions or scale.
 
 ## Surface maps
@@ -37,6 +38,15 @@ four transparent PNGs and a render manifest. The compositor embeds those PNGs
 in each SVG so they work in GitHub's image context without external requests.
 The `.blend` is a local working deliverable and is not committed to the profile.
 
+To update only the central Earth while preserving the existing satellite PNGs:
+
+```text
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_3d.py -- --out assets/planets-3d --size 960 --samples 96 --backend HIP --sprite core
+python scripts/build_profile_orbits.py
+```
+
 Motion retains a 48-second seamless composition with 24/16/12-second orbits,
-front/back occlusion and perspective scaling. The background stays still.
-Reduced-motion visitors receive a static composition.
+front/back occlusion and perspective scaling. Two shooting stars have
+16/24-second schedules with a brief flight and a quiet interval. Their paths
+stay behind the planetary scene and clear of the text. The distant starfield
+stays still. Reduced-motion visitors receive a static composition.

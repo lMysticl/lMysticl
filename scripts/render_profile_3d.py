@@ -1,27 +1,27 @@
 """Render original Cycles planetary sprites; run with Blender --background --python.
 
 The SVG compositor owns trajectories, text and full-banner sky. The saved .blend
-owns sphere geometry, crater relief, ring gaps, metallic P and physical lighting.
+owns the daylight Earth, crater relief, ring gaps and physical lighting.
 """
 from pathlib import Path
 import argparse
 import json
 import math
 import random
-import re
 import sys
 
 import bpy
 from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).parent))
-from profile_materials import LETTER
 TEXTURES = Path(__file__).resolve().parents[1] / 'assets' / 'planets-3d' / 'textures'
+CORE_ORIENTATION = (-74, 0, -12)
 
 args = argparse.ArgumentParser()
 args.add_argument('--out', required=True)
 args.add_argument('--size', type=int, default=640)
 args.add_argument('--samples', type=int, default=48)
+args.add_argument('--sprite', choices=['core', 'amber', 'moon', 'ocean'])
 args.add_argument('--backend', choices=['HIP', 'CUDA', 'OPTIX', 'METAL', 'CPU'], default='HIP')
 opts = args.parse_args(sys.argv[sys.argv.index('--') + 1:])
 out = Path(opts.out)
@@ -139,7 +139,7 @@ def atmosphere(parent, radius, color):
     sphere('Thin blue atmospheric scattering', radius, m, parent)
 
 
-def ocean(parent, continents=False):
+def ocean(parent, continents=False, orientation=(74, 0, -20), cloud_range=(.17, .84)):
     m, p = material('Deep cobalt ocean', (.006, .038, .11), rough=.68)
     p.inputs['Specular IOR Level'].default_value = .2
     t = noise(m, 4.4, 8, .65)
@@ -158,12 +158,12 @@ def ocean(parent, continents=False):
         land=image_texture(m,'earth-color.jpg')
         link(m,land,'Color',p,'Base Color')
     surface=sphere('Ocean surface', 1, m, parent)
-    surface.rotation_euler=(math.radians(74),0,math.radians(-20))
+    surface.rotation_euler=tuple(map(math.radians, orientation))
     clouds, cp = material('Volumetric-looking layered cloud deck', (.79,.86,.94), rough=.77)
     c=image_texture(clouds,'earth-clouds.jpg',True)
     density=node(clouds,'ShaderNodeValToRGB')
-    density.color_ramp.elements[0].position=.17
-    density.color_ramp.elements[1].position=.84
+    density.color_ramp.elements[0].position=cloud_range[0]
+    density.color_ramp.elements[1].position=cloud_range[1]
     link(clouds,c,'Color',density,'Fac')
     bump = node(clouds, 'ShaderNodeBump')
     bump.inputs['Strength'].default_value = .3
@@ -181,78 +181,9 @@ def ocean(parent, continents=False):
     atmosphere(parent, 1.017, (.07,.36,1))
 
 
-def letter_polygons(path):
-    tokens = re.findall(r'[MLHCZ]|-?\d+(?:\.\d+)?', path)
-    i = 0
-    current = (0, 0)
-    loops, points = [], []
-    while i < len(tokens):
-        command = tokens[i]
-        i += 1
-        if command in ('M', 'L'):
-            current = tuple(map(float, tokens[i:i+2])); i += 2
-            points.append(current)
-        elif command == 'H':
-            current = (float(tokens[i]), current[1]); i += 1
-            points.append(current)
-        elif command == 'C':
-            p0 = current
-            p1,p2,p3 = [tuple(map(float,tokens[i+j:i+j+2])) for j in (0,2,4)]
-            i += 6
-            for step in range(1, 25):
-                t = step / 24; u = 1-t
-                points.append(tuple(u**3*p0[k]+3*u*u*t*p1[k]+3*u*t*t*p2[k]+t**3*p3[k] for k in (0,1)))
-            current = p3
-        elif command == 'Z':
-            loops.append(points); points = []
-        else:
-            raise ValueError(command)
-    return loops
+core = group('Daylight Earth without a monogram')
+ocean(core, True, CORE_ORIENTATION, cloud_range=(.22, .95))
 
-
-core = group('Core and centered sculpted P')
-ocean(core)
-gold, gp = material('Satin champagne gold', (.9,.68,.32), metallic=1, rough=.21)
-gp.inputs['Anisotropic'].default_value = .35
-gc = node(gold, 'ShaderNodeTexCoord')
-gm = node(gold, 'ShaderNodeVectorMath'); gm.operation = 'MULTIPLY'
-gm.inputs[1].default_value = (1, 65, 4)
-link(gold, gc, 'Generated', gm, 0)
-grain = noise(gold, 65, 2)
-link(gold, gm, 'Vector', grain, 'Vector')
-gb = node(gold, 'ShaderNodeBump')
-gb.inputs['Strength'].default_value = .04
-gb.inputs['Distance'].default_value = .00035
-link(gold, grain, 'Fac', gb, 'Height')
-link(gold, gb, 'Normal', gp, 'Normal')
-curve = bpy.data.curves.new('Original P outline with open counter', 'CURVE')
-curve.dimensions = '2D'
-curve.fill_mode = 'BOTH'
-curve.extrude = .14
-curve.bevel_depth = .042
-curve.bevel_resolution = 7
-for loop in letter_polygons(LETTER):
-    spline = curve.splines.new('POLY')
-    spline.points.add(len(loop)-1)
-    for point, (x,y) in zip(spline.points, loop):
-        point.co = ((x-8.5)*.0119, -(y+1)*.0119, 0, 1)
-    spline.use_cyclic_u = True
-letter = bpy.data.objects.new('P, real extrusion and rounded bevel', curve)
-scene.collection.objects.link(letter)
-letter.parent = core
-letter.location = (0,0,1.035)
-letter.rotation_euler = (math.radians(-10),math.radians(-19),0)
-curve.materials.append(gold)
-# Center the evaluated solid, including bevel and depth, in the image plane.
-bpy.context.view_layer.update()
-evaluated = letter.evaluated_get(bpy.context.evaluated_depsgraph_get())
-mesh = evaluated.to_mesh()
-points = [letter.matrix_world @ v.co for v in mesh.vertices]
-center = [(min(p[k] for p in points)+max(p[k] for p in points))/2 for k in (0,1)]
-letter.location.x -= center[0]
-letter.location.y -= center[1]
-evaluated.to_mesh_clear()
-center_proof = {'before_xy': center, 'translation_xy': [-v for v in center], 'after_xy': [0,0]}
 
 amber = group('Saturn with layered ring geometry')
 m,p = material('Saturn atmospheric bands', (.5,.33,.15), rough=.66)
@@ -333,6 +264,8 @@ def hide_group(g, hidden):
         obj.hide_render=hidden
 
 for g,name,scale in [(core,'core',2.42),(amber,'amber',4.18),(moon,'moon',2.22),(earth,'ocean',2.28)]:
+    if opts.sprite and name != opts.sprite:
+        continue
     for other in groups:
         hide_group(other,other!=g)
     camera_data.ortho_scale=scale
@@ -345,5 +278,18 @@ for mat in list(bpy.data.materials):
     if not mat.users:
         bpy.data.materials.remove(mat)
 bpy.ops.wm.save_as_mainfile(filepath=str(out/'profile-planets.blend'))
-(out/'render-manifest.json').write_text(json.dumps({'blender':bpy.app.version_string,'engine':'CYCLES','device':[d.name for d in selected] or ['CPU'],'samples':opts.samples,'seed':42,'size':opts.size,'view_transform':'AgX','packed_textures':[p.name for p in sorted(TEXTURES.glob('*.jpg'))],'source_outline':'profile_materials.LETTER','letter_centering':center_proof,'sprites':['core','amber','moon','ocean']},indent=2)+'\n',encoding='utf-8',newline='\n')
-print('SPRITES_COMPLETE',out)
+manifest = {
+    'blender': bpy.app.version_string,
+    'engine': 'CYCLES',
+    'device': [d.name for d in selected] or ['CPU'],
+    'samples': opts.samples,
+    'seed': 42,
+    'size': opts.size,
+    'view_transform': 'AgX',
+    'packed_textures': [p.name for p in sorted(TEXTURES.glob('*.jpg'))],
+    'core': {'subject': 'daylight Earth', 'monogram': False, 'city_lights': False,
+             'orientation_degrees': CORE_ORIENTATION, 'cloud_range': [.22, .95]},
+    'rendered_sprites': [opts.sprite] if opts.sprite else ['core', 'amber', 'moon', 'ocean'],
+}
+(out/'render-manifest.json').write_text(
+    json.dumps(manifest, indent=2)+'\n', encoding='utf-8', newline='\n')

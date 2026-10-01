@@ -162,8 +162,8 @@ def scene(mobile, animated, dark):
     </circle>''')
     for front in (False, True):
         if front:
-            parts.append(f'    <circle r="{CORE_RADIUS + 1}" fill="none" stroke="#EABE80" stroke-width="6" opacity=".035"/>')
-            parts.append(f'    <circle r="{CORE_RADIUS + 1}" fill="none" stroke="#EABE80" stroke-width="2.5" opacity=".12"/>')
+            parts.append(f'    <circle r="{CORE_RADIUS + 1}" fill="none" stroke="#70B8FF" stroke-width="6" opacity=".035"/>')
+            parts.append(f'    <circle r="{CORE_RADIUS + 1}" fill="none" stroke="#70B8FF" stroke-width="2.5" opacity=".12"/>')
             parts.append('    <use id="orbital-core-instance" href="#orbital-nucleus"/>')
         parts.append(f'  <g class="orbit-{"front" if front else "back"}">')
         parts.extend(track(orbit, front, dark) for orbit in ORBITS)
@@ -184,21 +184,20 @@ def scene(mobile, animated, dark):
 def rebuild(path):
     source = path.read_text(encoding='utf-8')
     mobile, animated, dark = ('mobile' in path.name, 'animated' in path.name, 'dark' in path.name)
-    accent = '#E9B47A'
     # A night sky spans both theme variants; adjust light-theme ink for contrast.
     for old,new in {'#9E562E':'#E9B47A','#202124':'#F8F5EF','#4E4D49':'#D5D0C7',
                     '#64635E':'#A9AAA8','#D8D0C5':'#373B41'}.items():
         source=source.replace(old,new)
     if '<!-- profile-sky:start -->' in source:
-        source=re.sub(r'  <!-- profile-sky:start -->.*?  <!-- profile-sky:end -->',sky(mobile),source,count=1,flags=re.S)
+        source=re.sub(r'  <!-- profile-sky:start -->.*?  <!-- profile-sky:end -->',sky(mobile, animated),source,count=1,flags=re.S)
     else:
         source=re.sub(r'\n  <circle cx="(?:997|500)"[^\n]*fill="url\(#glow\)"/>','',source)
-        source=source.replace('  <!-- orbital-scene:start -->',sky(mobile)+'\n  <!-- orbital-scene:start -->',1)
+        source=source.replace('  <!-- orbital-scene:start -->',sky(mobile, animated)+'\n  <!-- orbital-scene:start -->',1)
     if '<!-- orbital-definitions:start -->' in source:
-        source = re.sub(r'  <!-- orbital-definitions:start -->.*?  <!-- orbital-definitions:end -->', definitions(accent), source, count=1, flags=re.S)
+        source = re.sub(r'  <!-- orbital-definitions:start -->.*?  <!-- orbital-definitions:end -->', definitions(), source, count=1, flags=re.S)
     else:
         source = re.sub(r'    <radialGradient id="planet(?:-halo)?"[^\n]+\n', '', source)
-        source = source.replace('    <style>', definitions(accent) + '\n    <style>', 1)
+        source = source.replace('    <style>', definitions() + '\n    <style>', 1)
     pattern = (r'  <!-- orbital-scene:start -->.*?  <!-- orbital-scene:end -->\n'
                if '<!-- orbital-scene:start -->' in source
                else r'  <g id="orbital-monogram".*?(?=  <rect x="(?:34|60)" y="(?:39|47)")')

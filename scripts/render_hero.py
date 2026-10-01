@@ -26,7 +26,7 @@ def base(width: int, height: int, c: dict[str, str], title: str) -> str:
     <linearGradient id="background" x2="1" y2="1"><stop stop-color="{c['bg_a']}"/><stop offset="1" stop-color="{c['bg_b']}"/></linearGradient>
     <radialGradient id="glow"><stop stop-color="{c['glow']}" stop-opacity=".16"/><stop offset="1" stop-color="{c['glow']}" stop-opacity="0"/></radialGradient>
     <linearGradient id="streak"><stop stop-color="{c['accent']}" stop-opacity="0"/><stop offset=".5" stop-color="{c['accent']}"/><stop offset="1" stop-color="{c['accent']}" stop-opacity="0"/></linearGradient>
-    <style>text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }} text.monogram {{ font-family: Georgia, "Times New Roman", serif; }} @media (prefers-reduced-motion: reduce) {{ .motion {{ display: none; }} }}</style>
+    <style>text {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }} @media (prefers-reduced-motion: reduce) {{ .motion {{ display: none; }} }}</style>
   </defs>
   <rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="18" fill="url(#background)" stroke="{c['border']}"/>
 '''
@@ -47,7 +47,6 @@ def desktop(c: dict[str, str], animated: bool) -> str:
   <circle cx="997" cy="195" r="260" fill="url(#glow)"/>
   <circle cx="995" cy="211" r="154" fill="none" stroke="{c['accent']}" stroke-opacity=".42" stroke-width="1.5"/>
   <circle cx="995" cy="211" r="122" fill="none" stroke="{c['line']}" stroke-opacity=".45"/>
-  <text class="monogram" x="890" y="311" fill="{c['accent']}" fill-opacity=".20" font-size="285" font-style="italic">P</text>
   <circle cx="1095" cy="304" r="13" fill="{c['accent']}"/>
   <rect x="60" y="47" width="38" height="4" rx="2" fill="{c['accent']}"/>
   <text x="111" y="52" fill="{c['accent']}" font-size="18" font-weight="700" letter-spacing="2">SENIOR JAVA ENGINEER · SPRING BOOT</text>
@@ -65,7 +64,6 @@ def mobile(c: dict[str, str], animated: bool) -> str:
     return base(620, 580, c, "Pavel Putrenkov — Senior Java Engineer") + f'''
   <circle cx="510" cy="461" r="160" fill="url(#glow)"/>
   <circle cx="505" cy="447" r="110" fill="none" stroke="{c['accent']}" stroke-opacity=".34" stroke-width="1.5"/>
-  <text class="monogram" x="432" y="520" fill="{c['accent']}" fill-opacity=".18" font-size="205" font-style="italic">P</text>
   <circle cx="573" cy="525" r="9" fill="{c['accent']}"/>
   <rect x="34" y="39" width="34" height="4" rx="2" fill="{c['accent']}"/>
   <text x="81" y="45" fill="{c['accent']}" font-size="22" font-weight="700" letter-spacing="1">SENIOR JAVA · SPRING BOOT</text>
