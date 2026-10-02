@@ -1,13 +1,13 @@
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-static-mobile-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-static-mobile-light.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-static-light.svg">
-  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-animated-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-animated-mobile-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-animated-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-animated-light.svg">
-  <img src="https://github.com/lMysticl/lMysticl/raw/94d3e870ead983b73e0678805b536ca4f51f7b14/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-static-mobile-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-static-mobile-light.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-static-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-static-light.svg">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-animated-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-animated-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-animated-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-animated-light.svg">
+  <img src="https://github.com/lMysticl/lMysticl/raw/1a7984a7637b6682c1062c25eca52c92bc0edd30/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
 </picture>
 
 **Senior Java Developer · Former Java Team Lead · 10+ years of experience**
