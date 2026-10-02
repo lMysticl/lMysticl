@@ -1,13 +1,15 @@
 {
   "blender": "5.2.1 LTS",
+  "source_sha256": "551d7dddb454c8ecaa29f5fa1fe189739cee41026ef83922679ee2d373875c9b",
   "engine": "CYCLES",
   "device": [
-    "AMD Radeon(TM) Graphics",
     "AMD Radeon RX 6950 XT"
   ],
   "samples": 96,
   "seed": 42,
-  "size": 960,
+  "size": 640,
+  "satellite_size": 256,
+  "png_compression": 100,
   "view_transform": "AgX",
   "packed_textures": [
     "earth-clouds.jpg",
@@ -15,6 +17,7 @@
     "moon-color.jpg",
     "moon-height.jpg"
   ],
+  "vivid_satellites": true,
   "core": {
     "subject": "daylight Earth",
     "monogram": false,
@@ -25,11 +28,14 @@
       -12
     ],
     "cloud_range": [
-      0.22,
-      0.95
+      0.29,
+      0.94
     ]
   },
   "rendered_sprites": [
-    "core"
+    "core",
+    "amber",
+    "moon",
+    "ocean"
   ]
 }
