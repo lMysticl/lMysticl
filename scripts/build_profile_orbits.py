@@ -184,6 +184,7 @@ def scene(mobile, animated, dark):
 def rebuild(path):
     source = path.read_text(encoding='utf-8')
     mobile, animated, dark = ('mobile' in path.name, 'animated' in path.name, 'dark' in path.name)
+    source = source.replace('.orbit-still {', '.orbit-still, .starfield-still {')
     # A night sky spans both theme variants; adjust light-theme ink for contrast.
     for old,new in {'#9E562E':'#E9B47A','#202124':'#F8F5EF','#4E4D49':'#D5D0C7',
                     '#64635E':'#A9AAA8','#D8D0C5':'#373B41'}.items():

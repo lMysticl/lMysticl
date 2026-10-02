@@ -1,25 +1,101 @@
 """Deterministic, full-bleed star field for the GitHub cover."""
 import math
 import random
+from collections import defaultdict
+
+
+def dot(x, y, radius):
+    """A circle subpath; many stars share one paint node."""
+    x, y, radius = round(x, 2), round(y, 2), round(radius, 2)
+    diameter = radius * 2
+    return (f'M{x-radius:.2f} {y:.2f}a{radius:.2f} {radius:.2f} 0 1 0 '
+            f'{diameter:.2f} 0a{radius:.2f} {radius:.2f} 0 1 0 {-diameter:.2f} 0z')
+
+
+def distant_stars(mobile, width, height):
+    rng = random.Random(263)
+    groups = defaultdict(list)
+    for _ in range(670 if mobile else 1120):
+        x, y = rng.uniform(2, width-2), rng.uniform(2, height-2)
+        radius = rng.choices([.4, .6, .9, 1.3], [42, 32, 21, 5])[0]
+        brightness = rng.choice([.25, .4, .55, .7])
+        # Keep quiet space behind the copy, with richer detail near Earth.
+        if (y < 385 if mobile else x < 730):
+            brightness *= .46
+        color = rng.choice(['#B1D4F0', '#DAE9F2', '#E3BE7E'])
+        groups[(color, round(brightness, 3))].append(dot(x, y, radius))
+    dust = []
+    for _ in range(460 if mobile else 680):
+        t = rng.random()
+        x = width*(.35+.65*t)+rng.gauss(0, 30)
+        y = height*(.95-.85*t)+math.sin(t*9)*height*.14+rng.gauss(0, 28)
+        if 2 < x < width-2 and 2 < y < height-2:
+            dust.append(dot(x, y, rng.uniform(.25, .8)))
+    groups[('#73B7EB', .13)] = dust
+    parts = ['    <g id="distant-stars">']
+    for i, ((color, opacity), paths) in enumerate(sorted(groups.items())):
+        parts.append(f'      <path id="star-batch-{i}" data-point-count="{len(paths)}" '
+                     f'd="{"".join(paths)}" fill="{color}" opacity="{opacity}"/>')
+    parts.append('    </g>')
+    return '\n'.join(parts)
+
+
+def moving_stars(mobile, animated, frame_time=None):
+    """Three repeated tiles drift behind Earth; 48s is an exact loop."""
+    x, y, width, height = (280, 390, 338, 126) if mobile else (730, 12, 468, 355)
+    rng = random.Random(419 if mobile else 418)
+    layers = ((100 if mobile else 130, .35, .6, .4, 48),
+              (70 if mobile else 95, .55, .9, .52, 24),
+              (35 if mobile else 48, .9, 1.4, .65, 16))
+    parts = [f'''    <defs>
+      <clipPath id="star-drift-frame"><rect x="{x}" y="{y}" width="{width}" height="{height}"/></clipPath>
+    </defs>
+    <g id="moving-starfield" clip-path="url(#star-drift-frame)">''']
+    still = []
+    for i, (count, smallest, largest, brightness, period) in enumerate(layers):
+        points = [(rng.uniform(x, x+width), rng.uniform(y, y+height),
+                   rng.uniform(smallest, largest)) for _ in range(count)]
+        path = ''.join(dot(px+tile*width, py, radius)
+                       for tile in (0, 1) for px, py, radius in points)
+        travel = -width*((frame_time % period)/period) if frame_time is not None else 0
+        parts.append(f'      <g id="star-drift-{i}" class="star-drift{" motion" if animated else ""}" '
+                     f'data-visible-points="{count}" transform="translate({travel:.3f} 0)">')
+        if animated:
+            parts.append(f'        <animateTransform attributeName="transform" type="translate" '
+                         f'values="0 0;{-width} 0" dur="{period}s" repeatCount="indefinite"/>')
+        parts.append(f'        <path d="{path}" fill="#D9EEFF" opacity="{brightness}"/>\n      </g>')
+        if animated:
+            still.append(f'        <path d="{"".join(dot(*p) for p in points)}" '
+                         f'fill="#D9EEFF" opacity="{brightness}"/>')
+    if animated:
+        parts.extend(['      <g class="starfield-still">', *still, '      </g>'])
+    parts.append('    </g>')
+    return '\n'.join(parts)
 
 
 def shooting_stars(mobile, animated, frame_time=None):
-    """Two quiet meteor flights, clipped away from the professional copy.
+    """Six staggered meteor flights, clipped away from the professional copy.
 
-    Their 16/24-second schedules share the existing 48-second orbital loop.
+    Their 12/16/24-second schedules share the existing 48-second orbital loop.
     frame_time lets the preview exporter render the same authored trajectories.
     """
     bounds = (280, 390, 338, 126) if mobile else (730, 12, 468, 355)
-    starts = ((290, 397), (390, 399)) if mobile else ((740, 24), (890, 30))
-    ends = ((610, 497), (612, 475)) if mobile else ((1160, 168), (1170, 128))
-    lengths = (55, 34) if mobile else (98, 58)
-    schedules = ((16, .1, .28, .85), (24, .55, .67, .6))
+    starts = ((290, 397), (390, 399), (290, 427), (320, 401), (390, 406), (296, 438)) if mobile else (
+        (740, 24), (890, 30), (744, 146), (790, 32), (925, 45), (745, 255))
+    ends = ((610, 497), (612, 475), (610, 508), (600, 480), (610, 483), (605, 511)) if mobile else (
+        (1160, 168), (1170, 128), (1170, 252), (1150, 150), (1180, 132), (1180, 345))
+    lengths = (55, 34, 42, 48, 32, 39) if mobile else (98, 58, 76, 84, 54, 72)
+    schedules = ((16, .1, .28, .85), (24, .55, .67, .6),
+                 (12, .03, .19, .5), (16, .38, .53, .7),
+                 (24, .82, .94, .55), (12, .61, .78, .45))
     x,y,width,height = bounds
     parts = [f'''  <defs>
     <clipPath id="meteor-frame"><rect x="{x}" y="{y}" width="{width}" height="{height}"/></clipPath>
   </defs>
   <g id="shooting-stars" clip-path="url(#meteor-frame)">''']
     for i, (start,end,length,schedule) in enumerate(zip(starts,ends,lengths,schedules)):
+        if not animated and frame_time is None and i >= 2:
+            break
         period,enter,leave,brightness = schedule
         slope = (end[1]-start[1])/(end[0]-start[0])
         sx,sy = start
@@ -57,7 +133,6 @@ def shooting_stars(mobile, animated, frame_time=None):
 
 def sky(mobile, animated=False, frame_time=None):
     width,height=(620,580) if mobile else (1200,430)
-    rng=random.Random(263)
     parts=[f'''  <!-- profile-sky:start -->
   <defs>
     <clipPath id="sky-frame"><rect x="1" y="1" width="{width-2}" height="{height-2}" rx="18"/></clipPath>
@@ -73,18 +148,8 @@ def sky(mobile, animated=False, frame_time=None):
     <ellipse cx="{width*.88}" cy="{height*.52}" rx="{width*.2}" ry="{height*.48}" fill="url(#sky-gold)"/>
     <ellipse cx="{width*.83}" cy="{height*.55}" rx="{width*.16}" ry="{height*.44}" fill="url(#sky-lilac)"/>
     <ellipse cx="{width*.15}" cy="{height*.8}" rx="{width*.35}" ry="{height*.6}" fill="url(#sky-blue)"/>''']
-    # Stars span the entire banner, with brighter dust near the orbital scene.
-    for i in range(410 if mobile else 660):
-        x,y=rng.uniform(2,width-2),rng.uniform(2,height-2)
-        r=rng.choices([.35,.55,.85,1.2],[45,32,19,4])[0]
-        opacity=rng.uniform(.18,.55)*(.6 if x<width*.64 else 1)
-        color=rng.choice(['#B1D4F0','#DAE9F2','#E3BE7E'])
-        parts.append(f'    <circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="{color}" opacity="{opacity:.2f}"/>')
-    for i in range(500):
-        t=rng.random(); x=width*(.35+.65*t)+rng.gauss(0,30)
-        y=height*(.95-.85*t)+math.sin(t*9)*height*.14+rng.gauss(0,28)
-        if 2<x<width-2 and 2<y<height-2:
-            parts.append(f'    <circle cx="{x:.1f}" cy="{y:.1f}" r="{rng.uniform(.25,.85):.2f}" fill="#73B7EB" opacity="{rng.uniform(.03,.17):.2f}"/>')
+    parts.append(distant_stars(mobile, width, height))
+    parts.append(moving_stars(mobile, animated, frame_time))
     for x,y,size in [(width*.08,height*.59,4),(width*.56,height*.12,4),(width*.94,height*.82,6),(width*.68,height*.7,3)]:
         parts.append(f'    <circle cx="{x}" cy="{y}" r="{size*2}" fill="url(#sky-star)"/><path d="M {x-size} {y} H {x+size} M {x} {y-size} V {y+size}" stroke="#C2E2FF" stroke-width=".5" opacity=".7"/>')
     parts.append(f'    <rect width="{width}" height="{height}" fill="url(#sky-text-shade)"/>')

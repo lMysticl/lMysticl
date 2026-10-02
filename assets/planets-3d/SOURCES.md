@@ -46,7 +46,9 @@ python scripts/build_profile_orbits.py
 ```
 
 Motion retains a 48-second seamless composition with 24/16/12-second orbits,
-front/back occlusion and perspective scaling. Two shooting stars have
-16/24-second schedules with a brief flight and a quiet interval. Their paths
-stay behind the planetary scene and clear of the text. The distant starfield
-stays still. Reduced-motion visitors receive a static composition.
+front/back occlusion and perspective scaling. Six shooting stars follow
+staggered 12/16/24-second schedules. Three depth layers drift behind Earth with
+16/24/48-second periods and repeatable tiles. Star points are batched into shared
+SVG paths to avoid a separate DOM/paint node for each dot. All moving stars stay
+behind the planetary scene and clear of the text. Reduced-motion visitors receive
+a static composition with the three satellites and a stationary starfield.
