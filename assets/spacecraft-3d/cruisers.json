@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "blender": "5.2.1 LTS",
+  "engine": "CYCLES",
+  "backend": "HIP",
+  "devices": [
+    "AMD Radeon RX 6950 XT"
+  ],
+  "samples": 48,
+  "seed": 42,
+  "external_assets": [],
+  "frames": [
+    {
+      "model": "aurora",
+      "mesh_objects": 129,
+      "file": "aurora.png",
+      "nose_angle_degrees": -0.0,
+      "png_sha256": "5234224aa32a985ff4b95ff1755e675b5e17a861f729c290c7896a715c996dd2"
+    },
+    {
+      "model": "vanguard",
+      "mesh_objects": 131,
+      "file": "vanguard.png",
+      "nose_angle_degrees": -0.0,
+      "png_sha256": "5596610c6b0db9feba71ad89e349c425c48081fb6b0435da51cbb55f71feedce"
+    }
+  ],
+  "source_sha256": "a74c14f1ff3704fc96cabaa73f38bc7e7c43ec628c2ce291e76c7fe41a65cf28",
+  "helper_sha256": "dc991730e00ac5ba0f1147f9a3068c268d5e745beb08052a40e713cf12173b11"
+}

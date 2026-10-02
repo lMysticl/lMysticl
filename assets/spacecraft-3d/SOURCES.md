@@ -53,18 +53,30 @@ SMIL clock, including view windows that target nested SVG viewports.
 
 ## Motion and consumer contract
 
-`profile_flight.py` supplies continuous projected paths and camera depth. Hull
-heading follows the path velocity. Bank anticipates curvature; pitch follows
-world-space motion reconstructed from the camera projection. No target-facing
-sideways slide or instant change of course is authored. This is a cinematic
-composition with deliberately compressed distance and time.
+`profile_flight.py` remains the source of the retained real 3D attitude renders.
+`profile_battle.py` maps those views onto four connected fleet passes in 48
+seconds. Hull heading follows the current projected path velocity; changing
+real atlas views supply bank and depth pitch. Arrival brakes from a short jump,
+ordinary combat maintains forward motion, and departure accelerates. Brief
+colored light transfers link each craft's exit to its next entrance.
 
 `profile_ship.py` applies those poses, interpolates the rendered views and
-launches three red bursts and three green bursts from the current cannon
+launches three red bursts and three green bursts on each pass from the current cannon
 coordinates. Each fast impulse keeps its forward launch vector after leaving
 the barrel. The 48-second loop has a four-second intro offset: the encounter
-appears soon after page load, followed by Aster breaking behind Earth and
-Vesper breaking above it. Both recede and leave the frame.
+appears immediately after page load. Fleet passes enter from four directions;
+the same ships return after each short departure instead of leaving the scene
+empty for the remainder of the sky loop. Narrow flares, local light streaks
+and short longitudinal hull stretches explain the hyperspace transitions.
+
+Two original distant capital ships, Aurora and Vanguard, have layered hulls,
+bridge/sensor structures, deck machinery, turrets, cooling grilles and five
+engine nozzles each. `render_profile_cruisers.py` builds 129/131 mesh objects
+using the existing Blender 5.2/Cycles helpers. Seed 42, 48 samples, AgX and the
+named RX 6950 XT HIP device match the recorded manifest. Their two 320 x 240
+RGBA views are shared once per SVG; slower ordinary movement and lower contrast
+place them behind the fighters. They arrive and jump away with the fleet.
+The editable scene and 1600 x 1000 inspection plate are retained outside Git.
 
 The mobile exchange is staged left of Earth, below both description lines.
 Its clipping region is y=390-516 in the 620 x 580 viewBox. The desktop clip

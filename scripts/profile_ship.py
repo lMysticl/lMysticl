@@ -11,12 +11,15 @@ import math
 from functools import lru_cache
 from pathlib import Path
 
-from profile_flight import (INTRO_OFFSET, LOOP, SHOTS, SHOT_DURATION, SHOT_SPEED,
-                            VIEW_TIMES, pose, position, view_indices)
+from profile_battle import (INTRO_OFFSET, LOOP, SHOTS, SHOT_DURATION, SHOT_SPEED,
+                            SAMPLE_TIMES, FIGHTERS, CRUISERS, FLEET, COLORS,
+                            pose, position, view_indices, view_events, stretch,
+                            jump_intensity, transfer)
 
 ASSETS=Path(__file__).resolve().parents[1]/'assets'/'spacecraft-3d'
 MODELS={'aster':('aster-ship',156),'interceptor':('vesper-interceptor',104)}
-STILL_TIME=5.30
+WIDTHS={**{m:w for m,(_,w) in MODELS.items()},'aurora':138,'vanguard':125}
+STILL_TIME=3.65
 
 
 def n(value):
@@ -57,6 +60,9 @@ def definitions():
         manifest=metadata(model)
         data=base64.b64encode((ASSETS/(stem+'.png')).read_bytes()).decode('ascii')
         parts.append(f'<image id="ship-atlas-{model}" width="{manifest["width"]}" height="{manifest["height"]}" href="data:image/png;base64,{data}"/>')
+    for model in CRUISERS:
+        data=base64.b64encode((ASSETS/(model+'.png')).read_bytes()).decode('ascii')
+        parts.append(f'<image id="ship-cruiser-{model}" width="320" height="240" href="data:image/png;base64,{data}"/>')
     return '\n'.join(parts)
 
 
@@ -65,17 +71,20 @@ def viewbox(model,index):
 
 
 def hull(model,animated,time):
+    if model in CRUISERS:
+        width=WIDTHS[model]
+        return f'<svg x="{-width/2}" y="{-width*.375}" width="{width}" height="{width*.75}" viewBox="0 0 320 240" overflow="hidden"><use href="#ship-cruiser-{model}"/></svg>'
     width=MODELS[model][1]
     first,second,fraction=view_indices(time)
-    times=[0,*VIEW_TIMES,LOOP]
-    indices=[0,*range(len(VIEW_TIMES)),len(VIEW_TIMES)-1]
+    times=view_events()
+    indices=[view_indices(t)[0] for t in times]
     parts=[]
     for layer,index,opacity in [('base',first,1),('next',second,fraction)]:
         ident=f'spacecraft-window-{model}-{layer}'
         target=f' id="{ident}"' if animated else ''
         parts.append(f'<svg{target} class="spacecraft-view-{layer}" x="{-width/2}" y="{-width*.375}" width="{width}" height="{width*.75}" viewBox="{viewbox(model,index)}" overflow="hidden" opacity="{n(opacity)}"><use href="#ship-atlas-{model}"/></svg>')
         if animated:
-            frame_indices=[min(i+(layer=='next'),len(VIEW_TIMES)-1) for i in indices]
+            frame_indices=[min(i+(layer=='next'),len(metadata(model)['frames'])-1) for i in indices]
             # A sibling animation targets the nested viewport explicitly.
             # This keeps attitude on the same parent SMIL clock as flight;
             # an animation inside the viewport would own a separate timeline.
@@ -84,17 +93,17 @@ def hull(model,animated,time):
                 # At each tile boundary the base becomes the previous next
                 # frame. The next layer resets to transparent without a
                 # silhouette pop or the alpha loss of a two-sided dissolve.
-                blend_times=[0,VIEW_TIMES[0]]
-                values=['0','0']
-                for t in VIEW_TIMES[1:]:
-                    # Equal keyTimes make an instantaneous opacity reset on
-                    # the very same boundary as the discrete view change.
-                    # A tiny finite reset interval would expose the previous
-                    # view at an exactly sought frame boundary.
-                    blend_times.extend([t,t])
-                    values.extend(['1','0'])
-                blend_times.append(LOOP)
-                values.append('0')
+                blend_times=[0]
+                values=[n(view_indices(0)[2])]
+                previous=indices[0]
+                for t,index in zip(times[1:],indices[1:]):
+                    if index!=previous:
+                        blend_times.extend([t,t])
+                        before=1 if index>previous else view_indices(t-.00001)[2]
+                        values.extend([n(before),n(view_indices(t)[2])])
+                    else:
+                        blend_times.append(t);values.append(n(view_indices(t)[2]))
+                    previous=index
                 parts.append(f'<animate href="#{ident}" attributeName="opacity" values="{";".join(values)}" {timing(blend_times)}/>')
     return '\n'.join(parts)
 
@@ -105,8 +114,9 @@ def actor(model,animated,frame_time=None,mobile=False):
     if not animated:
         if frame_time is None: opacity=1
         if opacity<=0: return ''
-        return f'<g class="spacecraft-static" data-ship="{model}" transform="translate({n(x)} {n(y)}) rotate({n(rotation)}) scale({n(scale)})" opacity="{n(opacity)}">{hull(model,False,time)}</g>'
-    times=[0,*VIEW_TIMES,10.2,12,48]
+        if frame_time is None and model in CRUISERS:opacity=.64
+        return f'<g class="spacecraft-static" data-ship="{model}" transform="translate({n(x)} {n(y)}) rotate({n(rotation)}) scale({n(scale)})" opacity="{n(opacity)}"><g transform="scale({n(stretch(time) if frame_time is not None else 1)} 1)">{hull(model,False,time)}</g></g>'
+    times=SAMPLE_TIMES
     poses=[pose(model,t,mobile) for t in times]
     rotations=[]
     for p in poses:
@@ -123,11 +133,56 @@ def actor(model,animated,frame_time=None,mobile=False):
           <animateTransform attributeName="transform" type="rotate" values="{';'.join(n(a) for a in rotations)}" {clock}/>
           <g class="spacecraft-depth" transform="scale({n(scale)})">
             <animateTransform attributeName="transform" type="scale" values="{';'.join(n(p[2]) for p in poses)}" {clock}/>
+            <g class="spacecraft-jump" transform="scale({n(stretch(time))} 1)">
+            <animateTransform attributeName="transform" type="scale" values="{';'.join(n(stretch(t))+' 1' for t in times)}" {clock}/>
             {hull(model,True,time)}
+            </g>
           </g>
         </g>
       </g>
     </g>'''
+
+
+def jump(model,animated,frame_time=None,mobile=False):
+    time=(frame_time or 0)+INTRO_OFFSET
+    x,y,_,angle,_=pose(model,time,mobile)
+    opacity=jump_intensity(time)
+    if not animated and opacity<=0:return ''
+    color=COLORS[model]
+    parts=[f'<g class="hyperspace-wake" data-jump="{model}" opacity="{n(opacity)}" transform="translate({n(x)} {n(y)})">']
+    if animated:
+        times=SAMPLE_TIMES;clock=timing(times)
+        parts.append(f'<animate attributeName="opacity" values="{";".join(n(jump_intensity(t)) for t in times)}" {clock}/>')
+        parts.append(f'<animateTransform attributeName="transform" type="translate" values="{";".join(n(position(model,t,mobile)[0])+" "+n(position(model,t,mobile)[1]) for t in times)}" {clock}/>')
+    parts.append(f'<g transform="rotate({n(angle)})">')
+    if animated:
+        rotations=[]
+        for t in SAMPLE_TIMES:
+            r=pose(model,t,mobile)[3]
+            if rotations:r=rotations[-1]+(r-rotations[-1]+180)%360-180
+            rotations.append(r)
+        parts.append(f'<animateTransform attributeName="transform" type="rotate" values="{";".join(n(r) for r in rotations)}" {timing(SAMPLE_TIMES)}/>')
+    # Compact streak bundle and a narrow lens-like arrival/exit aperture.
+    for i,(y0,length) in enumerate([(-12,63),(-7,91),(-2,120),(3,106),(9,76),(14,49)]):
+        parts.append(f'<path d="M -{length} {y0} L 18 {n(y0*.22)}" stroke="{color}" stroke-width="{1 if i%2 else .65}" opacity=".55"/>')
+    parts.append(f'<ellipse rx="3" ry="17" fill="none" stroke="{color}" stroke-width="1.3" opacity=".9"/><ellipse rx="1.2" ry="11" fill="#F0F8FF" opacity=".8"/></g></g>')
+    return '\n'.join(parts)
+
+
+def handoff(model,wave,animated,frame_time=None,mobile=False):
+    start=wave*12+11.4;end=(wave+1)*12
+    time=((frame_time or 0)+INTRO_OFFSET)%LOOP
+    u=max(0,min(1,(time-start)/(end-start)))
+    opacity=math.sin(math.pi*u)*.8
+    if not animated and opacity<=0:return ''
+    x,y=transfer(model,wave,u,mobile)
+    parts=[f'<circle class="hyperspace-transfer" data-link="{model}:{wave}" cx="0" cy="0" r="1.8" fill="{COLORS[model]}" opacity="{0 if animated else n(opacity)}" transform="translate({n(x)} {n(y)})">']
+    if animated:
+        times=sorted({0,LOOP,start,end,*[start+i*.6/12 for i in range(13)]})
+        progress=[max(0,min(1,(t-start)/.6)) for t in times]
+        parts.append(f'<animateTransform attributeName="transform" type="translate" values="{";".join(n(transfer(model,wave,p,mobile)[0])+" "+n(transfer(model,wave,p,mobile)[1]) for p in progress)}" {timing(times)}/>')
+        parts.append(f'<animate attributeName="opacity" values="{";".join(n(math.sin(math.pi*p)*.8) for p in progress)}" {timing(times)}/>')
+    parts.append('</circle>');return '\n'.join(parts)
 
 
 def shot_vector(owner,launch,mobile=False):
@@ -168,10 +223,13 @@ def scene(mobile,animated,frame_time=None):
            '<g id="spacecraft-scene" clip-path="url(#spacecraft-frame)">']
     if animated:
         parts.append('<g class="ship-still">')
-        parts.extend(actor(model,False,mobile=mobile) for model in MODELS)
+        parts.extend(actor(model,False,mobile=mobile) for model in FLEET)
         parts.extend(volley(i,*shot,False,mobile=mobile) for i,shot in enumerate(SHOTS))
         parts.append('</g><g class="motion">')
-    parts.extend(actor(model,animated,frame_time,mobile) for model in MODELS)
+    parts.extend(actor(model,animated,frame_time,mobile) for model in FLEET)
+    if animated or frame_time is not None:
+        parts.extend(jump(model,animated,frame_time,mobile) for model in FLEET)
+        parts.extend(handoff(model,w,animated,frame_time,mobile) for w in range(4) for model in FLEET)
     parts.extend(volley(i,*shot,animated,frame_time,mobile) for i,shot in enumerate(SHOTS))
     if animated: parts.append('</g>')
     parts.append('</g>')
