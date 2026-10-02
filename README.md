@@ -12,15 +12,12 @@
 
 **Senior Java Developer · Former Java Team Lead · 10+ years of experience**
 
-I build payment systems, e-commerce services and document-processing software
-with Java and Spring Boot. At Ukrposhta, I built a payment system from scratch
-and led Java development for three years, combining implementation with
-architecture, code reviews and technical decisions.
+I build Java and Spring Boot services for payments, e-commerce and document
+processing. I combine hands-on backend development with technical leadership
+and React / TypeScript experience.
 
-My current work connects Java 21 / Spring Boot 3 services for document
-conversion with interactive reporting in React / TypeScript. I focus on clear
-API contracts, reliable integrations and automated tests that protect business
-workflows.
+I focus on reliable integrations, clear API contracts and maintainable systems
+that support business workflows.
 
 **Open to remote Senior / Lead Java roles · Kyiv, Ukraine**
 
@@ -28,14 +25,12 @@ workflows.
 
 ## Experience
 
-- **Payments and integrations:** custom payment services at Ukrposhta, plus
-  PayPal integration and extensions to Stripe workflows in a later role.
-- **Document processing and reporting:** conversion across PDF, Word,
-  presentations and spreadsheets, with attention to layout, multilingual
-  content and the APIs used by reporting interfaces.
-- **Hands-on technical leadership:** architecture decisions, code reviews,
-  sprint planning and interviews, alongside implementation and collaboration
-  with business stakeholders.
+- **Payments and integrations:** backend services, external integrations and
+  REST API design.
+- **Document processing and reporting:** services and interfaces that turn
+  documents into usable information.
+- **Technical leadership:** architecture decisions, code reviews, planning and
+  collaboration with stakeholders.
 
 ## Core stack
 
