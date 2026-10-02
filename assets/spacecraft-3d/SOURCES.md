@@ -69,14 +69,24 @@ the same ships return after each short departure instead of leaving the scene
 empty for the remainder of the sky loop. Narrow flares, local light streaks
 and short longitudinal hull stretches explain the hyperspace transitions.
 
-Two original distant capital ships, Aurora and Vanguard, have layered hulls,
-bridge/sensor structures, deck machinery, turrets, cooling grilles and five
-engine nozzles each. `render_profile_cruisers.py` builds 129/131 mesh objects
+The two distant capital ships have different hull types. Aurora is a 129-mesh
+angular wedge destroyer with layered decks, a tall bridge/sensor structure,
+turrets, cooling grilles and five blue engine nozzles. Vanguard is a 120-mesh
+rounded cruiser with an elongated organic hull, eight side gondolas, a command
+pod, observation ports, dorsal armor, turrets and three amber engine nozzles.
+`render_profile_cruisers.py` authors both original ships locally
 using the existing Blender 5.2/Cycles helpers. Seed 42, 48 samples, AgX and the
 named RX 6950 XT HIP device match the recorded manifest. Their two 320 x 240
 RGBA views are shared once per SVG; slower ordinary movement and lower contrast
 place them behind the fighters. They arrive and jump away with the fleet.
 The editable scene and 1600 x 1000 inspection plate are retained outside Git.
+
+The contrasting shapes follow the user's two-type correction and the official
+Star Wars Databank descriptions/images of the
+[Imperial Star Destroyer](https://www.starwars.com/databank/imperial-star-destroyer)
+and [Mon Calamari Star Cruiser](https://www.starwars.com/databank/mon-calamari-star-cruiser).
+These are visual references; neither movie pixels nor imported model assets are
+embedded in the profile.
 
 The mobile exchange is staged left of Earth, below both description lines.
 Its clipping region is y=390-516 in the 620 x 580 viewBox. The desktop clip

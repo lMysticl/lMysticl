@@ -12,19 +12,21 @@
   "frames": [
     {
       "model": "aurora",
+      "type": "angular wedge destroyer",
       "mesh_objects": 129,
       "file": "aurora.png",
       "nose_angle_degrees": -0.0,
-      "png_sha256": "5234224aa32a985ff4b95ff1755e675b5e17a861f729c290c7896a715c996dd2"
+      "png_sha256": "4d35f52ca77e7bf3288622faee61784aa3028ee82f2303e9e18b4ee41b49332f"
     },
     {
       "model": "vanguard",
-      "mesh_objects": 131,
+      "type": "rounded gondola cruiser",
+      "mesh_objects": 120,
       "file": "vanguard.png",
       "nose_angle_degrees": -0.0,
-      "png_sha256": "5596610c6b0db9feba71ad89e349c425c48081fb6b0435da51cbb55f71feedce"
+      "png_sha256": "13e6d23b60128394469554fdd14396d1dc7bf2e46fe7a2fc7d2fb1cd64b2cee4"
     }
   ],
-  "source_sha256": "a74c14f1ff3704fc96cabaa73f38bc7e7c43ec628c2ce291e76c7fe41a65cf28",
+  "source_sha256": "ea911f508c01f776fa147e873d3bcb4f944972371b49567c3512b96365d99ed0",
   "helper_sha256": "dc991730e00ac5ba0f1147f9a3068c268d5e745beb08052a40e713cf12173b11"
 }

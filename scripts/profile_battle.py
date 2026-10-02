@@ -16,7 +16,7 @@ FIGHTERS = ('aster', 'interceptor')
 CRUISERS = ('aurora', 'vanguard')
 FLEET = (*CRUISERS, *FIGHTERS)
 COLORS = {'aster':'#FF677F', 'interceptor':'#74F8AB',
-          'aurora':'#8FCBFF', 'vanguard':'#ABB8FF'}
+          'aurora':'#8FCBFF', 'vanguard':'#F5C48D'}
 SHOT_DURATION = .24
 SHOT_SPEED = 950
 SHOTS = tuple((owner, wave*PASS+p, '#FF4B62' if owner=='aster' else '#62EE92')

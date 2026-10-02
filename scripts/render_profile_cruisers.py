@@ -17,7 +17,64 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 import render_profile_ship as h
 
 
+def capsule(name, center, length, radius_y, radius_z, mat):
+    """A smooth original ellipsoidal hull, constructed without imported meshes."""
+    cx,cy,cz=center
+    rings=12;steps=24
+    vertices=[]
+    for ring in range(rings+1):
+        a=math.pi*(.018+.964*ring/rings)
+        x=cx-math.cos(a)*length/2
+        for i in range(steps):
+            t=i*math.tau/steps
+            vertices.append((x,cy+math.sin(a)*radius_y*math.cos(t),cz+math.sin(a)*radius_z*math.sin(t)))
+    faces=[tuple(reversed(range(steps))),tuple(range(rings*steps,(rings+1)*steps))]
+    faces.extend((r*steps+i,r*steps+(i+1)%steps,(r+1)*steps+(i+1)%steps,(r+1)*steps+i)
+                 for r in range(rings) for i in range(steps))
+    obj=h.mesh(name,vertices,faces,mat,0)
+    for p in obj.data.polygons:p.use_smooth=p.index>1
+    return obj
+
+
+def rounded_cruiser(name,blockout):
+    h.SHIP=bpy.data.collections.new(name);bpy.context.scene.collection.children.link(h.SHIP)
+    hull=h.material(name+' | warm ceramic alloy',(.46,.40,.31),.48,.36)
+    ribs=h.material(name+' | champagne ribs',(.29,.27,.23),.7,.33)
+    dark=h.material(name+' | recessed conduits',(.035,.042,.045),.55,.4)
+    glow=h.material(name+' | amber engine cores',(1,.40,.12),.1,.23,3)
+    window=h.material(name+' | warm observation windows',(1,.48,.18),.1,.28,.8)
+    capsule(name+' | organic elongated hull',(0,0,0),7.0,1.0,.60,hull)
+    capsule(name+' | raised command pod',(-.85,0,.64),1.8,.52,.50,hull)
+    capsule(name+' | dorsal sensor blister',(.92,0,.52),1.3,.27,.22,ribs)
+    for side in (-1,1):
+        for i,(x,l,w) in enumerate([(-2.15,1.7,.34),(-.8,1.85,.36),(.82,1.9,.39),(2.05,1.15,.27)]):
+            capsule(name+f' | side gondola {side}:{i}',(x,side*.9,.08),l,w,.26,hull)
+            h.cylinder(name+f' | gondola spine {side}:{i}',(x-l*.3,side*.98,.29),(x+l*.3,side*.98,.29),.018,ribs,12,.002)
+        if not blockout:
+            for i in range(18):
+                x=-2.7+i*.3
+                y=side*math.sqrt(max(.01,1-(x/3.5)**2))*.84
+                h.box(name+f' | observation port {side}:{i}',(x,y,.29),(.055,.019,.025),window,.003)
+            for i in range(6):
+                x=-1.75+i*.58
+                capsule(name+f' | recessed service blister {side}:{i}',(x,side*.5,.51),.34,.10,.075,dark)
+                h.cylinder(name+f' | turret pedestal {side}:{i}',(x,side*.73,.35),(x,side*.73,.43),.072,ribs,16)
+                h.cylinder(name+f' | slim turret barrel {side}:{i}',(x,side*.73,.44),(x+.19,side*.73,.44),.014,ribs,10,.002)
+    for i,y in enumerate((-.42,0,.42)):
+        h.tube(name+f' | circular engine nozzle {i}',-3.62,-3.24,y,0,.21,.15,ribs,24)
+        h.cylinder(name+f' | amber engine core {i}',(-3.61,y,0),(-3.59,y,0),.147,glow,24,.002)
+    if not blockout:
+        for i in range(13):
+            a=i*math.tau/13
+            h.box(name+f' | command pod viewport {i}',(-.85+.68*math.cos(a),.39*math.sin(a),.83),(.065,.035,.035),window,.003)
+        for i in range(10):
+            x=-2.4+i*.48
+            h.box(name+f' | segmented dorsal armor {i}',(x,0,.59),(.22,.18,.025),ribs,.006)
+    return h.SHIP
+
+
 def cruiser(name, variant, blockout=False):
+    if variant:return rounded_cruiser(name,blockout)
     h.SHIP=bpy.data.collections.new(name)
     bpy.context.scene.collection.children.link(h.SHIP)
     metal=h.material(name+' | pale titanium',(.34,.41,.49),.62,.38)
@@ -95,7 +152,7 @@ def run(args):
         name=col.name;dest=args.out/(name+('-blockout' if args.blockout else '')+'.png')
         scene.render.filepath=str(dest);bpy.ops.render.render(write_still=True)
         center,nose=[world_to_camera_view(scene,cam,Vector(p)) for p in [(0,0,0),(1,0,0)]]
-        frames.append({'model':name,'mesh_objects':len(col.objects),'file':dest.name,
+        frames.append({'model':name,'type':'rounded gondola cruiser' if i else 'angular wedge destroyer','mesh_objects':len(col.objects),'file':dest.name,
                        'nose_angle_degrees':math.degrees(math.atan2(-(nose.y-center.y),nose.x-center.x)),
                        'png_sha256':hashlib.sha256(dest.read_bytes()).hexdigest()})
     if args.blockout:
