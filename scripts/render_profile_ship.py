@@ -12,8 +12,11 @@ import sys
 
 import bpy
 import bmesh
-from mathutils import Vector
+from mathutils import Quaternion, Vector
 from bpy_extras.object_utils import world_to_camera_view
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from profile_flight import VIEW_TIMES, view_pose
 
 
 def material(name, color, metal=0, rough=.35, emission=0):
@@ -202,19 +205,24 @@ def build_interceptor(detail):
     for side in (-1,1):
         cylinder(f'Radiator structural spar {side}',(0,0,0),(0,side*1.19,0),.135,MATS['metal'])
         y=side*1.27
-        outline=[(-.82,y,1.21),(.61,y,1.21),(1.12,y,.45),(1.12,y,-.65),(.5,y,-1.23),(-.85,y,-1.23),(-1.19,y,-.35),(-1.19,y,.48)]
+        # Six-sided silhouette from the film reference, with the original
+        # authored cell, fastener and conduit detail retained.
+        outline=[(-.65,y,1.21),(.65,y,1.21),(1.2,y,0),(.65,y,-1.21),
+                 (-.65,y,-1.21),(-1.2,y,0)]
+        sides=len(outline)
         vertices=[tuple(Vector(p)+Vector((0,d,0))) for d in (-.045,.045) for p in outline]
-        faces=[tuple(reversed(range(8))),tuple(range(8,16))]+[(i,(i+1)%8,(i+1)%8+8,i+8) for i in range(8)]
+        faces=[tuple(reversed(range(sides))),tuple(range(sides,sides*2))]+[
+            (i,(i+1)%sides,(i+1)%sides+sides,i+sides) for i in range(sides)]
         mesh(f'Radiator shield | {side}',vertices,faces,MATS['graphite'],.022)
-        for i in range(8):
-            cylinder(f'Shield perimeter beam {side}:{i}',outline[i],outline[(i+1)%8],.044,MATS['metal'],12,.005)
+        for i in range(sides):
+            cylinder(f'Shield perimeter beam {side}:{i}',outline[i],outline[(i+1)%sides],.044,MATS['metal'],12,.005)
         if detail:
             for face in (-1,1):
                 for col in range(3):
                     for row in range(5):
                         box(f'Shield recessed cell {side}:{face}:{col}:{row}',
                             (-.57+col*.39,y+face*.053,-.82+row*.41),(.347,.023,.357),MATS['radiator'],.009)
-                for i in range(8):
+                for i in range(sides):
                     p=Vector(outline[i])*.91
                     p.y=y+face*.053
                     cylinder(f'Shield rim fastener {side}:{face}:{i}',p,p+Vector((0,face*.017,0)),.019,MATS['warmmetal'],10,.002)
@@ -222,7 +230,7 @@ def build_interceptor(detail):
                 cylinder(f'Shield panel seam {side}:{z}',(-.83,y+side*.052,z),(.62,y+side*.052,z),.013,MATS['metal'],8,.002)
             for x in [-.48,-.1,.28]:
                 cylinder(f'Shield brace {side}:{x}',(x,y+side*.06,-1.03),(x,y+side*.06,1.02),.014,MATS['metal'],8,.002)
-            cylinder(f'Shield amber accent {side}',(-.82,y+side*.058,1.17),(.57,y+side*.058,1.17),.029,MATS['orange'],12,.002)
+            cylinder(f'Shield upper bus bar {side}',(-.57,y+side*.058,1.17),(.57,y+side*.058,1.17),.029,MATS['metal'],12,.002)
         cylinder(f'Aft engine housing {side}',(.34,side*.24,.14),(.83,side*.24,.14),.16,MATS['graphite'])
         tube(f'Aft open nozzle {side}',.73,.9,side*.24,.14,.17,.117,MATS['metal'],24)
         cylinder(f'Aft blue core {side}',(.89,side*.24,.14),(.896,side*.24,.14),.116,MATS['blue'],24,0)
@@ -266,11 +274,12 @@ def run(args):
     MUZZLE_CENTERS=[]
     MATS={name:material(name,*values) for name,values in {
         'ivory':((.72,.75,.78),.52,.3), 'metal':((.32,.39,.46),.8,.27),
-        'graphite':((.028,.046,.07),.58,.39), 'orange':((.88,.225,.055),.35,.3),
+        'graphite':((.028,.046,.07),.58,.39), 'orange':((.65,.035,.055),.35,.3),
         'panel':((.17,.23,.29),.67,.32), 'radiator':((.105,.165,.22),.58,.36),
         'warmmetal':((.42,.27,.13),.73,.3), 'amber':((1,.39,.085),0,.28,1.2),
-        'glass':((.018,.085,.145),.3,.13), 'blue':((.035,.36,1),.1,.25,3),
-        'hot':((.55,.91,1),0,.2,4)}.items()}
+        'glass':((.016,.027,.042),.3,.18),
+        'blue':(((.95,.055,.12) if args.model=='aster' else (.08,.75,.38)),.1,.25,3),
+        'hot':(((1,.58,.65) if args.model=='aster' else (.55,1,.7)),0,.2,4)}.items()}
     (build_ship if args.model=='aster' else build_interceptor)(not args.blockout)
     data=bpy.data.cameras.new('Rear three-quarter orthographic camera')
     cam=bpy.data.objects.new('Camera',data)
@@ -313,6 +322,9 @@ def run(args):
     light('Blue fill | separated lower foils',(-2,6,3),550,(.65,.8,1),5)
     light('Cool rim | wing edges',(-6,-3,5),850,(.69,.84,1),4)
     light('Warm bounce | aft metal',(1,6,-3),210,(1,.77,.5),4)
+    if args.flight:
+        render_flight(args,scene,cam,stem,model_name,selected)
+        return
     bpy.context.view_layer.update()
     # Keep intentional camera angle; expand only if the chosen silhouette crops.
     for _ in range(3):
@@ -351,6 +363,71 @@ def run(args):
     print('SHIP_RENDER_COMPLETE '+json.dumps(manifest))
 
 
+def render_flight(args,scene,cam,stem,model_name,devices):
+    """Render actual rotating geometry into a compact, camera-stable view set."""
+    args.out.mkdir(parents=True,exist_ok=False)
+    rig=bpy.data.objects.new('Flight attitude | bank and camera-depth pitch',None)
+    scene.collection.objects.link(rig)
+    for obj in SHIP.objects: obj.parent=rig
+    rig.rotation_mode='QUATERNION'
+    axis=1 if args.model=='aster' else -1
+    cam.location=(0,0,12)
+    cam.rotation_euler=(Vector((0,0,0))-cam.location).to_track_quat('-Z','Y').to_euler()
+    cam.data.ortho_scale=9.5 if args.model=='aster' else 4.4
+    scene.render.fps=12
+    scene.frame_start=1
+    scene.frame_end=len(VIEW_TIMES)
+
+    def attitude(time):
+        bank,pitch=view_pose(args.model,time)
+        forward=Vector((math.cos(math.radians(pitch)),0,math.sin(math.radians(pitch))))
+        orient=forward.to_track_quat('X','Z')
+        if axis<0: orient=orient@Quaternion((0,0,1),math.pi)
+        rig.rotation_quaternion=orient@Quaternion((1,0,0),math.radians(axis*bank))
+        bpy.context.view_layer.update()
+        return bank,pitch
+
+    # A single framing for every view prevents a camera zoom masquerading as
+    # a maneuver. Check all attitudes before rendering, then keep it fixed.
+    extent=0
+    for time in VIEW_TIMES:
+        attitude(time)
+        for obj in SHIP.objects:
+            for vertex in obj.data.vertices:
+                p=world_to_camera_view(scene,cam,obj.matrix_world@vertex.co)
+                extent=max(extent,abs(p.x-.5),abs(p.y-.5))
+    if extent>.445: cam.data.ortho_scale*=extent/.445
+
+    frames=[]
+    for index,time in enumerate(VIEW_TIMES):
+        scene.frame_set(index+1)
+        bank,pitch=attitude(time)
+        rig.keyframe_insert(data_path='rotation_quaternion',frame=index+1)
+        image=args.out/f'view-{index:03}.png'
+        scene.render.filepath=str(image)
+        bpy.ops.render.render(write_still=True)
+        project=lambda p:world_to_camera_view(scene,cam,rig.matrix_world@p)
+        nose,center=project(Vector((axis,0,0))),project(Vector((0,0,0)))
+        frames.append({'time':time,'file':image.name,'bank':bank,'pitch':pitch,
+            'engine_uv':[[p.x,p.y] for p in map(project,ENGINE_CENTERS)],
+            'muzzle_uv':[[p.x,p.y] for p in map(project,MUZZLE_CENTERS)],
+            'nose_angle_degrees':math.degrees(math.atan2(-(nose.y-center.y)*scene.render.resolution_y,(nose.x-center.x)*args.width)),
+            'png_sha256':hashlib.sha256(image.read_bytes()).hexdigest()})
+    scene.frame_set(31)
+    scene.render.filepath=str(args.out/'attitude-preview.png')
+    bpy.ops.wm.save_as_mainfile(filepath=str(args.out/(stem+'.blend')),check_existing=False)
+    manifest={'schema_version':2,'model':model_name,'blender':bpy.app.version_string,
+        'source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'flight_source_sha256':hashlib.sha256(Path(__file__).with_name('profile_flight.py').read_bytes()).hexdigest(),
+        'engine':'CYCLES','backend':args.backend,'devices':devices,'samples':args.samples,
+        'seed':42,'view_transform':'AgX','exposure':.35,'width':args.width,
+        'height':scene.render.resolution_y,'mesh_objects':len(SHIP.objects),
+        'external_assets':[],'materials':list(MATS),'framing':'fixed orthographic +X heading',
+        'ortho_scale':cam.data.ortho_scale,'frames':frames,'blockout':args.blockout}
+    (args.out/'render-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+    print('FLIGHT_RENDER_COMPLETE '+json.dumps({'model':args.model,'frames':len(frames),'devices':devices}))
+
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--out',type=Path,required=True)
@@ -358,6 +435,7 @@ if __name__=='__main__':
     parser.add_argument('--width',type=int,default=384)
     parser.add_argument('--samples',type=int,default=48)
     parser.add_argument('--blockout',action='store_true')
+    parser.add_argument('--flight',action='store_true',help='Render changing 3D attitudes, for build_flight_atlas.py')
     parser.add_argument('--model',choices=['aster','interceptor'],default='aster')
     parser.add_argument('--backend',choices=['HIP','CUDA','OPTIX','METAL','CPU'],default='HIP')
     parser.add_argument('--device-name',default='6950')
