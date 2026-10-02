@@ -2,7 +2,7 @@
 
 Original geometry, procedural materials and credited NASA surface maps are
 rendered by render_profile_3d.py.
-Self-contained PNG image elements retain detail inside GitHub SVG image contexts.
+Lossless self-contained WebP images retain every original RGBA pixel.
 """
 
 CORE_RADIUS = 105
@@ -19,12 +19,12 @@ ORBIT_COLORS = {
 def definitions():
     import base64
     from pathlib import Path
-    sprites = Path(__file__).resolve().parents[1] / 'assets' / 'planets-3d'
+    sprites = Path(__file__).resolve().parents[1] / 'assets' / 'web'
     parts = ['  <!-- orbital-definitions:start -->',
         '<radialGradient id="orbital-aura"><stop stop-color="#70B8FF" stop-opacity=".18"/><stop offset=".55" stop-color="#70B8FF" stop-opacity=".04"/><stop offset="1" stop-color="#70B8FF" stop-opacity="0"/></radialGradient>']
     for name, ident, extent in [('core','orbital-nucleus',CORE_RADIUS*2.42),('amber','orbital-body-amber',83.6),('moon','orbital-body-moon',35.52),('ocean','orbital-body-ocean',36.48)]:
-        encoded = base64.b64encode((sprites/(name+'.png')).read_bytes()).decode('ascii')
-        parts.append(f'<image id="{ident}" x="{-extent/2}" y="{-extent/2}" width="{extent}" height="{extent}" href="data:image/png;base64,{encoded}"/>')
+        encoded = base64.b64encode((sprites/(name+'.webp')).read_bytes()).decode('ascii')
+        parts.append(f'<image id="{ident}" x="{-extent/2}" y="{-extent/2}" width="{extent}" height="{extent}" href="data:image/webp;base64,{encoded}"/>')
     from profile_ship import definitions as ship_definitions
     parts.append(ship_definitions())
     parts.append('  <!-- orbital-definitions:end -->')

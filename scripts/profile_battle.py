@@ -1,131 +1,136 @@
-"""Four linked fleet passes, reusing the retained real Blender attitude atlas.
-
-The original profile_flight module remains the immutable atlas pose producer.
-This consumer maps each pass onto those views and carries the same ships through
-short hyperspace handoffs. All clocks divide the existing 48-second sky loop.
-"""
+"""Continuous pursuit; native cubic motion and offline sampling share one course."""
+import bisect
 import math
 from functools import lru_cache
-from profile_flight import curve, view_indices as atlas_indices
 
 LOOP = 48
-INTRO_OFFSET = 4
-PASS = 12
-ANGLES = (0, 180, -12, 168)
+INTRO_END = 1.05
+LAP = 12
 FIGHTERS = ('aster', 'interceptor')
-CRUISERS = ('aurora', 'vanguard')
-FLEET = (*CRUISERS, *FIGHTERS)
-COLORS = {'aster':'#FF677F', 'interceptor':'#74F8AB',
-          'aurora':'#8FCBFF', 'vanguard':'#F5C48D'}
-SHOT_DURATION = .24
-SHOT_SPEED = 950
-SHOTS = tuple((owner, wave*PASS+p, '#FF4B62' if owner=='aster' else '#62EE92')
-              for wave in range(4) for owner, phases in
-              [('aster',(3.35,3.55,3.75)),('interceptor',(3.42,3.62,3.82))]
-              for p in phases)
-SAMPLE_TIMES = tuple(sorted({i/12 for i in range(48*12+1)} |
-                           {w*PASS+p for w in range(4) for p in
-                            (0,.08,.16,.24,.4,.65,.8,10.2,10.6,10.85,11.1,11.4,11.5,11.7,11.9)}))
+COLORS = {'aster': '#FF677F', 'interceptor': '#74F8AB'}
+SHOT_DURATION = .20
+SHOT_SPEED = 900
+SAMPLE_TIMES = tuple(i*.75 for i in range(65))
+VIEW_SEQUENCE = (*range(8), *range(6, 0, -1), 0)
 
 
-def smooth(u):
-    u = max(0, min(1, u))
-    return u*u*(3-2*u)
-
-
-def phase(time):
-    t = time % LOOP
-    return int(t/PASS), t % PASS
-
-
-def source_time(time):
-    """Fast jump braking, steady combat, then increasing escape velocity."""
-    _, p = phase(time)
-    if p < .8:
-        u = p/.8
-        return 3.4 + .7*(1-(1-u)**3)
-    if p < 10.2:
-        return 4.1+(p-.8)*4.6/9.4
-    u = min(1, (p-10.2)/1.2)
-    # The starting derivative agrees with the steady flight segment.
-    return 8.7 + .75*(.783*u + .217*u*u*u)
+def sign(model):
+    return 1 if model == 'aster' else -1
 
 
 def remap(x, y, mobile):
-    return (x*.8-194, y*.68+39) if mobile else (x, y)
+    return (x*.70-183, y*.55+29) if mobile else (x, y)
 
 
-def location(model, wave, p, mobile=False):
-    if model in FIGHTERS:
-        x, y, depth = curve(model, source_time(wave*PASS+min(11.4,p)))
-        x, y = x*.55, y*.28
-        scale = 600/(600-depth)
-    else:
-        side = 1 if model=='aurora' else -1
-        # Capital ships move in the distant plane, with a brief escape burn.
-        travel = p*3 + 155*smooth((p-10.2)/1.2)
-        x = side*(-115+travel)
-        y = -5 if model=='aurora' else -29
-        scale = .67 - .11*smooth((p-10.2)/1.2)
-    angle=math.radians(ANGLES[wave % 4])
-    x,y = x*math.cos(angle)-y*math.sin(angle)-30, x*math.sin(angle)+y*math.cos(angle)-125
-    x,y = remap(x,y,mobile)
-    return x,y,scale
+def cubic(segment, u):
+    a, b, c, d = segment
+    p = tuple((1-u)**3*a[i]+3*(1-u)**2*u*b[i]+3*(1-u)*u*u*c[i]+u**3*d[i] for i in (0, 1))
+    v = tuple(3*(1-u)**2*(b[i]-a[i])+6*(1-u)*u*(c[i]-b[i])+3*u*u*(d[i]-c[i]) for i in (0, 1))
+    return p, v
 
 
-def position(model,time,mobile=False):
-    wave,p=phase(time)
-    return location(model,wave,p,mobile)
+@lru_cache(maxsize=4)
+def course(model, mobile=False):
+    rx, ry = (168, 116) if model == 'aster' else (186, 132)
+    theta = -math.pi/2+sign(model)*.24
+    k = 4/3*math.tan(math.pi/8)
+    segments = []
+    for i in range(4):
+        a, b = theta+i*math.pi/2, theta+(i+1)*math.pi/2
+        p = (-38+rx*math.cos(a), -15+ry*math.sin(a))
+        q = (-38+rx*math.cos(b), -15+ry*math.sin(b))
+        c = (p[0]-k*rx*math.sin(a), p[1]+k*ry*math.cos(a))
+        d = (q[0]+k*rx*math.sin(b), q[1]-k*ry*math.cos(b))
+        segments.append(tuple(remap(*v, mobile) for v in (p, c, d, q)))
+    distances, parameters = [0], [0]
+    previous = segments[0][0]
+    for i, segment in enumerate(segments):
+        for j in range(1, 257):
+            u = j/256
+            p, _ = cubic(segment, u)
+            distances.append(distances[-1]+math.dist(previous, p))
+            parameters.append(i+u)
+            previous = p
+    return segments, distances, parameters
 
 
-def pose(model,time,mobile=False):
-    wave,p=phase(time)
-    x,y,scale=location(model,wave,p,mobile)
-    a,b=location(model,wave,max(0,p-.002),mobile),location(model,wave,min(11.399,p+.002),mobile)
-    if p >=11.399: a,b=location(model,wave,11.39,mobile),location(model,wave,11.399,mobile)
-    angle=math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))
-    opacity=smooth(p/.16)*(1-smooth((p-11.10)/.30))
-    if model in CRUISERS: opacity *= .64
-    return x,y,scale,angle,opacity
+def travel(model, time):
+    """Four laps; positive speed and matching end position/velocity."""
+    return time/LAP+sign(model)*.041*(math.cos(2*math.pi*time/LOOP)-1)
+
+
+def position_heading(model, time, mobile=False):
+    segments, distances, parameters = course(model, mobile)
+    distance = (travel(model, time) % 1)*distances[-1]
+    i = min(len(distances)-1, max(1, bisect.bisect_right(distances, distance)))
+    u = (distance-distances[i-1])/(distances[i]-distances[i-1])
+    parameter = parameters[i-1]*(1-u)+parameters[i]*u
+    segment = min(3, int(parameter))
+    p, v = cubic(segments[segment], parameter-segment)
+    return p[0], p[1], math.degrees(math.atan2(v[1], v[0]))
+
+
+def pose(model, time, mobile=False):
+    x, y, angle = position_heading(model, time, mobile)
+    scale = (.48 if model == 'aster' else .62)+.045*math.sin(2*math.pi*travel(model, time))
+    return x, y, scale, angle, 1
+
+
+def position(model, time, mobile=False):
+    x, y, scale, _, _ = pose(model, time, mobile)
+    return x, y, scale
+
+
+def intro_pose(model, time, mobile=False):
+    x, y, scale, angle, _ = pose(model, 0, mobile)
+    u = max(0, min(1, time/INTRO_END))
+    length = course(model, mobile)[1][-1]
+    remaining = 120*(.70 if mobile else 1)*(1-u)**3+length/LAP*INTRO_END*(1-u)
+    r = math.radians(angle)
+    return x-remaining*math.cos(r), y-remaining*math.sin(r), scale, angle, min(1, u/.13)
 
 
 def stretch(time):
-    _,p=phase(time)
-    return 1+2.8*(1-smooth(p/.42))+3.6*smooth((p-10.85)/.55)
+    return 1+2.6*max(0, 1-time/INTRO_END)**3
 
 
 def view_indices(time):
-    return atlas_indices(source_time(time))
+    progress = (time % LAP)/LAP*(len(VIEW_SEQUENCE)-1)
+    index = int(progress)
+    return VIEW_SEQUENCE[index], VIEW_SEQUENCE[index+1], progress-index
 
 
-@lru_cache(maxsize=1)
 def view_events():
-    from profile_flight import VIEW_TIMES
-    events={0,LOOP}
-    for wave in range(4):
-        events.update((wave*PASS,wave*PASS+11.4,(wave+1)*PASS))
-        for source in VIEW_TIMES:
-            if not 3.4 < source < 9.45: continue
-            lo,hi=0,11.4
-            for _ in range(40):
-                mid=(lo+hi)/2
-                if source_time(mid)<source:lo=mid
-                else:hi=mid
-            events.add(wave*PASS+(lo+hi)/2)
-    return sorted(events)
+    return [i*LAP/(len(VIEW_SEQUENCE)-1) for i in range(4*(len(VIEW_SEQUENCE)-1)+1)]
 
 
-def jump_intensity(time):
-    _,p=phase(time)
-    return max(1-smooth(p/.65), smooth((p-10.6)/.5)*(1-smooth((p-11.4)/.6)))
+def path(model, mobile=False):
+    segments, _, _ = course(model, mobile)
+    fmt = lambda v: f'{v:.4f}'.rstrip('0').rstrip('.')
+    pair = lambda p: ' '.join(fmt(v) for v in p)
+    return 'M '+pair(segments[0][0])+' '+' '.join('C '+' '.join(pair(p) for p in s[1:]) for _ in range(4) for s in segments)
 
 
-def transfer(model,wave,u,mobile=False):
-    """A visible light pulse joins this exit to that craft's next entrance."""
-    a=location(model,wave,11.4,mobile)
-    b=location(model,(wave+1)%4,0,mobile)
-    # Arc above the fleet avoids the Earth and the professional copy.
-    control_y=min(a[1],b[1])-(18 if mobile else 25)
-    x=(1-u)*a[0]+u*b[0]
-    y=(1-u)**2*a[1]+2*(1-u)*u*control_y+u*u*b[1]
-    return x,y
+def shots():
+    """Find forward firing opportunities without aiming the hull backwards."""
+    result = []
+    for center in (1.5, 5, 8.5, 14, 17.5, 21, 25.5, 29, 32.5, 38, 41.5, 45):
+        candidates = []
+        for j in range(-12, 13):
+            t = center+j*.055
+            for owner in FIGHTERS:
+                enemy = FIGHTERS[1-FIGHTERS.index(owner)]
+                x, y, _, angle, _ = pose(owner, t)
+                tx, ty, _ = position(enemy, t+.085)
+                r = math.radians(angle)
+                ahead = (tx-x)*math.cos(r)+(ty-y)*math.sin(r)
+                cross = abs(-(tx-x)*math.sin(r)+(ty-y)*math.cos(r))
+                if 40 < ahead < 155:
+                    candidates.append((cross/ahead+abs(t-center)*.06, owner, t))
+        if candidates:
+            _, owner, t = min(candidates)
+            result.extend((owner, t+i*.14, '#FF4B62' if owner=='aster' else '#62EE92') for i in range(3))
+    return tuple(sorted(result, key=lambda shot: shot[1]))
+
+
+SHOTS = shots()

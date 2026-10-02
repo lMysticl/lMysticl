@@ -1,0 +1,95 @@
+{
+  "encoding": "lossless WebP, exact RGBA",
+  "planets": {
+    "core": {
+      "source_sha256": "53344181e2f438650d9cb8b1ac18db0ceaeb27daada919bc620fec4a0c9cfad1",
+      "output_sha256": "6d99ea2fc344733cf114178eeaf1e0309eb1a7e85a98ce199ff5a35f56ce103d",
+      "size": [
+        640,
+        640
+      ],
+      "source_bytes": 492665,
+      "web_bytes": 329880
+    },
+    "amber": {
+      "source_sha256": "5d9126f64e34c41e44f48f7b884f5733100edaa2ee6d09c5b3a4b43d48476d2f",
+      "output_sha256": "a096f1f84b24ddc0be38edb4e652d1d5b60ab568341a78ecbe202df25fbe09b0",
+      "size": [
+        256,
+        256
+      ],
+      "source_bytes": 53935,
+      "web_bytes": 36530
+    },
+    "moon": {
+      "source_sha256": "32e778a5262e85b92a7473f440fbd211582e4109b09a267e9cb0bc21243aedbe",
+      "output_sha256": "a95169d7d7cceceb2e20e7005272a86a87044a8bff475ed8d059047dd75013c4",
+      "size": [
+        256,
+        256
+      ],
+      "source_bytes": 78305,
+      "web_bytes": 51368
+    },
+    "ocean": {
+      "source_sha256": "5c8448e9220ff31cfbde4b9c411edd1a2cdd8e56a7d2b12689505f75c353a7c6",
+      "output_sha256": "5186787e93d5613d5327a5eab143c1fe83428cdfe3d835b8a16a35ddfcbe7165",
+      "size": [
+        256,
+        256
+      ],
+      "source_bytes": 81141,
+      "web_bytes": 54576
+    }
+  },
+  "fighters": {
+    "aster-ship": {
+      "source_bytes": 263319,
+      "web_bytes": 25600,
+      "source_size": [
+        1536,
+        1584
+      ],
+      "web_size": [
+        768,
+        288
+      ],
+      "selected_source_views": [
+        6,
+        10,
+        14,
+        18,
+        22,
+        26,
+        30,
+        34
+      ],
+      "source_sha256": "5ed2b4e1d8a81b1b255ed5ed66728744e2945b7606917a0d85dc97e0bc832d48",
+      "output_sha256": "3ccab871460a1c92d91bbfe5143ad2ceed9dfb5dae30991af9279a614a5c5ed9"
+    },
+    "vesper-interceptor": {
+      "source_bytes": 185009,
+      "web_bytes": 21586,
+      "source_size": [
+        1152,
+        1188
+      ],
+      "web_size": [
+        576,
+        216
+      ],
+      "selected_source_views": [
+        6,
+        10,
+        14,
+        18,
+        22,
+        26,
+        30,
+        34
+      ],
+      "source_sha256": "0e87b2240a777750d67ce7d0a4b8591cb89952bb942ff6ad6dda9069f183a02b",
+      "output_sha256": "f79b8948a50e92a9a7478d6fc6a051d331c627c3e05e7556eec9e3d287a64ed5"
+    }
+  }
+}
