@@ -17,8 +17,13 @@ before atomic replacement. The compact manifests retain each view's original
 cannon/exhaust coordinates and bind its source PNG and manifest hashes.
 `encoding-proof.json` records dimensions, sizes and hashes.
 
-The browser uses native SVG motion paths and SMIL: a 1.05-second arrival runs
-once, followed by a continuous 48-second pursuit. Both ships move forward along
-their tangent headings and trade the pursuing role. Static and reduced-motion
-variants retain both fighters. Cruisers are absent from the current web scene;
-their original modeling sources remain available separately.
+The browser uses native SVG motion paths and SMIL. Each six-second story starts
+with a 0.8-second hyperspace arrival, followed by three seconds of pursuit and
+crossfire. The X-wing's final forward volley defeats the interceptor at 3.8
+seconds; a small impact flash and six fragments mark the hit. The winner
+accelerates away and the next story enters from the opposite side. Two mirrored
+passes repeat every 12 seconds, aligned with the scene's 48-second planet and
+star clock. Both ships follow their tangent headings and use the same camera
+views for their turns. Static and reduced-motion variants retain both fighters.
+Cruisers are absent from the current web scene; their original modeling sources
+remain available separately.

@@ -150,10 +150,30 @@
   </g>
 <defs><clipPath id="spacecraft-frame"><rect x="-265" y="-191" width="468" height="355"/></clipPath></defs>
 <g id="spacecraft-scene" clip-path="url(#spacecraft-frame)">
-<g class="spacecraft-static" data-ship="aster" transform="translate(128.5565 0.2482) rotate(100.9697) scale(0.5243)" opacity="1"><g transform="scale(1 1)"><svg class="spacecraft-view-base" x="-78.0" y="-58.5" width="156" height="117.0" viewBox="576 0 192 144" overflow="hidden" opacity="1"><use href="#ship-atlas-aster"/></svg>
-<svg class="spacecraft-view-next" x="-78.0" y="-58.5" width="156" height="117.0" viewBox="0 144 192 144" overflow="hidden" opacity="0.15"><use href="#ship-atlas-aster"/></svg></g></g>
-<g class="spacecraft-static" data-ship="interceptor" transform="translate(126.1519 -77.1394) rotate(53.1186) scale(0.6646)" opacity="1"><g transform="scale(1 1)"><svg class="spacecraft-view-base" x="-52.0" y="-39.0" width="104" height="78.0" viewBox="432 0 144 108" overflow="hidden" opacity="1"><use href="#ship-atlas-interceptor"/></svg>
-<svg class="spacecraft-view-next" x="-52.0" y="-39.0" width="104" height="78.0" viewBox="0 108 144 108" overflow="hidden" opacity="0.15"><use href="#ship-atlas-interceptor"/></svg></g></g>
+<g class="spacecraft-static" data-ship="aster" transform="translate(110.6155 39.15198) rotate(127.33929) scale(0.52463)" opacity="1"><g class="hyperspace-wake" opacity="0">
+<path d="M -63 -10 L 6 -1.5" fill="none" stroke="#FF677F" stroke-width=".85" opacity=".6"/>
+<path d="M -92 -5 L 6 -0.75" fill="none" stroke="#FF677F" stroke-width=".85" opacity=".6"/>
+<path d="M -125 0 L 6 0.0" fill="none" stroke="#FF677F" stroke-width=".85" opacity=".6"/>
+<path d="M -92 5 L 6 0.75" fill="none" stroke="#FF677F" stroke-width=".85" opacity=".6"/>
+<path d="M -63 10 L 6 1.5" fill="none" stroke="#FF677F" stroke-width=".85" opacity=".6"/>
+<ellipse cx="-8" rx="1.7" ry="11" fill="none" stroke="#ECF6FF" stroke-width="1" opacity=".85"/></g><g transform="scale(1 1)"><svg class="spacecraft-view-base" x="-78.0" y="-58.5" width="156" height="117.0" viewBox="576 144 192 144" overflow="hidden" opacity="1"><use href="#ship-atlas-aster"/></svg>
+<svg class="spacecraft-view-next" x="-78.0" y="-58.5" width="156" height="117.0" viewBox="384 144 192 144" overflow="hidden" opacity="0.21622"><use href="#ship-atlas-aster"/></svg></g></g>
+<g class="spacecraft-static" data-ship="interceptor" transform="translate(68.75727 93.13553) rotate(153.55048) scale(0.638)" opacity="1"><g class="hyperspace-wake" opacity="0">
+<path d="M -63 -10 L 6 -1.5" fill="none" stroke="#74F8AB" stroke-width=".85" opacity=".6"/>
+<path d="M -92 -5 L 6 -0.75" fill="none" stroke="#74F8AB" stroke-width=".85" opacity=".6"/>
+<path d="M -125 0 L 6 0.0" fill="none" stroke="#74F8AB" stroke-width=".85" opacity=".6"/>
+<path d="M -92 5 L 6 0.75" fill="none" stroke="#74F8AB" stroke-width=".85" opacity=".6"/>
+<path d="M -63 10 L 6 1.5" fill="none" stroke="#74F8AB" stroke-width=".85" opacity=".6"/>
+<ellipse cx="-8" rx="1.7" ry="11" fill="none" stroke="#ECF6FF" stroke-width="1" opacity=".85"/></g><g transform="scale(1 1)"><svg class="spacecraft-view-base" x="-52.0" y="-39.0" width="104" height="78.0" viewBox="432 108 144 108" overflow="hidden" opacity="1"><use href="#ship-atlas-interceptor"/></svg>
+<svg class="spacecraft-view-next" x="-52.0" y="-39.0" width="104" height="78.0" viewBox="288 108 144 108" overflow="hidden" opacity="0.21622"><use href="#ship-atlas-interceptor"/></svg></g></g>
+<g id="laser-volley-2-still" class="laser-volley" data-owner="aster" data-launch="2.05" transform="translate(-43.16499 137.37825)" opacity="1">
+<path class="laser-bolt" d="M 108.27042 -6.89993 L 104.07382 6.45629" fill="none" stroke="#FF4B62" stroke-width="1.8" stroke-linecap="round"/><path d="M 108.27042 -6.89993 L 104.07382 6.45629" fill="none" stroke="#FFF9F5" stroke-width=".6" stroke-linecap="round" opacity=".95"/>
+<path class="laser-bolt" d="M 134.10339 14.23519 L 129.90679 27.59141" fill="none" stroke="#FF4B62" stroke-width="1.8" stroke-linecap="round"/><path d="M 134.10339 14.23519 L 129.90679 27.59141" fill="none" stroke="#FFF9F5" stroke-width=".6" stroke-linecap="round" opacity=".95"/>
+</g>
+<g id="laser-volley-3-still" class="laser-volley" data-owner="aster" data-launch="2.19" transform="translate(-10.31122 14.75394)" opacity="1">
+<path class="laser-bolt" d="M 102.46003 14.29571 L 94.44019 25.771" fill="none" stroke="#FF4B62" stroke-width="1.8" stroke-linecap="round"/><path d="M 102.46003 14.29571 L 94.44019 25.771" fill="none" stroke="#FFF9F5" stroke-width=".6" stroke-linecap="round" opacity=".95"/>
+<path class="laser-bolt" d="M 117.46744 41.93432 L 109.4476 53.4096" fill="none" stroke="#FF4B62" stroke-width="1.8" stroke-linecap="round"/><path d="M 117.46744 41.93432 L 109.4476 53.4096" fill="none" stroke="#FFF9F5" stroke-width=".6" stroke-linecap="round" opacity=".95"/>
+</g>
 </g>
     <circle r="106" fill="none" stroke="#70B8FF" stroke-width="6" opacity=".035"/>
     <circle r="106" fill="none" stroke="#70B8FF" stroke-width="2.5" opacity=".12"/>
