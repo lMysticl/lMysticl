@@ -25,5 +25,7 @@ def definitions():
     for name, ident, extent in [('core','orbital-nucleus',CORE_RADIUS*2.42),('amber','orbital-body-amber',83.6),('moon','orbital-body-moon',35.52),('ocean','orbital-body-ocean',36.48)]:
         encoded = base64.b64encode((sprites/(name+'.png')).read_bytes()).decode('ascii')
         parts.append(f'<image id="{ident}" x="{-extent/2}" y="{-extent/2}" width="{extent}" height="{extent}" href="data:image/png;base64,{encoded}"/>')
+    from profile_ship import definitions as ship_definitions
+    parts.append(ship_definitions())
     parts.append('  <!-- orbital-definitions:end -->')
     return '\n'.join(parts)

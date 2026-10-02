@@ -13,6 +13,7 @@ import xml.etree.ElementTree as ET
 
 from profile_materials import CORE_RADIUS, ORBIT_COLORS, definitions
 from profile_sky import sky
+from profile_ship import scene as spacecraft_scene
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -151,7 +152,7 @@ def satellite(orbit, front, animated):
     </g>'''
 
 
-def scene(mobile, animated, dark):
+def scene(mobile, animated, dark, frame_time=None):
     placement = 'translate(508 442) scale(.56)' if mobile else 'translate(995 203)'
     parts = [f'  <!-- orbital-scene:start -->\n  <g id="orbital-monogram" transform="{placement}">',
              '  <defs>', *(trail_definitions(o, animated) for o in ORBITS), '  </defs>',
@@ -162,6 +163,7 @@ def scene(mobile, animated, dark):
     </circle>''')
     for front in (False, True):
         if front:
+            parts.append(spacecraft_scene(mobile, animated, frame_time))
             parts.append(f'    <circle r="{CORE_RADIUS + 1}" fill="none" stroke="#70B8FF" stroke-width="6" opacity=".035"/>')
             parts.append(f'    <circle r="{CORE_RADIUS + 1}" fill="none" stroke="#70B8FF" stroke-width="2.5" opacity=".12"/>')
             parts.append('    <use id="orbital-core-instance" href="#orbital-nucleus"/>')
@@ -185,6 +187,7 @@ def rebuild(path):
     source = path.read_text(encoding='utf-8')
     mobile, animated, dark = ('mobile' in path.name, 'animated' in path.name, 'dark' in path.name)
     source = source.replace('.orbit-still {', '.orbit-still, .starfield-still {')
+    source = source.replace('.orbit-still, .starfield-still {', '.orbit-still, .starfield-still, .ship-still {')
     # A night sky spans both theme variants; adjust light-theme ink for contrast.
     for old,new in {'#9E562E':'#E9B47A','#202124':'#F8F5EF','#4E4D49':'#D5D0C7',
                     '#64635E':'#A9AAA8','#D8D0C5':'#373B41'}.items():

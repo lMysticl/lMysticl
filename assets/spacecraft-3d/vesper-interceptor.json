@@ -1,0 +1,60 @@
+{
+  "model": "Vesper | original radiator-shield interceptor",
+  "blender": "5.2.1 LTS",
+  "source_sha256": "54d06df22a5339d089c5af4d141740dea3a58800371e795935b01b0e5360965a",
+  "engine": "CYCLES",
+  "backend": "HIP",
+  "devices": [
+    "AMD Radeon RX 6950 XT"
+  ],
+  "samples": 96,
+  "seed": 42,
+  "view_transform": "AgX",
+  "exposure": 0.35,
+  "width": 256,
+  "height": 192,
+  "mesh_objects": 179,
+  "materials": [
+    "ivory",
+    "metal",
+    "graphite",
+    "orange",
+    "panel",
+    "radiator",
+    "warmmetal",
+    "amber",
+    "glass",
+    "blue",
+    "hot"
+  ],
+  "external_assets": [],
+  "engine_uv": [
+    [
+      0.6369462609291077,
+      0.5594730377197266
+    ],
+    [
+      0.5888279676437378,
+      0.6082054972648621
+    ]
+  ],
+  "muzzle_uv": [
+    [
+      0.36201170086860657,
+      0.3486582040786743
+    ],
+    [
+      0.3179032802581787,
+      0.3933296203613281
+    ]
+  ],
+  "nose_angle_degrees": 159.50280902708587,
+  "silhouette_bounds_uv": [
+    0.17784400284290314,
+    0.05000000074505806,
+    0.7778584957122803,
+    0.9118741750717163
+  ],
+  "png_sha256": "cbb4369a85f591d379203c580023c1d058c67c273c40797005c096b6d0d96e71",
+  "blockout": false
+}
