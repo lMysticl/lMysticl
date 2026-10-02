@@ -4,13 +4,13 @@ import json
 import math
 from functools import lru_cache
 from pathlib import Path
-from profile_battle import (LOOP,PASS,HIT_TIME,
+from profile_battle import (LOOP,PASS,HIT_TIME,EXIT_END,IMPACT_DURATION,exit_duration,
     SHOTS,SHOT_DURATION,SHOT_SPEED,FIGHTERS,COLORS,pose,location,
     view_indices,view_events,stretch,path,motion_fraction,jump_intensity,phase,SAMPLE_TIMES)
 
 ASSETS=Path(__file__).resolve().parents[1]/'assets'/'web'
 MODELS={'aster':('aster-ship',156),'interceptor':('vesper-interceptor',104)}
-STILL_TIME=2.21
+STILL_TIME=3.01
 
 
 def n(value):
@@ -100,7 +100,7 @@ def actor(model,animated,frame_time=None,mobile=False):
     route=path(model,0,mobile)+' '+path(model,1,mobile)
     points=[1 if t==LOOP else (phase(t)[0]+motion_fraction(model,phase(t)[1],mobile))/2 for t in times]
     clock=timing(times)
-    visible_until=4.75 if model=='aster' else 4.13
+    visible_until=EXIT_END if model=='aster' else HIT_TIME+exit_duration(model)
     visibility=timing([0,visible_until,PASS,PASS+visible_until,LOOP])
     parts=[f'<g id="spacecraft-{model}" class="spacecraft-flight" data-ship="{model}" data-wave="alternating" opacity="0">',
         f'<animate attributeName="display" calcMode="discrete" values="inline;none;inline;none;inline" {visibility}/>',
@@ -119,12 +119,12 @@ def actor(model,animated,frame_time=None,mobile=False):
 def impact(wave,animated,frame_time=None,mobile=False):
     time=frame_time or 0
     start=wave*PASS+HIT_TIME
-    u=max(0,min(1,(time-start)/.42))
-    opacity=max(0,min(1,(time-start)/.025,(start+.42-time)/.20))
+    u=max(0,min(1,(time-start)/IMPACT_DURATION))
+    opacity=max(0,min(1,(time-start)/.055,(start+IMPACT_DURATION-time)/.30))
     if not animated and opacity<=0:return ''
     x,y,_,_,_=location('interceptor',wave,HIT_TIME,mobile)
     parts=[f'<g class="victory-impact" data-winner="aster" data-defeated="interceptor" data-wave="{wave}" transform="translate({n(x)} {n(y)})" opacity="{0 if animated else n(opacity)}">']
-    times=[0,start,start+.025,start+.17,start+.42,LOOP]
+    times=[0,start,start+.055,start+.24,start+IMPACT_DURATION,LOOP]
     if animated:
         parts.append(f'<animate attributeName="opacity" values="0;0;1;1;0;0" {timing(times)}/>')
     parts.append(f'<g class="impact-spread" transform="scale({n(1+1.4*u)})">')
@@ -160,7 +160,7 @@ def volley(index,owner,launch,color,animated,frame_time=None,mobile=False):
         parts.append(f'<animate attributeName="opacity" values="0;0;1;1;0;0" {timing(times)}/>')
     if owner=='aster':
         # The final forward volley uses the wing pair that meets the target.
-        pair=1 if phase(launch)[1]>3.5 else (index//2)%2
+        pair=1 if phase(launch)[1]>HIT_TIME-.3 else (index//2)%2
         muzzles=muzzles[pair::2]
     for px,py in muzzles:
         d=f'M {n(px-ux*14)} {n(py-uy*14)} L {n(px)} {n(py)}'

@@ -1,4 +1,4 @@
-"""Two mirrored six-second stories: arrival, three-second duel, victory, escape.
+"""Two mirrored eight-second stories: arrival, three-second duel, victory, escape.
 
 Native cubic paths and the offline renderer share exact geometry and arc
 length. The two small real-view atlases and the accepted planet/sky stay intact.
@@ -7,22 +7,24 @@ import bisect
 import math
 from functools import lru_cache
 
-LOOP = 12
-PASS = 6
-ARRIVAL_END = .8
-BATTLE_END = 3.8
-HIT_TIME = 3.8
-EXIT_END = 4.75
+LOOP = 16
+PASS = 8
+ARRIVAL_END = 1.6
+BATTLE_END = ARRIVAL_END+3
+HIT_TIME = BATTLE_END
+TURN_END = HIT_TIME+.75
+EXIT_END = TURN_END+1.35
+IMPACT_DURATION = .55
 FIGHTERS = ('aster', 'interceptor')
 COLORS = {'aster': '#FF677F', 'interceptor': '#74F8AB'}
 SHOT_DURATION = .20
 SHOT_SPEED = 900
-VIEW_KNOTS = (0,.8,.99,1.18,1.37,1.56,1.75,1.94,2.13,2.50,2.90,3.30,3.8,6)
-VIEW_ORDER = (0,0,1,2,3,4,5,6,7,6,5,4,4,4)
-LOCAL_TIMES = tuple(sorted({i/15 for i in range(91)} | set(VIEW_KNOTS) |
-                          {i/30 for i in range(25)} |
-                          {BATTLE_END+i/60 for i in range(58)} |
-                          {.065,3.72,3.8,3.9,4.13,4.55,4.75,4.9}))
+VIEW_KNOTS = (0,1.6,1.79,1.98,2.17,2.36,2.55,2.74,2.93,3.30,3.70,4.10,HIT_TIME,TURN_END,PASS)
+VIEW_ORDER = (0,0,1,2,3,4,5,6,7,6,5,4,4,2,2)
+LOCAL_TIMES = tuple(sorted({i/15 for i in range(PASS*15+1)} | set(VIEW_KNOTS) |
+                          {i/30 for i in range(round(ARRIVAL_END*30)+1)} |
+                          {BATTLE_END+i/60 for i in range(round((EXIT_END-BATTLE_END)*60)+1)} |
+                          {.28,HIT_TIME-.08,HIT_TIME+.55,TURN_END+.15,EXIT_END-.45,EXIT_END}))
 SAMPLE_TIMES = tuple(sorted({w*PASS+p for w in range(2) for p in LOCAL_TIMES}))
 
 
@@ -81,9 +83,12 @@ def course(model,mobile=False):
     return segments,distances,parameters
 
 
-def fight_progress(model,p):
+def course_progress(model,p):
     t=max(0,min(3,p-ARRIVAL_END))
-    return t/4-sign(model)*.082*smooth(t/1.4)
+    fraction=t/4-sign(model)*.082*smooth(t/1.4)
+    if model=='aster' and p>HIT_TIME:
+        fraction+=max(0,min(TURN_END-HIT_TIME,p-HIT_TIME))/4
+    return fraction
 
 
 def course_parameter(model,fraction,mobile=False):
@@ -103,7 +108,11 @@ def course_point(model,fraction,mobile=False):
 
 
 def exit_duration(model):
-    return EXIT_END-BATTLE_END if model=='aster' else .33
+    return EXIT_END-TURN_END if model=='aster' else .55
+
+
+def exit_start(model):
+    return TURN_END if model=='aster' else HIT_TIME
 
 
 def entry_remaining(model,p,mobile=False):
@@ -113,28 +122,28 @@ def entry_remaining(model,p,mobile=False):
 
 
 def exit_distance(model,p,mobile=False):
-    d=max(0,min(exit_duration(model),p-BATTLE_END))
+    d=max(0,min(exit_duration(model),p-exit_start(model)))
     speed=course(model,mobile)[1][-1]/4
     return speed*d+(220*(.70 if mobile else 1)*(d/exit_duration(model))**3 if model=='aster' else 0)
 
 
 def location(model,wave,p,mobile=False):
-    fraction=fight_progress(model,p)
+    fraction=course_progress(model,p)
     (x,y),angle=course_point(model,fraction,mobile)
     if p<ARRIVAL_END:
         distance=-entry_remaining(model,p,mobile)
-    elif p>BATTLE_END:
+    elif p>exit_start(model):
         distance=exit_distance(model,p,mobile)
     else:
         distance=0
     r=math.radians(angle)
     x,y=mirror((x+distance*math.cos(r),y+distance*math.sin(r)),wave,mobile)
     scale=(.48 if model=='aster' else .62)+.045*math.sin(2*math.pi*fraction)
-    if p>BATTLE_END:
-        scale*=1-(.7 if model=='aster' else .8)*smooth((p-BATTLE_END)/exit_duration(model))
-    opacity=smooth(p/.065)
-    end=4.55 if model=='aster' else BATTLE_END
-    opacity*=1-smooth((p-end)/(.20 if model=='aster' else .33))
+    if p>exit_start(model):
+        scale*=1-(.52 if model=='aster' else .8)*smooth((p-exit_start(model))/exit_duration(model))
+    opacity=smooth(p/.28)
+    end=EXIT_END-.45 if model=='aster' else HIT_TIME
+    opacity*=1-smooth((p-end)/(.45 if model=='aster' else .55))
     return x,y,scale,angle+wave*180,opacity
 
 
@@ -150,13 +159,13 @@ def position(model,time,mobile=False):
 def stretch(model,time):
     _,p=phase(time)
     if p<ARRIVAL_END:return 1+2.6*(1-p/ARRIVAL_END)**3
-    if model=='aster' and p>BATTLE_END:return 1+2.8*smooth((p-4.05)/.7)
+    if model=='aster' and p>TURN_END:return 1+2.8*smooth((p-TURN_END-.15)/(EXIT_END-TURN_END-.15))
     return 1
 
 
 def jump_intensity(model,p):
     arrival=max(0,1-p/ARRIVAL_END)**2
-    departure=smooth((p-3.9)/.4)*(1-smooth((p-4.55)/.2)) if model=='aster' else 0
+    departure=smooth((p-TURN_END-.1)/.45)*(1-smooth((p-EXIT_END+.45)/.45)) if model=='aster' else 0
     return max(arrival,departure)
 
 
@@ -187,13 +196,13 @@ def geometry(model,wave,mobile=False):
     speed=distances[-1]/4
     offset=lambda d:(p[0]-d*unit[0],p[1]-d*unit[1])
     entry=(offset(entry_remaining(model,0,mobile)),offset(2*speed*ARRIVAL_END/3),offset(speed*ARRIVAL_END/3),p)
-    parameter=course_parameter(model,fight_progress(model,BATTLE_END),mobile)
+    parameter=course_parameter(model,course_progress(model,exit_start(model)),mobile)
     index=min(3,int(parameter))
     middle=[*segments[:index],split_prefix(segments[index],parameter-index)]
-    last,angle=course_point(model,fight_progress(model,BATTLE_END),mobile)
+    last,angle=course_point(model,course_progress(model,exit_start(model)),mobile)
     r=math.radians(angle);unit=(math.cos(r),math.sin(r))
     duration=exit_duration(model)
-    end=exit_distance(model,BATTLE_END+duration,mobile)
+    end=exit_distance(model,exit_start(model)+duration,mobile)
     shift=lambda d:(last[0]+d*unit[0],last[1]+d*unit[1])
     escape=(last,shift(speed*duration/3),shift(2*speed*duration/3),shift(end))
     return [tuple(mirror(p,wave,mobile) for p in s) for s in [entry,*middle,escape]]
@@ -209,14 +218,14 @@ def path(model,wave,mobile=False):
 def motion_fraction(model,p,mobile=False):
     length=course(model,mobile)[1][-1]
     entry=entry_remaining(model,0,mobile)
-    combat=fight_progress(model,BATTLE_END)*length
-    escape=exit_distance(model,BATTLE_END+exit_duration(model),mobile)
+    combat=course_progress(model,exit_start(model))*length
+    escape=exit_distance(model,exit_start(model)+exit_duration(model),mobile)
     distance=(entry-entry_remaining(model,p,mobile) if p<ARRIVAL_END else
-              entry+fight_progress(model,p)*length+(exit_distance(model,p,mobile) if p>BATTLE_END else 0))
+              entry+course_progress(model,p)*length+(exit_distance(model,p,mobile) if p>exit_start(model) else 0))
     return distance/(entry+combat+escape)
 
 
 SHOTS=tuple((owner,w*PASS+p,'#FF4B62' if owner=='aster' else '#62EE92')
             for w in range(2) for owner,points in
-            [('interceptor',(1.00,1.14)),('aster',(2.05,2.19,2.33,2.85,2.99,3.13,3.72))]
-            for p in points)
+            [('interceptor',(.20,.34)),('aster',(1.25,1.39,1.53,2.05,2.19,2.33,2.92))]
+            for offset in points for p in [ARRIVAL_END+offset])
