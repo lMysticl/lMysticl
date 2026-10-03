@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "assets/business/cover-background.png",
+      "sha256": "bfdf85dec4151948201d929c477e18c33c22ca7bd0cf8fa43361645cb78b280f"
+    },
+    {
+      "path": "assets/business/satellite-atlas.png",
+      "sha256": "c05ddd419bbe642f5367de908e56328c5a8b007be074e5f0c3c9641b7d007704"
+    }
+  ],
+  "images": [
+    {
+      "path": "assets/web/business-background.webp",
+      "dimensions": [
+        1200,
+        430
+      ],
+      "bytes": 430206,
+      "sha256": "5169800873301ff1e87d4d255e6c77e322cc4740645e7581d68b860df0988d3d",
+      "rgba_equal": true
+    },
+    {
+      "path": "assets/web/satellite-purple.webp",
+      "dimensions": [
+        128,
+        128
+      ],
+      "bytes": 9790,
+      "sha256": "369a3eec224ac181a7ae469d8a51f8351a575626362620eeaf52c6becafc8ffa",
+      "rgba_equal": true
+    },
+    {
+      "path": "assets/web/satellite-gold.webp",
+      "dimensions": [
+        128,
+        128
+      ],
+      "bytes": 8208,
+      "sha256": "9d30aaddef1b8b95d158022c26013b3af9504ad99d388c2284d6e988758aeb61",
+      "rgba_equal": true
+    },
+    {
+      "path": "assets/web/satellite-teal.webp",
+      "dimensions": [
+        128,
+        128
+      ],
+      "bytes": 9218,
+      "sha256": "a147cac89b88919d2cc38a581748b2c706cb2caa68c390d37af8fb6a5cbda5cb",
+      "rgba_equal": true
+    }
+  ],
+  "operations": "One 1200x430 background resize. Three atlas cells, alpha trim, 128x128 web canvases. Derived RGBA pixels checked after lossless encoding."
+}

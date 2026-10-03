@@ -183,9 +183,17 @@ def scene(mobile, animated, dark, frame_time=None):
     return '\n'.join(part for part in parts if part)
 
 
-def rebuild(path):
+def rebuild(path, business=False):
     source = path.read_text(encoding='utf-8')
     mobile, animated, dark = ('mobile' in path.name, 'animated' in path.name, 'dark' in path.name)
+    if business or 'data-profile-style="business-dark"' in source:
+        from profile_business import cover
+        source = cover(mobile, animated)
+        ET.fromstring(source)
+        pending = path.with_suffix('.svg.tmp')
+        pending.write_text(source, encoding='utf-8', newline='\n')
+        pending.replace(path)
+        return len(source.encode('utf-8'))
     source = source.replace('.orbit-still {', '.orbit-still, .starfield-still {')
     source = source.replace('.orbit-still, .starfield-still {', '.orbit-still, .starfield-still, .ship-still {')
     # A night sky spans both theme variants; adjust light-theme ink for contrast.
@@ -222,5 +230,9 @@ def rebuild(path):
 
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--business', action='store_true', help='Select the user-approved dark Fullstack satellite cover.')
+    args = parser.parse_args()
     for asset in sorted((ROOT / 'assets').glob('profile-cover-2026-*.svg')):
-        print(f'{asset.name}: {rebuild(asset)} bytes')
+        print(f'{asset.name}: {rebuild(asset, business=args.business)} bytes')

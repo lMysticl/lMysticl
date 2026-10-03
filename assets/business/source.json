@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "selected_reference_sha256": "c1f13d68895e01265642d1be4879398716829517ccbd3c10af85c1ee21208425",
+  "corrected_reference_sha256": "e7f91972d357cc93c41a04e3fd34e29ecac1307c464e0eb19c928acad94e7a5c",
+  "generator": "Built-in ImageGen; exact attached dark reference; three detailed artificial satellites, not planetary moons",
+  "assets": [
+    {
+      "name": "cover-background.png",
+      "path": "assets/business/cover-background.png",
+      "sha256": "bfdf85dec4151948201d929c477e18c33c22ca7bd0cf8fa43361645cb78b280f",
+      "generation": "exec-6d1775e8-1b48-465e-93e3-333049e6fce7.png"
+    },
+    {
+      "name": "satellite-atlas.png",
+      "path": "assets/business/satellite-atlas.png",
+      "sha256": "c05ddd419bbe642f5367de908e56328c5a8b007be074e5f0c3c9641b7d007704",
+      "generation": "exec-f5bbc86b-e4ab-4fc7-8fbd-f736bb82a336.png"
+    }
+  ]
+}
