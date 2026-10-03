@@ -1,16 +1,16 @@
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-static-mobile-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-static-mobile-light.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-static-dark.svg">
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-static-light.svg">
-  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-animated-mobile-dark.svg">
-  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-animated-mobile-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-animated-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-animated-light.svg">
-  <img src="https://github.com/lMysticl/lMysticl/raw/b0bc9e8e97abd1e90ae1cc297868982dcd2dd966/assets/profile-cover-2026-static-light.svg" alt="Pavel Putrenkov, Senior Java Engineer. Complex inputs, clear outcomes." width="100%">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-static-mobile-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-static-mobile-light.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-static-dark.svg">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-static-light.svg">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-animated-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-animated-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-animated-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-animated-light.svg">
+  <img src="https://github.com/lMysticl/lMysticl/raw/335086ed0c0af748c36f1b68ebd3f59f5a665bc2/assets/profile-cover-2026-static-light.svg" alt="Fullstack Java Developer. Reliable backend systems. Dark space, Earth and eight orbiting service and technology satellites." width="100%">
 </picture>
 
-**Senior Java Developer · Former Java Team Lead · 10+ years of experience**
+**Fullstack Java Developer · Former Java Team Lead · 10+ years of experience**
 
 I build Java and Spring Boot services for payments, e-commerce and document
 processing. I combine hands-on backend development with technical leadership
