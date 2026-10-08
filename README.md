@@ -12,6 +12,8 @@
 
 **Fullstack Java Developer · Former Java Team Lead · 10+ years of experience**
 
+AI Integration & Automation Expert
+
 I build Java and Spring Boot services for payments, e-commerce and document
 processing. I combine hands-on backend development with technical leadership
 and React / TypeScript experience.
