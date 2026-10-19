@@ -19,36 +19,45 @@ processing. I combine hands-on backend development with technical leadership
 and React / TypeScript experience.
 
 I focus on reliable integrations, clear API contracts and maintainable systems
-that support business workflows.
+that support business workflows. I also build tooling for AI coding agents.
 
-**Open to remote Senior / Lead Java roles · Kyiv, Ukraine**
+**Open to remote Senior / Lead Java roles · Kyiv, Ukraine (UTC+2/+3) · B2B contract**
 
-[LinkedIn](https://www.linkedin.com/in/pavlo-putrenkov/) · [Hiring enquiries](mailto:putrenkov99@gmail.com)
+[LinkedIn — Pavlo Putrenkov](https://www.linkedin.com/in/pavlo-putrenkov/) · [Hiring enquiries](mailto:putrenkov99@gmail.com)
+
+**Track record:** 66 merged pull requests to Broadleaf Commerce · a GitHub
+Marketplace action with signed, reproducible releases · ArchVerity AI on
+JetBrains Marketplace (300+ downloads)
 
 ## Experience
 
-- **Payments and integrations:** backend services, external integrations and
-  REST API design.
+- **Payments and integrations:** a distributed, event-driven payment system on
+  Kafka; backend services, external integrations and REST API design.
 - **Document processing and reporting:** services and interfaces that turn
   documents into usable information.
-- **Technical leadership:** architecture decisions, code reviews, planning and
-  collaboration with stakeholders.
+- **Technical leadership:** former Java Team Lead — architecture decisions,
+  code reviews, planning and collaboration with stakeholders.
 
 ## Core stack
 
-Java 21 · Spring Boot 3 · REST APIs · Microservices · Kafka · PostgreSQL · MySQL
-· Hibernate / JPA · React · TypeScript
-
-Testing and delivery: JUnit · Mockito · Testcontainers · Playwright ·
-GitHub Actions · Docker · Micrometer / Prometheus
+- **Backend:** Java 21 · Spring Boot 3 · Spring Cloud · REST APIs ·
+  Microservices · Hibernate / JPA
+- **Messaging and data:** Kafka · RabbitMQ · PostgreSQL · MySQL · MongoDB ·
+  Redis
+- **Cloud and delivery:** Docker · Kubernetes · AWS · GitHub Actions ·
+  GitLab CI · Jenkins
+- **Testing:** JUnit · Mockito · Testcontainers · Playwright
+- **Observability:** Micrometer / Prometheus · Grafana · ELK
+- **Frontend:** React · TypeScript
 
 ## Selected work
 
 ### 01 · [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
 
 A Java CLI and GitHub Action that flags missing or suspicious PDF text layers
-before they disrupt search, indexing or text extraction. Page-level findings
-and JSON reports make document checks usable in CI.
+before they disrupt search, indexing, RAG ingestion or text extraction.
+Page-level findings and JSON reports make document checks usable in CI.
+Releases are signed and reproducible, with an SBOM.
 
 [Source code](https://github.com/lMysticl/pdf-text-layer-auditor) · [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) · [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
 
@@ -62,18 +71,29 @@ real databases through Testcontainers, migrations and observability.
 
 [Source code](https://github.com/lMysticl/user-aggregation-service) · [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
 
-### 03 · [ArchVerity](https://plugins.jetbrains.com/plugin/34234-archverity)
+### 03 · [ArchVerity AI](https://plugins.jetbrains.com/plugin/34234-archverity-ai)
 
-A Kotlin plugin for IntelliJ IDEA that helps review Spring architecture and
-contracts across repositories, bringing these checks into the development
-workflow.
+A Kotlin plugin for IntelliJ IDEA that lets an AI agent review Spring contract
+changes across repositories before commit — for example, a controller or DTO
+change that passes the local build but breaks a consumer elsewhere. 300+
+downloads on JetBrains Marketplace.
 
-[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34234-archverity)
+[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34234-archverity-ai) · [Demo projects](https://github.com/lMysticl/ArchVerity-Demo)
+
+### 04 · [Bug Receipt](https://github.com/lMysticl/bug-receipt)
+
+A portable agent skill for Codex, Claude Code, Cursor and GitHub Copilot: an
+agent may call a bug fixed only with evidence — the observed failure, the root
+cause, the change and passing checks. In a pre-registered benchmark, runs with
+the skill passed 18 of 20 blind-judged assertions versus 5 of 20 without it.
+
+[Source code](https://github.com/lMysticl/bug-receipt) · [Live demo](https://lmysticl.github.io/bug-receipt/) · [Benchmark](https://github.com/lMysticl/bug-receipt/blob/main/benchmarks/RESULTS.md)
 
 ## Earlier open-source work
 
 Before this account, I contributed to Broadleaf Commerce as
-[`putrenkov`](https://github.com/putrenkov). A few examples:
+[`putrenkov`](https://github.com/putrenkov): 77 pull requests, 66 of them
+merged. A few examples:
 
 - [Historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360) — retention safety and MySQL/PostgreSQL compatibility.
 - [Domain equality and serialization invariants](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156) — regression coverage across the domain model.

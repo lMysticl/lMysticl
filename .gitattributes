@@ -1,0 +1,2 @@
+# Banner render scripts are build tooling, not the profile's language.
+scripts/** linguist-vendored
