@@ -19,7 +19,7 @@ processing: reliable integrations, clear API contracts and maintainable
 systems. Former Java Team Lead; React / TypeScript when the product needs it.
 I also build tooling for AI coding agents.
 
-**Open to remote Senior / Lead Java roles · Kyiv, Ukraine (UTC+2/+3) · B2B contract**
+**Open to remote Senior / Lead Java roles · full-time or contract · Kyiv, Ukraine (UTC+2/+3)**
 
 [LinkedIn — Pavlo Putrenkov](https://www.linkedin.com/in/pavlo-putrenkov/) · [Hiring enquiries](mailto:putrenkov99@gmail.com)
 
