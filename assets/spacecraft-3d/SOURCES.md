@@ -24,8 +24,8 @@ backend explicitly. Every output directory must be new. Master portraits are
 manifest. These larger local deliverables are saved outside this repository.
 
 ```text
-blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --model aster --out E:/CodexData/GeneratedImages/aster-master --width 1200 --samples 96 --backend HIP --device-name 6950
-blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --model interceptor --out E:/CodexData/GeneratedImages/vesper-master --width 1200 --samples 96 --backend HIP --device-name 6950
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --model aster --out <output-dir>/aster-master --width 1200 --samples 96 --backend HIP --device-name 6950
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --model interceptor --out <output-dir>/vesper-master --width 1200 --samples 96 --backend HIP --device-name 6950
 ```
 
 ## Build the changing 3D views
@@ -36,10 +36,10 @@ view set; perspective scale is applied by the final scene. The saved flight
 `.blend` includes the attitude keyframes for inspection and editing.
 
 ```text
-blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --flight --model aster --out E:/CodexData/GeneratedImages/aster-views --width 192 --samples 48 --backend HIP --device-name 6950
-blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --flight --model interceptor --out E:/CodexData/GeneratedImages/vesper-views --width 144 --samples 48 --backend HIP --device-name 6950
-python scripts/build_flight_atlas.py --source E:/CodexData/GeneratedImages/aster-views --assets assets/spacecraft-3d --stem aster-ship
-python scripts/build_flight_atlas.py --source E:/CodexData/GeneratedImages/vesper-views --assets assets/spacecraft-3d --stem vesper-interceptor
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --flight --model aster --out <output-dir>/aster-views --width 192 --samples 48 --backend HIP --device-name 6950
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_ship.py -- --flight --model interceptor --out <output-dir>/vesper-views --width 144 --samples 48 --backend HIP --device-name 6950
+python scripts/build_flight_atlas.py --source <output-dir>/aster-views --assets assets/spacecraft-3d --stem aster-ship
+python scripts/build_flight_atlas.py --source <output-dir>/vesper-views --assets assets/spacecraft-3d --stem vesper-interceptor
 python scripts/build_profile_orbits.py
 ```
 
@@ -81,7 +81,7 @@ RGBA views are shared once per SVG; slower ordinary movement and lower contrast
 place them behind the fighters. They arrive and jump away with the fleet.
 The editable scene and 1600 x 1000 inspection plate are retained outside Git.
 
-The contrasting shapes follow the user's two-type correction and the official
+The contrasting shapes follow two distinct hull types and the official
 Star Wars Databank descriptions/images of the
 [Imperial Star Destroyer](https://www.starwars.com/databank/imperial-star-destroyer)
 and [Mon Calamari Star Cruiser](https://www.starwars.com/databank/mon-calamari-star-cruiser).

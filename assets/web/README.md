@@ -1,6 +1,6 @@
 # Profile image sources and web assets
 
-The selected cover is the user's dark Fullstack reference with daylight Earth,
+The current cover is the dark Fullstack design with daylight Earth,
 the original APIs / Services / Data satellites and five technology groups:
 Java 21, Spring Boot, PostgreSQL, Kafka and React / TypeScript. The heading is
 exactly **Fullstack Java Developer**, with no personal name. Both GitHub theme

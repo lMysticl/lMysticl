@@ -27,7 +27,24 @@ that support business workflows. I also build tooling for AI coding agents.
 
 **Track record:** 66 merged pull requests to Broadleaf Commerce · a GitHub
 Marketplace action with signed, reproducible releases · ArchVerity AI on
-JetBrains Marketplace (300+ downloads)
+JetBrains Marketplace (300+ downloads) · Bug Receipt included in GitHub's
+awesome-copilot collection
+
+## Work map
+
+```mermaid
+flowchart LR
+  me(["Java · Spring Boot · 10+ years"])
+  me --> pay["Payments & commerce"]
+  me --> doc["Documents & data"]
+  me --> ai["AI developer tooling"]
+  pay --> p1["Event-driven payment system on Kafka<br/>as Java Team Lead"]
+  pay --> p2["Broadleaf Commerce<br/>66 merged PRs"]
+  doc --> d1["PDF Text Layer Auditor<br/>GitHub Marketplace action"]
+  doc --> d2["User Aggregation Service<br/>PostgreSQL + MongoDB API"]
+  ai --> a1["ArchVerity AI<br/>JetBrains Marketplace · 300+ downloads"]
+  ai --> a2["Bug Receipt<br/>in GitHub awesome-copilot"]
+```
 
 ## Experience
 
@@ -86,8 +103,10 @@ A portable agent skill for Codex, Claude Code, Cursor and GitHub Copilot: an
 agent may call a bug fixed only with evidence — the observed failure, the root
 cause, the change and passing checks. In a pre-registered benchmark, runs with
 the skill passed 18 of 20 blind-judged assertions versus 5 of 20 without it.
+Included in GitHub's awesome-copilot collection through three merged pull
+requests.
 
-[Source code](https://github.com/lMysticl/bug-receipt) · [Live demo](https://lmysticl.github.io/bug-receipt/) · [Benchmark](https://github.com/lMysticl/bug-receipt/blob/main/benchmarks/RESULTS.md)
+[Source code](https://github.com/lMysticl/bug-receipt) · [Live demo](https://lmysticl.github.io/bug-receipt/) · [Benchmark](https://github.com/lMysticl/bug-receipt/blob/main/benchmarks/RESULTS.md) · [awesome-copilot](https://github.com/github/awesome-copilot/tree/main/skills/bug-receipt)
 
 ## Earlier open-source work
 

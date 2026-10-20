@@ -31,11 +31,11 @@ Blue Marble cloud map. The turquoise world's turbulent clouds are procedural.
 ## Rebuild
 
 From the repository root, using Blender 5.2 and Python 3. Use a fresh render
-directory on E: for each iteration; the editable scene and master PNGs stay
+directory for each iteration; the editable scene and master PNGs stay
 outside Git. To build 960 px masters:
 
 ```text
-blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_3d.py -- --out E:/CodexData/GeneratedImages/profile-planets-master --size 960 --samples 96 --backend HIP --vivid-satellites
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_3d.py -- --out <output-dir>/profile-planets-master --size 960 --samples 96 --backend HIP --vivid-satellites
 ```
 
 Select an available Cycles backend explicitly (`HIP`, `CUDA`, `OPTIX`, `METAL`
@@ -52,7 +52,7 @@ manifest with same-directory atomic replacement, then the compositor rebuilds
 all eight themes/motion/layout variants:
 
 ```text
-blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_3d.py -- --out E:/CodexData/GeneratedImages/profile-planets-web --asset-out assets/planets-3d --size 640 --satellite-size 256 --samples 96 --backend HIP --vivid-satellites
+blender --background --factory-startup --python-exit-code 1 --python scripts/render_profile_3d.py -- --out <output-dir>/profile-planets-web --asset-out assets/planets-3d --size 640 --satellite-size 256 --samples 96 --backend HIP --vivid-satellites
 python scripts/build_profile_orbits.py
 ```
 
