@@ -15,105 +15,55 @@
 AI Integration & Automation Expert
 
 I build Java and Spring Boot services for payments, e-commerce and document
-processing. I combine hands-on backend development with technical leadership
-and React / TypeScript experience.
-
-I focus on reliable integrations, clear API contracts and maintainable systems
-that support business workflows. I also build tooling for AI coding agents.
+processing: reliable integrations, clear API contracts and maintainable
+systems. Former Java Team Lead; React / TypeScript when the product needs it.
+I also build tooling for AI coding agents.
 
 **Open to remote Senior / Lead Java roles · Kyiv, Ukraine (UTC+2/+3) · B2B contract**
 
 [LinkedIn — Pavlo Putrenkov](https://www.linkedin.com/in/pavlo-putrenkov/) · [Hiring enquiries](mailto:putrenkov99@gmail.com)
 
-**Track record:** 66 merged pull requests to Broadleaf Commerce · a GitHub
-Marketplace action with signed, reproducible releases · ArchVerity AI on
-JetBrains Marketplace (300+ downloads) · Bug Receipt included in GitHub's
-awesome-copilot collection
-
-## Work map
-
-```mermaid
-flowchart LR
-  me(["Java · Spring Boot · 10+ years"])
-  me --> pay["Payments & commerce"]
-  me --> doc["Documents & data"]
-  me --> ai["AI developer tooling"]
-  pay --> p1["Event-driven payment system on Kafka<br/>as Java Team Lead"]
-  pay --> p2["Broadleaf Commerce<br/>66 merged PRs"]
-  doc --> d1["PDF Text Layer Auditor<br/>GitHub Marketplace action"]
-  doc --> d2["User Aggregation Service<br/>PostgreSQL + MongoDB API"]
-  ai --> a1["ArchVerity AI<br/>JetBrains Marketplace · 300+ downloads"]
-  ai --> a2["Bug Receipt<br/>in GitHub awesome-copilot"]
-```
-
 ## Experience
 
 - **Payments and integrations:** a distributed, event-driven payment system on
-  Kafka; backend services, external integrations and REST API design.
+  Kafka; external integrations and REST API design.
 - **Document processing and reporting:** services and interfaces that turn
   documents into usable information.
-- **Technical leadership:** former Java Team Lead — architecture decisions,
-  code reviews, planning and collaboration with stakeholders.
+- **Technical leadership:** architecture decisions, code reviews, planning and
+  work with stakeholders.
 
 ## Core stack
 
-- **Backend:** Java 21 · Spring Boot 3 · Spring Cloud · REST APIs ·
-  Microservices · Hibernate / JPA
-- **Messaging and data:** Kafka · RabbitMQ · PostgreSQL · MySQL · MongoDB ·
-  Redis
-- **Cloud and delivery:** Docker · Kubernetes · AWS · GitHub Actions ·
-  GitLab CI · Jenkins
-- **Testing:** JUnit · Mockito · Testcontainers · Playwright
-- **Observability:** Micrometer / Prometheus · Grafana · ELK
-- **Frontend:** React · TypeScript
+- **Backend:** Java 21 · Spring Boot 3 · Spring Cloud · Kafka · RabbitMQ ·
+  REST · Microservices · Hibernate / JPA
+- **Data and delivery:** PostgreSQL · MySQL · MongoDB · Redis · Docker ·
+  Kubernetes · AWS · GitHub Actions · GitLab CI · Jenkins
+- **Quality and frontend:** JUnit · Mockito · Testcontainers · Playwright ·
+  Prometheus / Grafana · ELK · React · TypeScript
 
 ## Selected work
 
-### 01 · [PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)
+- **[Spring Agent Skills](https://github.com/lMysticl/spring-agent-skills)** —
+  Java/Spring backend skills for AI coding agents: transactions, Kafka,
+  PostgreSQL, concurrency, code and test review.
+- **[PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)** —
+  Java CLI and [GitHub Marketplace action](https://github.com/marketplace/actions/pdf-text-layer-audit)
+  that flags PDFs with missing or broken text layers before search or RAG
+  ingestion.
+- **[ArchVerity AI](https://plugins.jetbrains.com/plugin/34234-archverity-ai)** —
+  IntelliJ IDEA plugin for AI-assisted review of Spring contract changes across
+  repositories. 300+ downloads.
+- **[Bug Receipt](https://github.com/lMysticl/bug-receipt)** — agent skill that
+  won't call a bug fixed without evidence. Included in
+  [GitHub's awesome-copilot](https://github.com/github/awesome-copilot/tree/main/skills/bug-receipt).
+- **[User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)** —
+  Spring Boot API over PostgreSQL and MongoDB with bounded concurrency,
+  Testcontainers and ArchUnit.
 
-A Java CLI and GitHub Action that flags missing or suspicious PDF text layers
-before they disrupt search, indexing, RAG ingestion or text extraction.
-Page-level findings and JSON reports make document checks usable in CI.
-Releases are signed and reproducible, with an SBOM.
+## Open source
 
-[Source code](https://github.com/lMysticl/pdf-text-layer-auditor) · [GitHub Marketplace](https://github.com/marketplace/actions/pdf-text-layer-audit) · [Latest release](https://github.com/lMysticl/pdf-text-layer-auditor/releases/latest)
-
-### 02 · [User Aggregation Service](https://github.com/lMysticl/user-aggregation-service)
-
-A portfolio API that combines user records from PostgreSQL and MongoDB using
-bounded concurrent requests. It retains source information and returns an
-explicit error when a source fails or times out, so consumers can distinguish
-complete results from a failed aggregation. Includes integration tests with
-real databases through Testcontainers, migrations and observability.
-
-[Source code](https://github.com/lMysticl/user-aggregation-service) · [Latest release](https://github.com/lMysticl/user-aggregation-service/releases/latest)
-
-### 03 · [ArchVerity AI](https://plugins.jetbrains.com/plugin/34234-archverity-ai)
-
-A Kotlin plugin for IntelliJ IDEA that lets an AI agent review Spring contract
-changes across repositories before commit — for example, a controller or DTO
-change that passes the local build but breaks a consumer elsewhere. 300+
-downloads on JetBrains Marketplace.
-
-[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34234-archverity-ai) · [Demo projects](https://github.com/lMysticl/ArchVerity-Demo)
-
-### 04 · [Bug Receipt](https://github.com/lMysticl/bug-receipt)
-
-A portable agent skill for Codex, Claude Code, Cursor and GitHub Copilot: an
-agent may call a bug fixed only with evidence — the observed failure, the root
-cause, the change and passing checks. In a pre-registered benchmark, runs with
-the skill passed 18 of 20 blind-judged assertions versus 5 of 20 without it.
-Included in GitHub's awesome-copilot collection through three merged pull
-requests.
-
-[Source code](https://github.com/lMysticl/bug-receipt) · [Live demo](https://lmysticl.github.io/bug-receipt/) · [Benchmark](https://github.com/lMysticl/bug-receipt/blob/main/benchmarks/RESULTS.md) · [awesome-copilot](https://github.com/github/awesome-copilot/tree/main/skills/bug-receipt)
-
-## Earlier open-source work
-
-Before this account, I contributed to Broadleaf Commerce as
-[`putrenkov`](https://github.com/putrenkov): 77 pull requests, 66 of them
-merged. A few examples:
-
-- [Historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360) — retention safety and MySQL/PostgreSQL compatibility.
-- [Domain equality and serialization invariants](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156) — regression coverage across the domain model.
-- [Multi-catalog persistence fix](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2367) — a persistence defect validated through review.
+Before this account I contributed to Broadleaf Commerce as
+[`putrenkov`](https://github.com/putrenkov): 77 pull requests, 66 merged — for
+example a [historical order purge](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2360),
+[domain invariant tests](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2156)
+and a [multi-catalog persistence fix](https://github.com/BroadleafCommerce/BroadleafCommerce/pull/2367).
