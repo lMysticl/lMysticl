@@ -43,9 +43,6 @@ I also build tooling for AI coding agents.
 
 ## Selected work
 
-- **[Spring Agent Skills](https://github.com/lMysticl/spring-agent-skills)** —
-  Java/Spring backend skills for AI coding agents: transactions, Kafka,
-  PostgreSQL, concurrency, code and test review.
 - **[PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)** —
   Java CLI and [GitHub Marketplace action](https://github.com/marketplace/actions/pdf-text-layer-audit)
   that flags PDFs with missing or broken text layers before search or RAG
