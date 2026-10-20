@@ -43,6 +43,12 @@ I also build tooling for AI coding agents.
 
 ## Selected work
 
+- **[DLQDesk](https://github.com/lMysticl/dlqdesk)** — inspect, fix and replay
+  failed Kafka messages with a reviewed preview and a durable delivery history.
+  Java 21, Spring Boot, React, TypeScript.
+- **[BatchLens](https://github.com/lMysticl/batchlens)** — see why a Spring Batch
+  job failed and restart it from its last checkpoint; an open-source console
+  embedded in your application. Java 21, Spring Boot, React, TypeScript.
 - **[PDF Text Layer Auditor](https://github.com/lMysticl/pdf-text-layer-auditor)** —
   Java CLI and [GitHub Marketplace action](https://github.com/marketplace/actions/pdf-text-layer-audit)
   that flags PDFs with missing or broken text layers before search or RAG
